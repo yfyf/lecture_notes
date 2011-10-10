@@ -1,11 +1,15 @@
 \documentclass[12pt]{article}
 \usepackage{amsfonts, amsthm, amsmath}
-\usepackage{verbatim} 
+\usepackage{verbatim}
 \usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsthm}
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
-\setlength{\textheight}{9.5in}
+\setlength{\textheight}{10.5in}
 \setlength{\topmargin}{0in}
 \setlength{\headheight}{0in}
 \setlength{\headsep}{0in}
@@ -36,59 +40,65 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{mydef}{Definition}
+\newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
-\newtheorem{prop}{Proposition}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{note}{Note}
+\newtheorem*{claim}{Claim}
+\newtheorem*{notation}{Notation}
+\newtheorem{corollary}{Corollary}
 \begin{document}
-
+\begin{titlepage}
 \title{Measure Theory}
 \author{Prof. D Larman}
 \date{Autum 2011}
 \maketitle
 
-\head{Introduction}  In this course we first seek to define the measure of a set eg. the length, area, volume, probability of a set. We also seek to improve on the riemann integral by defining the lebesgue integral.\\
- If $\lambda$ denotes the "length" of a set in  $\RR$., clearly we would expect $\lambda$[0,1]=1. But what about the length of [0,1]$\backslash\QQ$ where $\QQ$ is the set of rationals? Or the set $\bigcup_{i=0}^{\infty}[\frac{1}{2^{i+1}} +\frac{1}{2^i} ]$? Since $\QQ$ is quite "small" we might expect $\lambda$([0,1]$\backslash\QQ$)=1. Also we might expect\\  $\lambda$($\bigcup_{i=0}^{\infty}[\frac{1}{2^{i+1}} +\frac{1}{2^i} ]$)=$\sum_{i=0}^{\infty}\lambda$([$\frac{1}{2^{i+1}} +\frac{1}{2^i} ]$.  Both expectations are true!\\\\
-If we take the function  $f(x) = \left\{ \begin{array}{rcl}
+\section*{Introduction} In this course we first seek to define the measure of a set eg. the length, area, volume, probability of a set. We also seek to improve on the riemann integral by defining the lebesgue integral.\\
+ If $\lambda$ denotes the "length" of a set in $\RR$., clearly we would expect $\lambda$[0,1]=1. But what about the length of [0,1]$\backslash\QQ$ where $\QQ$ is the set of rationals? Or the set $\bigcup_{i=0}^{\infty}[\frac{1}{2^{i+1}} +\frac{1}{2^i} ]$? Since $\QQ$ is quite "small" we might expect $\lambda$([0,1]$\backslash\QQ$)=1. Also we might expect\\ \(\lambda(\bigcup_{i=0}^{\infty}[\frac{1}{2^{i+1}} +\frac{1}{2^i} ])=\sum_{i=0}^{\infty}\lambda([\frac{1}{2^{i+1}} +\frac{1}{2^i} ]\). Both expectations are true!\\\\
+If we take the function $f(x) = \left\{ \begin{array}{rcl}
 1 & \mbox{for} &
- \mbox{\emph{x  irrational}} \\ 0 & \mbox{for} & \mbox{\emph{x rational}} \\
+\mbox{\emph{x irrational}} \\ 0 & \mbox{for} & \mbox{\emph{x rational}} \\
 \end{array}\right.$ \\then you will know from analysis 2 that ($\mathbf{R}$)$\int\limits_{0}^{-1}f(x)\,dx =1$ and ($\mathbf{R}$)$\int\limits_{-0}^{1}f(x)\,dx =1$
-\\ however the vast majority of x in [0,1] are irrational and and so we might expect the integral to be 1. When we have defined the labesgue integral we will find ($\mathbf{L}$)$\int_{0}^{1}f(x)\,dx =1$
-
+\\ however the vast majority of x in [0,1] are irrational and and so we might expect the integral to be 1. When we have defined the labesgue integral we will find ($\mathbf{L})\int_{0}^{1}f(x)\,dx =1$
+\end{titlepage}
 \begin{center}
 \section{Measures}
 \end{center}
 
-We will work within a set $\Omega$. For example  $\Omega$ = $\RR$, $\Omega$ = $\RR^n$, $\Omega$ =$ \{sequence of heads \& tails\}$. Families of subsets of $\Omega$ will be denoted by $\mathcal{F}$,  $\mathcal{G}$ etc.\\
+We will work within a set $\Omega$. For example $\Omega$ = $\RR$, $\Omega$ = $\RR^n$, $\Omega$ = \{sequence of heads \& tails\}. Families of subsets of $\Omega$ will be denoted by $\mathcal{F}$, $\mathcal{G}$ etc.\\
 
-\begin{mydef}{Algebra of sets:} \\ A family $\mathcal{F}$ of subsets of $\Omega$ is called an Algebra if it satisfies:
+\begin{definition}[Algebra of sets] A family $\mathcal{F}$ of subsets of $\Omega$ is called an Algebra if it satisfies:
 \begin{enumerate}[(i)]
   \item $\phi, \Omega \in \mathcal{F}$
   \item If A $\in \mathcal{F}$ then $A^{c}= \Omega \backslash A \in \mathcal{F}$
   \item If A,B $\in \mathcal{F}$ then A$\cup$B $\in \mathcal{F}$
 \end{enumerate}
- \end{mydef}
+ \end{definition}
 
 \begin{example} If $\Omega$=[0,1] and $\mathcal{F}$ is the family of all subsets of [0,1] which can be expressed as a finite union of intervals (which can be open, closed half open, empty) then $\mathcal{F}$ is an algebra. \end{example}
 
-\begin{mydef}{$\sigma$-Algebra of sets:} \\ A family $\mathcal{F}$ of subsets of $\Omega$ is called a $\sigma$-Algebra if it satisfies:
+\begin{definition}[$\sigma$-Algebra of sets] A family $\mathcal{F}$ of subsets of $\Omega$ is called a $\sigma$-Algebra if it satisfies:
 \begin{enumerate}[(i)]
   \item $\phi, \Omega \in \mathcal{F}$
   \item If A $\in \mathcal{F}$ then $A^{c}= \Omega \backslash A \in \mathcal{F}$
   \item If $A_1,A_2,\dots$ is a sequence of sets in $\mathcal{F}$ then $\bigcup_{i=1}^{\infty} A_{i} \in \mathcal{F}$
 \end{enumerate}
- \end{mydef}
+ \end{definition}
 
-\begin{example} 
+\begin{example}
 For any $\Omega$.
 \item $\mathcal{F}$=\{$\phi,\Omega$\} is a $\sigma$-algebra.
 \item $\mathcal{F}$=\{all subsets of $\Omega$\} is a $\sigma$-algebra.
 \end{example}
 
-{\bf Remark:} althouth example 1 is an algebra, it is not a $\sigma$-algebra (try to prove it). Notice that a $\sigma$-algebra is an algebra. 
+{\bf Remark:} althouth example 1 is an algebra, it is not a $\sigma$-algebra (try to prove it). Notice that a $\sigma$-algebra is an algebra.
 \vspace{20pt}
-\begin{theorem}{De Morgan's Laws} If $A_{\alpha}$, $\alpha \in I$ is a family of sets in$\Omega$ then
-\item ($\cup_{\alpha \in I}A_{\alpha})^{c}$=$\cap_{\alpha \in I}A_{\alpha}^{c}$
-\item ($\cap_{\alpha \in I}A_{\alpha})^{c}$=$\cup_{\alpha \in I}A_{\alpha}^{c}$
+\begin{theorem}[De Morgan's Laws] If $A_{\alpha}$, $\alpha \in I$ is a family of sets in$\Omega$ then
+\begin{enumerate}[(i)]
+\item \((\cup_{\alpha \in I}A_{\alpha})^{c}=\cap_{\alpha \in I}A_{\alpha}^{c}\)
+\item \((\cap_{\alpha \in I}A_{\alpha})^{c}=\cup_{\alpha \in I}A_{\alpha}^{c}\)
+\end{enumerate}
 \end{theorem}
 
 
@@ -96,38 +106,348 @@ From the defintion of an algebra or a $\sigma$-algebra we can deduce the followi
 \vspace{20pt}\\
 {\bf Algebra}
 \begin{enumerate}[(i)]
-  \item $A_{i}, i=1,2,\dots,n \in \mathcal{F} \implies \bigcup_{i=1}^{n} A_{i} \in \mathcal{F}$ (induction)
-  \item  $A_{i}, i=1,2,\dots,n \in \mathcal{F} \implies \bigcap_{i=1}^{n} A_{i} \in \mathcal{F}$ (By De Morgan (ii))
-  \item A,B $\in \mathcal{F} \implies A\backslash B\in \mathcal{F}$ (Since $A\backslash B=A\cap B^{c}$)
+  \item \(A_{i}, i=1,2,\dots,n \in \mathcal{F} \implies \bigcup_{i=1}^{n} A_{i} \in \mathcal{F}$ (induction)
+  \item \(A_{i}, i=1,2,\dots,n \in \mathcal{F} \implies \bigcap_{i=1}^{n} A_{i} \in \mathcal{F}$ (By De Morgan (ii))
+  \item \(A,B \in \mathcal{F} \implies A\backslash B \in \mathcal{F}\) (Since \(A\backslash B=A\cap B^{c})\)
 \end{enumerate}
 
 \vspace{12pt}
 {\bf $\sigma$-Algebra}
 \begin{enumerate}[(i)]
-  \item  $A_{1}, A_{2},\dots \in \mathcal{F}$ then $\bigcap_{i=1}^{\infty} A_{i} \in \mathcal{F}$  ($\bigcap_{i=1}^{\infty} A_{i} = \bigcap_{i=1}^{\infty}( A_{i}^{c})^{c}= (\bigcup_{i=1}^{\infty} A_{i}^{c})^{c}\in \mathcal{F})$
+  \item \(A_{1}, A_{2},\dots \in \mathcal{F}$ then $\bigcap_{i=1}^{\infty} A_{i} \in \mathcal{F} (\bigcap_{i=1}^{\infty} A_{i} = \bigcap_{i=1}^{\infty}( A_{i}^{c})^{c}= (\bigcup_{i=1}^{\infty} A_{i}^{c})^{c}\in \mathcal{F})\)
 \end{enumerate}
 \vspace{12pt}
-\begin{prop}($\sigma$-algebra generated by A)\\ For any family of subsets A of $\Omega$, there is a smallest $\sigma$-algebra $\sigma$(A) containing A.\\ i.e. $\sigma(A) \supset A$ and if $\mathcal{F}$ is any $\sigma$-algebra containing A then 
+
+\begin{proposition}\label{P:smallestsigmaalg}
+  For any family of subsets A of $\Omega$, there is a smallest $\sigma$-algebra $\sigma$(A) containing A.\\ i.e. $\sigma(A) \supset A$ and if $\mathcal{F}$ is any $\sigma$-algebra containing A then
 $\sigma(A)\subset\mathcal{F}$. We call $\sigma(A)$ the $\sigma$-algebra generated by A.
-\end{prop}
+\end{proposition}
 
 \begin{proof}
 Just note that there is a $\sigma$-algebra containing A, namely \{all subsets of A\}.\\ Consider all $\sigma$-algebras containing A and let $\sigma(A)$ be their intersection. i.e. B$\in\sigma(A)$ iff B belongs to every $\sigma$-algebra containing A. We certainly have A$\subset\sigma(A)$ and if $\mathcal{F}$ is a $\sigma$-algebra containing A then $\sigma(A)\subset\mathcal{F}$. It remains to show that $\sigma(A)$ is a $\sigma$-algebra.
 \begin{enumerate}[(i)]
   \item $\phi, \Omega \in \sigma(A)$ since they belong to every $\sigma$-algebra containing A.
-  \item  If A$\in \sigma(A)$ and $\mathcal{F}$ is a $\sigma$-algebra containing A, then A$\in \mathcal{F}$ and so $A^{c}\in\mathcal{F}$.\\ So $A^{c}\in\sigma(A)$
-  \item If \{$A_{i}\}_{i=1}^{\infty}\in\sigma(A)$ and $\mathcal{F}$ is a $\sigma$-algebra containing A then  \{$A_{i}\}_{i=1}^{\infty}\in\mathcal{F}$ \& so $\bigcup_{i=1}^{\infty} A_{i}\in\mathcal{F}$. Hence $\bigcup_{i=1}^{\infty} A_{i}\in\sigma(A)$.
+  \item If A$\in \sigma(A)$ and $\mathcal{F}$ is a $\sigma$-algebra containing A, then A$\in \mathcal{F}$ and so $A^{c}\in\mathcal{F}$.\\ So $A^{c}\in\sigma(A)$
+  \item If \{$A_{i}\}_{i=1}^{\infty}\in\sigma(A)$ and $\mathcal{F}$ is a $\sigma$-algebra containing A then \{$A_{i}\}_{i=1}^{\infty}\in\mathcal{F}$ \& so $\bigcup_{i=1}^{\infty} A_{i}\in\mathcal{F}$. Hence $\bigcup_{i=1}^{\infty} A_{i}\in\sigma(A)$.
 \end{enumerate}
 \end{proof}
 
 The most important $\sigma$-algebra is the:
 
-\begin{mydef}{Borel $\sigma$-algebra:}\\
+\begin{definition}[Borel $\sigma$-algebra]
 This is the $\sigma$-algebra on $\RR$ generated by the family of open intervals in $\RR$.
-\end{mydef}
+\end{definition}
 
-\begin{mydef}{Borel Set:}\\
+\begin{definition}[Borel Set]
 A Borel Set is any set which belongs to the Borel $\sigma$-algebra eg.\\ $\phi, \RR$, any open interval, any closed interval $([a,b]=\bigcap_{i=1}^{\infty}(a - \frac{1}{i}, b + \frac{1}{i})).$\\ Most reasonable sets are Borel:\\
-$[a,b)=\bigcap_{n=1}^{\infty}(a - \frac{1}{n}, b)$, $\{a\}=\bigcap_{n=1}^{\infty}(a - \frac{1}{n}, a + \frac{1}{n})$, $\QQ=\bigcup_{n=1}^{\infty}r_n$, $I(irrationals)=\QQ^{c}$.
-\end{mydef}
+\([a,b)=\bigcap_{n=1}^{\infty}(a - \frac{1}{n}, b),  \{a\}=\bigcap_{n=1}^{\infty}(a - \frac{1}{n}, a + \frac{1}{n},   \QQ=\bigcup_{n=1}^{\infty}r_n,  I(irrationals)=\QQ^{c}.\)
+\end{definition}
+
+\begin{proposition} \label{P:OpenSetsBorel}
+	Open sets are Borel.
+	\begin{proof}
+		If $G$ is open and $g \in G$, we can choose an $I_g$ with rational end points such that $g \in I_g \subset G$.  Since there are only countably many open intervals with rational end points, we may arrange the intervals $I_g$, $g \in G$ as a sequence of open intervals $\{I_n\}_{n=1}^\infty$.  Then $G = \bigcup_{n=1}^\infty I_n$ and so $G$ is a Borel set.
+	\end{proof}
+\end{proposition}
+
+\begin{corollary} \label{C:ClosedSetsBorel}
+	Closed sets are Borel sets.
+	\begin{proof}
+		They are complements of open sets
+	\end{proof}
+\end{corollary}
+
+\begin{note}
+	Two different collections of sets can give rise to the same $\sigma$-algebra.
+\end{note}
+
+\begin{example}
+	Let
+	\begin{align*}
+		I &= \text{collection of open intervals in } \mathbb{R} \text{ and} \\
+		\theta &= \text{collection of open sets in } \mathbb{R}.
+	\end{align*}
+	Then $I \subset \theta$ so $I \subset \sigma(\theta)$.  $\sigma(I)$ is the smallest $\sigma$-algebra containing $I$ so $\sigma(I) \subset \sigma(\theta)$.\\
+	Open sets are Borel sets so $\theta \subset \sigma(I)$.  $\sigma(\theta)$ is the smallest $\sigma$-algebra containing $\theta$ so $\sigma(\theta) \subset \sigma(I)$. Hence $\sigma(\theta) = \sigma(I)$
+\end{example}
+
+
+\begin{definition} \label{D:Measure}
+	If $\mathcal{F}$ is a $\sigma$-algebra on a set $\Omega$, then a \emph{measure on $\mathcal{F}$} is a function, $\mu$ such that:
+	$$\mu : \mathcal{F} \rightarrow [0,\infty]$$
+	satisfying:
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$
+		\item If $E_1,E_2,... \in \mathcal{F}$ and $E_i \cap E_j = \emptyset, i \not= j$, then
+			$$\mu(\bigcup_{i=1}^\infty E_i) = \sum_{i=1}^\infty \mu(E_i)$$
+	\end{enumerate}
+\end{definition}
+
+\begin{example} \label{E:Dirac}
+	Let $\Omega = \text{any set},\, \mathcal{F} = \{\text{all subsets of }\Omega\}$.  Fix $x \in \Omega$, then for $E \in \mathcal{F}$ define
+	$$\delta_x (E) = 
+	\begin{cases}
+		0, & \text{if } x \notin E\\
+		1, & \text{if } x \in E
+	\end{cases}$$
+	We claim that $\delta_x$ is a measure on $\mathcal{F}$.
+	\begin{proof}We prove the properties of measures one-by-one.
+		\begin{enumerate}
+			\item $\delta_x (\emptyset) = 0$
+			\item If $E_1,E_2,... \in \mathcal{F}$ and $E_i \cap E_j = \emptyset, i \not= j$, then,
+			\begin{description}
+				 \item either $x \notin \bigcup_{i=1}^\infty E_i$ and hence $x \notin E_i$ for all $i$ so $$\delta_x (\bigcup_{i=1}^\infty) = 0 = \sum_{i=1}^\infty \delta_x(E_i)$$
+				\item or $x \in \bigcup_{i=1}^\infty E_i$ so $x \in \text{exactly one} E_j$ and $\delta_x (E_i) = 0, \text{for} i \not= j$.  Then $$\delta_x(\bigcup_{i=1}^\infty E_i) = 1 = \delta_x (E_j) = \sum_{i=1}^\infty \delta_x (E_i)$$
+			\end{description}
+		\end{enumerate}
+	\end{proof}
+\end{example} 
+
+\begin{note}
+	If $c \in [0, \infty]$, then $c \delta_x$ is also a measure. ($\infty \cdot 0 = 0$)
+\end{note}
+
+\begin{example} \label{E:Counting}
+	We define the discrete counting measure, $\gamma$, by
+	$$\gamma (E) = \sum_{x \in E} 1 = \text{number of elements in $E$}$$
+\end{example}	
+
+\begin{proposition} \label{P:PropertiesMeasures}
+	\emph{Properties of Measures}
+	\begin{enumerate}
+		\item If $A, B \in \mathcal{F}$ and $A \subset B$, then
+			$$\mu(A) \leq \mu(B)$$
+		\item If $A, B \in \mathcal{F}$, $A \subset B$ and $\mu(A) < \infty$, then
+			$$\mu(B) - \mu(A) = \mu(B \setminus A)$$
+		\item \emph{$\sigma$-subadditivty}. If $E_1, E_2, ... \in \mathcal{F}$, then
+			$$\mu(\bigcup_{i=1}^\infty) \le \sum_{i=1}^\infty \mu(E_i)$$
+		\item \emph{Continuity of measures}. If $E_1, E_2, ... \in \mathcal{F}$ and $E_1 \subset E_2 \subset ...$, then
+			$$\mu(\bigcup_{i=1}^\infty E_i) = \lim_{n \to \infty} \mu (E_n)$$
+		\item If $E_1, E_2, ... \in \mathcal{F}$, $E_1 \supset E_2 \supset ...$ and $\mu(E_1) < \infty$, then 
+			$$\mu(\bigcap_{i=1}^\infty E_i) = \lim_{i \to \infty} \mu(E_i)$$
+	\end{enumerate}
+	\begin{proof} \quad
+		\begin{enumerate}
+			\item $\mu(B) = \mu(A) + \mu(B \setminus A)$ and $\mu(B \setminus A) \ge 0$, so $\mu(B) \ge \mu(A)$.
+			\item Rearrange 1. and $\mu(A) < \infty$ so the sum makes sense.
+			\item Let 
+			$$F_i = E_i \setminus \bigcup_{i < j} E_j$$
+			then $\bigcup_{i=1}^\infty F_i = \bigcup_{i=1}^\infty E_i$, $F_1, F_2, ... \in \mathcal{F}$, $F_i \cap F_j = \emptyset, i \ne j$ and $F_i \subset E_i$ for all $i$.\\
+			So
+			$$\mu(\bigcup_{i=1}^\infty E_i) = \mu(\bigcup_{i=1}^\infty F_i) = \sum_{i=1}^\infty \mu(F_i) \le \sum_{i=1}^\infty \mu(E_i)$$
+			\item Let 
+			$$F_i = E_i \setminus \bigcup_{i < j} E_j$$
+			then
+			\begin{align*}
+				\mu(\bigcup_{i=1}^\infty E_i)	= \mu(\bigcup_{i=1}^\infty F_i) %\\
+				= \sum_{i=1}^\infty \mu(F_i) %\\
+				= \lim_{n \to \infty} \sum_{i=1}^n \mu(F_i) %\\
+				&= \lim_{n \to \infty} \mu(\bigcup_{i=1}^n F_i) \\
+				&= \lim_{n \to \infty} \mu(E_n)
+			\end{align*}
+			\item $$\mu(E_1) = \mu(E_1 \setminus \bigcap_{i=1}^\infty E_i) + \mu(\bigcap_{i=1}^\infty E_i)$$
+			So
+			\begin{align*}
+				\mu(\bigcap_{i=1}^\infty E_i) &= \mu(E_1) - \mu(E_1 \setminus \bigcap_{i=1}^\infty E_i)\\
+				&= \mu(E_1) - \mu(\bigcup_{i=1}^\infty E_1 \setminus E_i)\\
+				&= \mu(E_1) - \lim_{n \to \infty} \mu(E_1 \setminus E_n)\\
+				&= \mu(E_1) - \mu(E_1) + \lim_{n \to \infty} \mu(E_n)
+			\end{align*}
+		\end{enumerate}
+	\end{proof}
+\end{proposition}
+
+$\lambda$, \emph{Lebesgue measure}, will be our means of defining a concept for length, area, volume etc. of a set. \\
+On $\mathbb{R}$ we clearly desire $\lambda_1 ((a,b)) = b - a$.\\
+On $\mathbb{R}^2$ we clearly desire $\lambda_2 ((a,b) \times (c,d)) = (b - a)(d - c)$.
+And so on. \\[11pt]
+On $\mathbb{R}$, if a set $A$ is contained in $\bigcup_{i=1}^\infty(a_i,b_i)$ we must have by $\sigma$-subadditivity:
+$$\lambda(A) \le \sum_{i=1}^\infty \lambda(a_i,b_i) \le \sum_{i=1}^\infty (b_i - a_i)$$
+which motivates us to define:
+$$\lambda^*(A) = \inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty(a_i,b_i)\}$$
+We plan to find a $\sigma$-algebra containing the open intervals (and hence the Borel sets) on which $\lambda^*$ is a measure.\\
+We must also show $\lambda^*((a,b)) = b - a$.
+
+%Outer measure
+
+\section{Outer Measure}
+
+\begin{definition} \label{D:OuterMeasure}
+	An \emph{outer measure} on a set $\Omega$ is a function:
+	$$\mu^* : \{\text{All subsets of $\Omega$}\} \to [0,\infty]$$
+	such that:
+	\begin{enumerate}
+		\item $\mu^*(\emptyset) = 0$
+		\item \emph{Monotonicity}. If $A \subset B$, then $\mu^*(A) \le \mu^*(B)$.
+		\item \emph{$\sigma$-subadditivity}. $\mu(\bigcup_{i=1}^\infty B_i) \le \sum_{i=1}^\infty \mu^*(B_i)$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Let $\mathcal{A}$ be a family of subsets of $\Omega$. Now define a function $\phi : \mathcal{A} \to [0,\infty]$.  Let $B$ be an arbitrary subset of $\Omega$ and define:
+	$$\mu^*(A) = \inf\{\sum_{i=1}^\infty \phi(A_i) : B \subset \bigcup_{i=1}^\infty A_i, \text{ and } A_1, A_2, ... \in \mathcal{A} \}$$
+	Further, define $\mu^*(\emptyset) = 0$ and $\mu^*(B) = \infty$ if no such $A_i$ (i.e. no such cover) exist(s).
+\end{definition}
+
+\begin{lemma} \label{L:OuterMeasure}
+	$\mu^*$ is an outer measure.
+	\begin{proof} \quad
+		\begin{enumerate}
+		\item from definition
+		\item from definition
+		\item Consider a set $B_j$ and cover $B_j$ by sets $A_{i}^{(j)}$ in $\mathcal{A}$ such that $$B_j \subset \bigcup_{i=1}^\infty A_{i}^{(j)} \text{ and } \sum_{i=1}^\infty \phi (A_{i}^{(j)}) \le \mu^*(B_j) + \frac{\epsilon}{2^j}$$
+		then
+		$$\mu^*(\bigcup_{i=1}^\infty B_j) \le \sum_{j=1}^\infty \sum_{i=1}^\infty \phi(A_{i}^{(j)}) \le \sum_{i=1}^\infty \mu^*(B_j) + \epsilon$$
+		\end{enumerate}
+	\end{proof}
+\end{lemma}
+
+\begin{definition} \label{D:measurability}
+	If $\mu^*$ is an outer measure on a set $\Omega$, we say that a set $A \subset \Omega$ is \emph{$\mu^*$ measurable} if, for any $T \subset \Omega$:
+	$$\mu^*(T \cap A) + \mu^*(T \setminus A) = \mu^*(T)$$
+\end{definition}
+
+\begin{theorem} \label{T:Caratheodory}
+	If $\mu^*$ is an outer measure on $\Omega$, then the family of $\mu^*$ measurable sets, $\mathcal{F}(\mu^*)$, is a $\sigma$-algebra and $\mu^*$ is a measure on $\mathcal{F}(\mu^*)$.
+	\begin{proof}
+		We first show that $\mathcal{F}(\mu^*)$ is an algebra:
+		\begin{enumerate}
+			\item If $A \in \mathcal{F}(\mu^*)$, then $\Omega \setminus A \in \mathcal{F}(\mu^*)$
+			\begin{proof}
+					For any $T \subset \Omega$
+					\begin{align*}
+						\mu^*(T) &= \mu^*(T \cap A) + \mu^*(T \setminus A)\\
+						&= \mu^*(T \setminus (\Omega \setminus A)) + \mu^*(T \cap (\Omega \setminus A))\\
+					\end{align*}
+			\end{proof}
+			\item $\emptyset \in \mathcal{F}(\mu^*)$ and $\Omega \in \mathcal{F}(\mu^*)$
+			\begin{proof}
+					For any $T \subset \Omega$
+					\begin{align*}
+						\mu^*(T) &= \mu^*(T \cap \emptyset) + \mu^*(T \setminus \emptyset)\\
+						&= 0 + \mu^*(T)\\
+						&= \mu^*(T)
+					\end{align*}
+					By 1., $\Omega \in \mathcal{F}(\mu^*)$.
+			\end{proof}
+			\item If $A, B \in \mathcal{F}(\mu^*)$, then $A \cup B \in \mathcal{F}(\mu^*)$
+			\begin{proof}
+					Let $A, B \in \mathcal{F}(\mu^*)$ and let $T \subset \Omega$ be an arbitrary set. $A$ is $\mu^*$ measurable, so
+					$$\mu^*(T) = \mu^*(T \cap A) + \mu^*(T \setminus A)$$
+					We now test the measurability of $B$ with $T \cap A$
+					\begin{align*}
+						\mu^*(T \cap A) &= \mu^*(T \cap A \cap B) + \mu^*((T \cap A) \setminus B)\\
+						\text{so } \mu^*(T) &= \mu^*(T \cap A \cap B) + \mu^*((T \cap A) \setminus B) + \mu^*(T \setminus A)\\
+						&\ge \mu^*(T \cap A \cap B) + \mu^*(((T \cap A) \setminus B) \cup (T \setminus A))\\
+						&\ge \mu^*(T \cap (A \cap B)) + \mu^*(T \setminus (A \cap B))
+					\end{align*}
+					Since $(((T \cap A) \setminus B) \cup (T \setminus A)) \supset (T \setminus (A \cap B))$ (monotonicity).\\
+					Now, by the subadditivity of outer measures,
+					$$\mu^*(T) \le \mu^*(T \cap (A \cap B)) + \mu^*(T \setminus (A \cap B))$$
+					and hence
+					$$\mu^*(T) = \mu^*(T \cap (A \cap B)) + \mu^*(T \setminus (A \cap B))$$
+					So $A \cap B$ is $\mu^*$ measurable, for $A, B \in \mathcal{F}(\mu^*)$.  By \emph{De Morgan's Laws}, $A \cup B = \Omega \setminus ((\Omega \setminus A) \cap (\Omega \setminus B))$ so, by 2., $A \cup B \in \mathcal{F}(\mu^*)$.
+			\end{proof}
+		\end{enumerate}
+		So $\mathcal{F}(\mu^*)$ is an algebra.  We must now prove that $\mathcal{F}(\mu^*)$ is a $\sigma$-algebra.\\[11pt]
+		Let $F_1, ... , F_n \in \mathcal{F}(\mu^*)$ be disjoint sets, then, since $\mathcal{F}(\mu^*)$ is an algebra, $\bigcup_{i=1}^n F_i \, \text{and} \, \bigcap_{i=1}^n F_i \in \mathcal{F}(\mu^*)$.\\
+		We claim $\mu^*(T \cap \bigcup_{i=1}^n F_i) = \sum_{i=1}^n \mu^*(T \cap F_i)$ for all $n$.
+		\begin{proof}
+			Let $n = 1$, then trivially $\mu^*(T \cap F_1) = \mu^*(T \cap F_1)$.\\
+			Assume our claim holds for some $n \ge 1$, then consider
+			\begin{align*}
+				\mu^*(T \cap \bigcup_{i=1}^{n+1} F_i) &= \mu^*((T \cap \bigcup_{i=1}^{n+1} F_i) \cap F_{n+1}) + \mu^*((T \cap \bigcup_{i=1}^{n+1} F_i) \setminus F_{n+1})\\
+				&= \mu^*(T \cap F_{n+1}) + \mu^*(T \cap \bigcup_{i=1}^n F_i)\\
+				&= \mu^*(T \cap F_{n+1}) + \sum_{i=1}^n \mu^*(T \cap F_i)\\
+				&= \sum_{i=1}^{n+1} \mu^*(T \cap F_i)
+			\end{align*}
+			So our claim holds inductively for all $n$.
+		\end{proof}
+		Now let $E_1, E_2, ... \in \mathcal{F}(\mu^*)$ be arbitrary sets and define
+		$$F_i = E_i \setminus \bigcup_{j < i} E_j$$
+		So that $F_i \cap F_j = \emptyset, i \ne j$ and, since $\mathcal{F}(\mu^*)$ is an algebra, $F_i \in \mathcal{F}(\mu^*)$ for all $i$. Also note that
+		$$\bigcup_{i=1}^n E_i = \bigcup_{i=1}^n F_i  \text{ for all $n$, so } \bigcup_{i=1}^\infty E_i = \bigcup_{i=1}^\infty F_i$$
+		Now let $T \subset \Omega$ be any set and recall $\bigcup_{i=1}^n F_i \in \mathcal{F}(\mu^*)$, so
+		\begin{align*}
+			\mu^*(T) &= \mu^*(T \cap \bigcup_{i=1}^n F_i) + \mu^*(T \setminus \bigcup_{i=1}^n F_i)\\
+			&\ge \mu^*(T \cap \bigcup_{i=1}^n F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)\\
+			&= \sum_{i=1}^n \mu^*(T \cap F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)\\
+			& \xrightarrow{\text{as } n \to \infty} \sum_{i=1}^\infty \mu^*(T \cap F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)\\
+			& \ge \mu^*(T \cap \bigcup_{i=1}^\infty F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)
+		\end{align*}
+		But $\mu^*$ is subadditive so
+		$$\mu^*(T) \le \mu^*(T \cap \bigcup_{i=1}^\infty F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)$$
+		Consequently
+		\begin{align*}
+			\mu^*(T) &= \mu^*(T \cap \bigcup_{i=1}^\infty F_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty F_i)\\
+			&= \mu^*(T \cap \bigcup_{i=1}^\infty E_i) + \mu^*(T \setminus \bigcup_{i=1}^\infty E_i)
+		\end{align*}
+		So $\bigcup_{i=1}^\infty E_i \in \mathcal{F}(\mu^*)$ and $\mathcal{F}(\mu^*)$ is a $\sigma$-algebra.	
+	\end{proof}
+\end{theorem}
+
+\begin{definition} \label{D:MeasurableTerminology}
+	If we restrict $\mu^*$ to $\mathcal{F}(\mu^*)$, then we replace $\mu^*$ by $\mu$ and simply say ``the measure $\mu$".
+\end{definition}
+
+%Lebesgue Measure
+
+\section{Lebesgue Measure}
+
+\begin{definition} \label{D:LebesgueOuterMeasure}
+	The \emph{Lebesgue outer measure on $\mathbb{R}$} is defined as
+	$$\lambda^*(A) = \inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty(a_i,b_i)\}$$
+\end{definition}
+
+\begin{note}
+	We could use any interval type to define $\lambda^*$.
+	\begin{proof}
+		\begin{enumerate}
+			\item If $A \subset \bigcup_{i=1}^\infty (a_i, b_i)$, then $A \subset \bigcup_{i=1}^\infty [a_i, b_i]$ and so
+			$$\inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty[a_i,b_i]\} \le \inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty(a_i,b_i)\}$$
+			\item Let $\epsilon > 0$.  If $A \subset \bigcup_{i=1}^\infty [a_i, b_i]$, then $A \subset \bigcup_{i=1}^\infty (a_i - \frac{\epsilon}{2^i}, b_i + \frac{\epsilon}{2^i})$ and
+			$$\sum_{i=1}^\infty ((b_i + \frac{\epsilon}{2^i}) - (a_i - \frac{\epsilon}{2^i})) = 2\epsilon + \sum_{i=1}^\infty (b_i - a_i)$$
+			So
+			$$\inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty (a_i, b_i)\} \le 2\epsilon + \inf\{\sum_{i=1}^\infty(b_i - a_i) : A \subset \bigcup_{i=1}^\infty [a_i, b_i]\} $$
+		\end{enumerate}
+		Combining 1. and 2. yields equality.
+	\end{proof}
+\end{note}
+
+\begin{lemma} \label{L:leb-a}
+	If $[a,b] \subset \bigcup_{i=1}^\infty(a_i,b_i)$, then $b - a \le \sum_{i=1}^\infty (b_i - a_i)$
+	\begin{proof}
+		By Heine-Borel theorem, if a closed interval is contained in an union of open intervals, then there exists a finite subcover of the closed interval.  In our case there exists a finite $n$ such that
+		$$[a,b] \subset \bigcup_{i=1}^n (a_i, b_i)$$
+		So we need only show that for such an $[a,b] \subset \mathbb{R}$, $b - a \le \sum_{i=1}^n (b_i - a_i)$.\\
+		Result holds for $n=1$. Assume result holds for some finite $n \ge 1$. For the case $n + 1$, we may assume $a_{n+1} \le a_i$ for all $i$ and $a_{n+1} < a$.\\
+		\begin{enumerate}
+			\item If $b_{n+1} > b$, then
+			$$b - a \le b_{n+1} - a_{n+1} \le \sum_{i=1}^{n+1} (b_i - a_i)$$
+			\item If $b_{n+1} < b$ (and $b_{n+1} > a$), then $[b_{n+1}, b]$ is covered by $\bigcup_{i=1}^n (a_i, b_i)$, so by inductive hypothesis
+			\begin{align*}
+				b - a &= (b - b_{n+1}) + (b_{n+1} - a)\\
+				&\le \sum_{i=1}^n (b_i - a_i) + (b_{n+1} - a_{n+1})\\
+				&= \sum_{i=1}^{n+1} (b_i - a_i)
+			\end{align*}
+		\end{enumerate}
+		1. and 2. prove our claim inductively for $n+1$, so claim holds inductively for all $n$ and our lemma is proved.
+	\end{proof}
+\end{lemma}
+
+\begin{lemma} \label{L:b-a}
+	$\lambda^*(a,b) = \lambda^*[a,b] = b - a$
+	\begin{proof}
+		Note, by Definition \ref{D:LebesgueOuterMeasure}
+		$$\lambda^*[a,b] =  \inf\{\sum_{i=1}^\infty(b_i - a_i) : [a,b] \subset \bigcup_{i=1}^\infty(a_i,b_i)\}$$
+		Now $[a, b] \subset (a - \epsilon, b + \epsilon)$ for all $\epsilon > 0$ so
+		$$\lambda^*[a,b] \le b - a + 2\epsilon$$
+		and by Lemma \ref{L:leb-a} we may deduce
+		$$\lambda^*[a,b] = b - a$$
+		Furthermore
+		$$b - a  - 2\epsilon \le \lambda^*[a+\epsilon, b - \epsilon] \le \lambda^*(a,b) \le \lambda^*[a,b] = b - a$$
+		So $\lambda^*(a,b) = b - a$ also.
+	\end{proof}
+\end{lemma}
+
 \end{document}
