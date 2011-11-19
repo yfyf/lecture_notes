@@ -54,20 +54,28 @@
 \newtheorem*{claim}{Claim}
 
 
+
 \begin{document}
 \title{Multivariate Analysis}
 \author{Iannis Petridis}
 \date{Autum 2011}
 \maketitle
 
+\tableofcontents
+\setcounter{tocdepth}{4}
+\newpage
+
 \section{Mulivarible  Calculus}
 \subsection{Notation}
 $X\in\RR^{n}$, $ X=\{x_{1},x_{2},\dots,x_{n}\}$ where $x_{i}\in\RR$
 $\RR^{n}$ is a vector space\\
-length norm |x|=$\sqrt{x_1^2 + x_2^2 + \dots +x_n^2 }$\\
+length norm$|x|=\sqrt{x_1^2 + x_2^2 + \dots +x_n^2 }$\\
 If $Y,X\in\RR^{n}$ and $ Y=\{y_{1},y_{2},\dots,y_{n}\}$ then $X \cdot Y=x_{1}y_{1}+ x_{2}y_{2} +\dots + x_{n}y_{n}$\\
-Standard Basis: $e_j$=(0,0,0,.....,0, 1, 0,...)\\
-\mbox{j-1,j,j+1}\\
+Standard Basis:
+\begin{align*}
+  e_j=(0, \dots &,  0, 1, 0, \dots)\\
+& \textrm{ \scriptsize j-1,\: j, \:j+1} 
+\end{align*}
 Properties of norm
 \[|x|\geq0\]
 \[|x|=0 iff x=\vec{0}\]
@@ -135,8 +143,12 @@ then:
 \end{enumerate}
 \begin{proof}
 of (iii)
-\[f(x)\cdot g(x)-b\cdot c= f(x)\cdot g(x) -b\cdot g(x) + b\cdot g(x) -b\cdot c= g(x)\dot (f(x)-b) + b\cdot (g(x) - c) \]
-\[|f(x)\cdot g(x)-b\cdot c|= |g(x)\dot (f(x)-b) + b\cdot (g(x) - c)| \leq |g(x)\dot (f(x)-b)| +| b\cdot (g(x) - c)|\]
+\begin{align*}
+f(x)\cdot g(x)-b\cdot c &= f(x)\cdot g(x) -b\cdot g(x) + b\cdot g(x) -b\cdot c \\
+&= g(x)\dot (f(x)-b) + b\cdot (g(x) - c) \\
+|f(x)\cdot g(x)-b\cdot c|&= |g(x)\dot (f(x)-b) + b\cdot (g(x) - c)|\\
+ &\leq |g(x)\dot (f(x)-b)| +| b\cdot (g(x) - c)|\\
+\end{align*}
 Cauchy-Schwartz: $|x^{1}y^{1} + \dots +x^{n}y^{n}| \leq \sqrt{(x^{1})^{2} + \dots +(x^{n})^{2}} \cdot \sqrt{(y^{1})^{2} + \dots +(y^{n})^{2}}$
 \[|f(x)\cdot g(x)-b\cdot c| \leq |g(x)\dot (f(x)-b)| +| b\cdot (g(x) - c)|  \leq |g(x)|\cdot |f(x)-b| +|b|\cdot |g(x) - c|\]
 Since $ lim_{x\to a} (g(x))=c$, $g$ is a bounded neighbourhood of a, i.e: 
@@ -158,27 +170,31 @@ Since $ lim_{x\to a} (g(x))=c$, $g$ is a bounded neighbourhood of a, i.e:
 Linear transformations are continuious.
 \begin{proof}
 $T:\RR^{n} \rightarrow \RR^{m}$ let $a \in \RR^{n}$ to show: $\lim_{x\to a}T(a+h) = T(a)$
-\[|T(a+h) - T(a)|=|T(h)|=|T(h^{1}e_{1}+ \dots +h^{n}e_{n})|=|h^{1}T(e_{1}) + \dots +h^{n}T(e_{n})| \leq \] \[|h^{1}||T(e_{1})|+ \dots |h^{n}||T(e_{n})| \leq |h|(T(e_{1})+ \dots T(e_{n}))\]
-\[So \: we\:  have \quad |T(a+h) - T(a)| \leq M|h| \quad where \quad M= \sum_{i=1}^{n}|T(e_i)|\]
-\[So \: given \quad \epsilon > 0,\quad choose \quad \delta= \frac{\epsilon}{M} \quad such \: that \quad |h|< \delta \implies |T(a+h) - T(a)|< \epsilon\]
+\begin{align*}
+|T(a+h) - T(a)| & = |T(h)|=|T(h^{1}e_{1}+ \dots +h^{n}e_{n})| =|h^{1}T(e_{1}) + \dots +h^{n}T(e_{n})|\\ 
+&\leq  |h^{1}||T(e_{1})|+ \dots |h^{n}||T(e_{n})| \leq |h|(T(e_{1})+ \dots T(e_{n})) \\
+So: \quad |T(a+h) - T(a)| &\leq  M|h| \quad where \quad M= \sum_{i=1}^{n}|T(e_i)| \\
+So \: given \quad \epsilon > 0,\quad choose \quad \delta &= \frac{\epsilon}{M} \quad such \: that \quad |h|< \delta \implies |T(a+h) - T(a)|< \epsilon \\
+\end{align*}
 \end{proof}
 \end{theorem}
 
 \begin{example}
-$f(x,y)= \frac{x^{2} - y^{2}}{x^{2} +y^{2}}, \quad (x,y)=(0,0)$
-\[assume \quad \lim_{(x,y) \to (0,0)} f(x,y) = L\]
-\[\forall \epsilon > 0, \quad \exists \delta>0 \quad such \: that \quad 0<|(x,y)|<\delta \implies |f(x,y)-L|<\epsilon\] 
-Plug (x,0) into f: \[ f(x,0)= \frac{x^{2}-0}{x^{2}-0} = 1\]
-Plug (0,y) into f: \[f(0,y)= \frac{0-y^{2}}{0 +y^{2}} = -1\]
-\[If \quad |x|< \delta, \quad |f(x,0)| < \delta \implies |f(x,0) - L|< \epsilon \quad ie \quad |1-L|< \epsilon\]
-\[If \quad |y|< \delta, \quad |f(0,y)| < \delta \implies |f(0,y) - L|< \epsilon \quad ie \quad |-1-L|< \epsilon\]
-\[\implies \epsilon = \frac{1}{2} \quad contradiction! \]
+$f(x,y)= \frac{x^{2} - y^{2}}{x^{2} +y^{2}}, \quad (x,y)=(0,0)$ assume $\quad \lim_{(x,y) \to (0,0)} f(x,y) = L$
+\begin{align*}
+\forall \epsilon > 0, \quad  \exists \delta >0  \quad &such\: that \quad 0<|(x,y)|<\delta \implies |f(x,y)-L|<\epsilon \\
+\text{Plug (x,0) into f:} f(x,0) &\;= \frac{x^{2}-0}{x^{2}-0} = 1\\
+\text{Plug (0,y) into f:}  f(0,y)&\;= \frac{0-y^{2}}{0 +y^{2}} = -1\\
+If \: |x|< \delta \quad |f(x,0)| < \delta & \implies |f(x,0) - L|< \epsilon \quad ie \quad |1-L|< \epsilon\\
+If \: |y|< \delta \quad |f(0,y)| < \delta& \implies |f(0,y) - L|< \epsilon \quad ie \quad |-1-L|< \epsilon\\
+&\implies \epsilon = \frac{1}{2} \quad contradiction! \\
+\text{Now consider} \quad y=mx, m\in \RR&\\
+&f(x,mx)=\frac{x^{2} - (mx)^{2}}{x^{2} + (mx)^{2}} = \frac{1-m^{2}}{1+m^{2}}\\
+&\lim_{x \to 0}(\lim_{y \to 0} f(x,y)) = \lim_{x \to 0}1 = 1\\
+&\lim_{y \to 0}(\lim_{x \to 0} f(x,y)) = \lim_{y \to 0}-1 = -1\\
+\end{align*}
+\text{However checking along straight lines is  not enough to prove continuity.}\\
 
-Now consider y=mx, m$\in \RR$
-\[f(x,mx)=\frac{x^{2} - (mx)^{2}}{x^{2} + (mx)^{2}} = \frac{1-m^{2}}{1+m^{2}}\]
-\[\lim_{x \to 0}(\lim_{y \to 0} f(x,y)) = \lim_{x \to 0}1 = 1\]
-\[\lim_{y \to 0}(\lim_{x \to 0} f(x,y)) = \lim_{y \to 0}-1 = -1\]
-However checking along straight lines is not enough to prove continuity.
 \end{example}
 
 \begin{example}
@@ -221,36 +237,38 @@ if $f:\RR^{n} \rightarrow \RR$
 \end{example}
 
 \begin{example}
-\[
- f(x,y) =
+\begin{align*}
+ f(x,y) &=
   \begin{cases}
    \frac{x^{2} - y^{2}}{\sqrt{x^{2} + y^{2}}} & \text{if } (x,y) \neq (0,0) \\
    1       & \text{if } (x,y) = (0,0)
-  \end{cases}
-\]
-Then $D_{1}f(0,0) =$
-\[\left.\frac{df}{dx}\right| _{(0,0)} =  \lim_{x \to 0}\frac{f(x,0) - f(0,0)}{x}= \lim_{x \to 0}\frac{\frac{x^{2}-0}{x^{2}-0} -1}{x} = 0\]
-$D_{2}f(0,0) =$
-\[\left.\frac{df}{dy}\right| _{(0,0)} =  \lim_{y \to 0}\frac{f(0,y) - f(0,0)}{y}= \lim_{y \to 0}\frac{\frac{0-y^{2}}{0+y^{2}} -1}{y} = \frac{-2}{y}= \pm \infty\]
+  \end{cases}\\
+ D_{1}f(0,0) =\left.\frac{df}{dx}\right| _{(0,0)} &=  \lim_{x \to 0}\frac{f(x,0) - f(0,0)}{x}= \lim_{x \to 0}\frac{\frac{x^{2}-0}{x^{2}-0} -1}{x} = 0\\
+D_{2}f(0,0) =\left.\frac{df}{dy}\right| _{(0,0)} &=  \lim_{y \to 0}\frac{f(0,y) - f(0,0)}{y}= \lim_{y \to 0}\frac{\frac{0-y^{2}}{0+y^{2}} -1}{y} = \frac{-2}{y}= \pm \infty\\
+\end{align*}
 \end{example}
 
 \subsection{Total Derivitive}
 
 
 In 1 dimention we write the following for the derivitive of $f:\RR \rightarrow \RR$
-\[f^{'}(a)=\lim_{h \to 0}\frac{f(a+h) - f(a)}{h}\]
+\[\quad f^{'}(a)=\lim_{h \to 0}\frac{f(a+h) - f(a)}{h}\]
 we try to write it in higher dimentions $f:\RR^{n} \rightarrow \RR^{m}$ in this form
-\[\lim_{h \to 0}\left[\frac{f(a+h) - f(a)}{h} - f^{'}(a)\right]=\lim_{h \to 0}\left[\frac{f(a+h) - f(a) - h \cdot f^{'}(a)}{h}\right]=\] 
-\[\lim_{h \to 0}\frac{|f(a+h) - f(a) - h \cdot f^{'}(a)|}{|h|} =0 \]
+\begin{align*}
+\lim_{h \to 0}\left[\frac{f(a+h) - f(a)}{h} - f^{'}(a)\right] &=\lim_{h \to 0}\left[\frac{f(a+h) - f(a) - h \cdot f^{'}(a)}{h}\right]\\
+&=\lim_{h \to 0}\frac{|f(a+h) - f(a) - h \cdot f^{'}(a)|}{|h|} =0 \\
+\end{align*}
 For $f:\RR^{n} \rightarrow \RR^{m}$ consider the tangent line at a: $y=f(a) +f^{'}(a)(x-a)$\\
 call $x-a = h$ then we have: $y=f(a) +f^{'}(a)(h)$\\
-this is an Affine transformation, not a linear map.//
-Look at the map
+this is an Affine transformation, not a linear map.\\
+Look at the map:
 \[\lambda:h \rightarrow hf^{'}(a), \quad h \in \RR\]
 This is a linear map.
-\[\lambda(h_{1} + h_{2})=(h_{1} + h_{2})f^{'}(a)= h_{1}f^{'}(a) + h_{2}f^{'}(a) =\lambda(h_{1}) + \lambda(h_{2})\]
-\[\lambda(\alpha \cdot h)=(\alpha h)f^{'}(a)=\alpha(hf^{'}(a))=\alpha \cdot\lambda( h)\]
-\[\lim_{h \to 0}\frac{|f(a+h) - f(a) - \lambda(h)|}{|h|} =0 \]
+\begin{align*}
+\lambda(h_{1} + h_{2})&=(h_{1} + h_{2})f^{'}(a)= h_{1}f^{'}(a) + h_{2}f^{'}(a) =\lambda(h_{1}) + \lambda(h_{2})\\
+\lambda(\alpha \cdot h)&=(\alpha h)f^{'}(a)=\alpha(hf^{'}(a))=\alpha \cdot\lambda( h)\\
+&\lim_{h \to 0}\frac{|f(a+h) - f(a) - \lambda(h)|}{|h|} =0 \\
+\end{align*}
 
 \begin{definition}[Total Derivitive]\label{D:Total Derivitive}
 $f:\RR^{n} \rightarrow \RR^{m}\: or \:(f:A \rightarrow \RR^{m}, \: A \subset \RR^{n}, \:A\;is\;open)$
@@ -277,13 +295,18 @@ If f is differentiable at a then there exists a unique linear transformation, $ 
 suppose $ \mu:\RR^{n} \rightarrow \RR^{m}$ is another linear transformation such that:
 \[\lim_{h \to 0}\frac{|f(a+h) - f(a) - \mu(h)|}{|h|} =0 \]
 deduce that $\lambda= \mu \:\forall h\in\RR^{n} \; ie\; \lambda(h)= \mu(h)$
-\[\frac{|\lambda(h)- \mu(h)|}{|h|}= \frac{|\lambda(h) +f(a) -f(a+h) +f(a+h) -f(a)- \mu(h)|}{|h|} \leq \] 
-\[\frac{|f(a+h) -f(a) -\lambda(h)|}{|h|} +  \frac{|f(a+h) -f(a) -\mu(h)|}{|h|}\]
-Conclude that \[lim_{h \to 0}\frac{|\lambda(h)- \mu(h)|}{|h|} \leq 0 + 0 =0 \quad (*)\]
+\begin{align*}
+\frac{|\lambda(h)- \mu(h)|}{|h|}&= \frac{|\lambda(h) +f(a) -f(a+h) +f(a+h) -f(a)- \mu(h)|}{|h|}\\
+&\leq \frac{|f(a+h) -f(a) -\lambda(h)|}{|h|} +  \frac{|f(a+h) -f(a) -\mu(h)|}{|h|}\\
+\text{Conclude that:} \qquad \qquad \qquad &\\
+\:lim_{h \to 0}\frac{|\lambda(h)- \mu(h)|}{|h|} &\leq 0 + 0 =0 \quad (*)
+\end{align*}
 Let h=0 $\lambda= 0=\mu$ since $\lambda, \mu$ are linear. Now fix $h \in \RR^{n}$, $h\neq0$ and let $t\in\RR$ such that $th\in\RR^{n} $ then replace $h$ with $th$ in (*):
-\[0 =\lim_{t \to 0}\frac{|\lambda(th)- \mu(th)|}{|th|}= \lim_{t \to 0}\frac{|t\lambda(h)- t\mu(h)|}{|t||h|} =\]  
-\[\lim_{t \to 0}\frac{|t|}{|t|}\frac{|\lambda(h)- \mu(h)|}{|h|}= \frac{|\lambda(h)- \mu(h)|}{|h|} \]
-\[So\quad \lambda(h)=\mu(h)\]
+\begin{align*}
+\lim_{t \to 0}\frac{|\lambda(th)- \mu(th)|}{|th|}&= \lim_{t \to 0}\frac{|t\lambda(h)- t\mu(h)|}{|t||h|}\\
+&= \lim_{t \to 0}\frac{|t|}{|t|}\frac{|\lambda(h)- \mu(h)|}{|h|}= \frac{|\lambda(h)- \mu(h)|}{|h|} = 0\\
+&So\quad \lambda(h)=\mu(h)\\
+\end{align*}
 \end{proof}
 \end{theorem}
 
@@ -294,12 +317,20 @@ $f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at $a \in \RR^{n}$ and it is d
 \begin{example}\label{Df example}
 $f:\RR^{2} \rightarrow \RR^{2}, \quad f(x,y)=(x^{2},x+5) \quad x,y \in \RR$\\
 Show that $Df(1,2)(h^{1}, h^{2})=(4h^{1} +  h^{2}, h^{1})$:
-\[f((1,2) +(h^{1}, h^{2})) - f(1,2) -Df(1,2)(h^{1}, h^{2})= f(1+h^{1}, 2+ h^{2}) - f(1,2) - (4h^{1}+ h^{2}, h^{1})=\]
-\[((1+h^{1})^{2}(2+ h^{2}), (1+h^{1} +5)) - (2,6)  - (4h^{1}+ h^{2}, h^{1})=\]
-\[(2+ h^{2} + 2(h^{1})^{2} +(h^{1})^{2}h^{2} + 2h^{1}h^{2} + 4h^{1} -2 -4h^{1} -h^{2}, 6+h^{1} - 6 -h^{1})=\]
-\[Take \; length\: =| (2(h^{1})^{2} +(h^{1})^{2}h^{2} + 2h^{1}h^{2}, 0)| \leq 2|h|^{2} +|h|^{2}|h| + 2|h||h| = 4|h|^{2} + |h|^{3}\]
-\[So\quad \lim_{h \to 0}\frac{|f((1,2) +(h^{1}, h^{2})) - f(1,2) -Df(1,2)(h^{1}, h^{2})|}{|h|} \leq \] 
-\[ \lim_{h \to 0}\frac{4|h|^{2} + |h|^{3}}{|h|} =  \lim_{h \to 0}4|h| + |h|^{2}=0\]
+\begin{align*}
+&f((1,2) +(h^{1}, h^{2})) - f(1,2) -Df(1,2)(h^{1}, h^{2})\\
+&= f(1+h^{1}, 2+ h^{2}) - f(1,2) - (4h^{1}+ h^{2}, h^{1})\\
+&=((1+h^{1})^{2}(2+ h^{2}), (1+h^{1} +5)) - (2,6)  - (4h^{1}+ h^{2}, h^{1})\\
+&=(2+ h^{2} + 2(h^{1})^{2} +(h^{1})^{2}h^{2} + 2h^{1}h^{2} + 4h^{1} -2 -4h^{1} -h^{2}, 6+h^{1} - 6 -h^{1})
+\end{align*}
+\textrm{Take length:}
+\[|(2(h^{1})^{2} +(h^{1})^{2}h^{2} + 2h^{1}h^{2}, 0)| \leq 2|h|^{2} +|h|^{2}|h| + 2|h||h| = 4|h|^{2} + |h|^{3}\]
+\textrm{So:}
+\begin{align*}
+&\lim_{h \to 0}\frac{|f((1,2) +(h^{1}, h^{2})) - f(1,2) -Df(1,2)(h^{1}, h^{2})|}{|h|}\\
+& \leq
+\lim_{h \to 0}\frac{4|h|^{2} + |h|^{3}}{|h|} =  \lim_{h \to 0}4|h| + |h|^{2}=0
+\end{align*}
 \end{example}
 
 \begin{definition}
@@ -334,9 +365,171 @@ Having  directional derivitives in all directions $u\neq 0$ is not enough to gua
 \begin{theorem}
 If $f$ is differentiable at a then $f$ is continuious at a.
 \begin{proof}
-\[\lim_{h \to 0}|f(a+h)-f(a)| = \lim_{h \to 0}|f(a+h)-f(a) -Df(a) + Df(a)| \leq\] 
-\[ \lim_{h \to 0}\frac{|f(a+h)-f(a) -Df(a)(h)|}{|h|}\cdot|h| +| Df(a)(h)| = 0 +| Df(a)(h)|\]
+\begin{align*}
+\lim_{h \to 0}|f(a+h)-f(a)| &= \lim_{h \to 0}|f(a+h)-f(a) -Df(a) + Df(a)|\\
+&\leq \lim_{h \to 0}\frac{|f(a+h)-f(a) -Df(a)(h)|}{|h|}\cdot|h| + \lim_{h \to 0}| Df(a)(h)|\\ 
+&= 0 \\
+\end{align*}
 \end{proof}
 \end{theorem}
+
+\subsection{The Chain Rule}
+\begin{theorem}[Chain Rule]\label{T:Chain Rule}
+if $f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a and $f:\RR^{m} \rightarrow \RR^{k}$ is differentiable at $f(a)$ then $g \circ f:\RR^{n} \rightarrow \RR^{k}$ is differentiable at a and 
+\[D(g \circ f)(a) = Dg(f(a))\circ Df(a)\]
+
+\[\begin{diagram}
+\node{\RR^{n}} \arrow{e,t}{Df(a)}  \arrow{se,b}{D(g\circ f)(a)}
+\node{\RR^m}  \arrow{s,r}{Dg(f(a))} \\
+ \node[2]{\RR^{k}}
+\end{diagram}\]
+\[(g\circ f)^{'}(a)= g^{'}(f(a))\cdot f^{'}(a), \quad \textrm{where $\cdot$ represents matrix multiplication}\]
+
+\begin{proof}
+if $b=f(a)$ and we let $Df(a) = \lambda$ and $Dg(f(a))=\mu$ then if we define:
+\begin{align}
+\varphi(x) &=f(x)-f(a) -\lambda(x-a)\\
+\psi(y) &= g(y) - g(b) - \mu(y-b)\\
+\rho(x) &= g\circ f(x) - g\circ f(a) - \mu \circ \lambda (x -a)
+\end{align}
+\text{Then:}
+\begin{align}
+\lim_{h \to 0}\frac{|f(a+h)-f(a) -Df(a)(h)|}{|h|} &= \lim_{x \to a}\frac{|\varphi(x)|}{|x-a|} = 0\\
+\lim_{h \to 0}\frac{|g(b+h)-g(b) -Dg(b)(h)|}{|h|} &= \lim_{y \to b}\frac{|\psi(y)|}{|y-b|} = 0
+\end{align}
+We must show:
+\[\lim_{h \to 0}\frac{|g\circ f(x) - g\circ f(a) - \mu \circ \lambda (x -a)|}{|h|} = \lim_{x \to b}\frac{|\rho(x)|}{|x-b|} = 0\]
+Now:
+\begin{align*}
+\rho(x) &=g(f(x)) - g(b) - \mu(\lambda(x-a)) \\
+&= g(f(x)) - g(b) - \mu(f(x) - f(a) - \varphi(x)) \qquad \; \textmd{by (1)}\\
+&= [g(f(x)) - g(b) - \mu(\lambda(f(x)-f(a)))] \\
+&= \mu(\varphi(x)) = \psi(f(x)) + \mu(f(x)) \qquad \qquad \qquad \quad \textmd{by (2)}
+\end{align*}
+Thus we must Prove
+\begin{align}
+&\lim_{x \to a}\frac{|\psi(f(x))|}{|x-a|} = 0\\
+&\lim_{x \to a}\frac{|\mu\varphi(x)|}{|x-a|} = 0
+\end{align}
+It follows from (5) that for some $\delta > 0 $  we have
+\[|\psi(f(x))|<\epsilon|f(x) - b| \quad if\; |f(x) - b|<\delta\]
+which is true if $|x-a|< \delta_{1} $ for a suitable $\delta_{1}$. We also have that if T is a linear transformation then $\exists M \geq 0\; such \; that\;  |T(x)|<M|x|$. So then:
+\begin{align*}
+|\psi(f(x))| &<\epsilon|f(x) - b| \\
+&= \epsilon|\varphi(x) + \lambda(x-a)|\\
+& \leq \epsilon|\varphi(x)| + \epsilon M|x-a|
+\end{align*}
+So
+\[\lim_{x \to a}\frac{|\psi(f(x))|}{|x-a|} \leq \lim_{x \to a}\frac{\epsilon|\varphi(x)|}{|x-a|}  + \lim_{x \to a}\frac{\epsilon M|x-a|}{|x-a|} = \epsilon M \rightarrow 0\]
+Also
+\[\lim_{x \to a}\frac{|\mu\varphi(x)|}{|x-a|} \leq \lim_{x \to a}\frac{M|\varphi(x)|}{|x-a|} = 0\]
+\end{proof}
+\end{theorem}
+
+\begin{theorem}\label{s}
+Define $s:\RR^2 \rightarrow \RR \quad s(x,y)=x + y$ then $s$ is differentiable  and $Ds = s$
+\begin{proof}
+S is linear so
+\begin{align*}
+s((x,y) + (x^{'},y^{'})) &=s(x+x^{'},y+y^{'})= s(x,y) + s(x^{'},y^{'})\\
+s(\lambda(x,y)) &= \lambda s(x,y)\\
+\lim_{h \to 0}\frac{|s(a+h) - s(a) -s(h)|}{|h|} = 0
+\end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}\label{p}
+Define $p:\RR^2 \rightarrow \RR, \quad p(x,y)=xy$, then $p$ is differentiable  and:\\
+$Dp(a,b):\RR^2 \rightarrow \RR$ is linear with $Dp(a,b)(h,k) = ak + bh$ and $p^{'} = (b,a)$
+\begin{proof}
+use of derivitive
+\begin{align*}
+p((a,b)+(h,k)) - p(a,b) - Dp(a,b)(h,k) &= p(a+h,b+k) - p(a,b) - (ak + bh)\\
+&=(a+h)(b+k) - ab - (ak + bh) = hk\\
+\frac{|p((a,b)+(h,k)) - p(a,b) - Dp(a,b)(h,k)|}{|(h,k)|} &= \frac{|hk|}{\sqrt{h^2 + k^2}} \leq  \frac{\sqrt{h^2 + k^2}\sqrt{h^2 + k^2}}{\sqrt{h^2 + k^2}} = \sqrt{h^2 + k^2} \rightarrow 0
+\end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+To check some $T:\RR^n \rightarrow \RR^m$ is linear we listed two properties:
+\begin{align*}
+T(x+y) &= T(x) +T(y)\\
+T(\lambda x) &= \lambda T(x)\\
+\text{we can instead just check:}\\
+T( \lambda x + y) &= \lambda T(x) + T(y)
+\end{align*}
+\end{remark}
+
+\subsection{Linear Functionals}
+
+\begin{definition}
+Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear functional. The set of all linear functionals from $\RR^n \rightarrow \RR$ is called the dual space of $\RR^{n}$, denoted $(\RR^n)*$\\
+let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
+$g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
+\begin{align*}
+g(\lambda x +y) &= \lambda g(x) + g(y) \\
+\text{this can be seen by} \qquad
+g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
+&= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
+&= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
+\end{align*}
+$[g^{i}]$ is the matrix representation of $g^{i}$\\
+$[g^{i}] = (g_{1}^{i}, \dots , g_{n}^{i})$
+\[ [g]_{mxn} = \begin{pmatrix}
+  g_{1}^{1}  & \cdots & g_{n}^{1} \\
+  \vdots   & & \vdots  \\
+  g_{1}^{m} & \cdots &g_{n}^{m}
+ \end{pmatrix}\]
+\end{definition}
+
+\begin{theorem}
+$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a iff $f^{i}$ are differentiable at a, $i=1, \dots , m$
+and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
+\begin{proof}
+assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
+\[f^{i} =  \Pi^{i} \circ f\]
+this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
+\[ \implies Df^{i} = D\Pi^{i}(a) \cdot Df(a)\]
+$D\Pi^{i} = \Pi^{i}$
+\[ \implies Df^{i} = \Pi^{i}(a) \cdot Df(a) \]
+Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
+\begin{align*}
+&f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
+ &= (f^{1}(a+h), \dots , f^{m}(a+h)) - (f^{1}, \dots, f^{m}) - (Df^{1}*(a)(h), \dots , Df^{m}(a)(h))\\
+&=(f^{1}(a+h) -f^{1}(a) - df^{1}(a) , \dots , f^{m}(a+h) -f^{m}(a) - df^{m}(a))
+\end{align*}
+So
+\begin{align*}
+ &\frac{|f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))|}{|h|} \\
+&\leq \frac{|f^{1}(a+h) -f^{1}(a) - df^{1}(a)|}{|h|} , \dots ,\frac{| f^{m}(a+h) -f^{m}(a) - df^{m}(a)|}{|h|} \rightarrow 0
+\end{align*}
+\end{proof}
+\end{theorem} 
+
+\begin{remark}
+If $T,S:\RR^{n} \rightarrow \RR^{m}$ are linear then $(T +S):\RR^{n} \rightarrow \RR^{m}, (T+S)(x) = T(x) + S(x)$ is linear.\\
+If $\lambda \in \RR$ then $(\lambda T):\RR^{n} \rightarrow \RR^{m}, (\lambda T)(x) = \lambda \cdot T(x)$ is also linear.
+\end{remark}
+
+\begin{corollary}
+$f,g:\RR^{n} \rightarrow \RR$ differentiable at $a \in \RR^{n}$
+\begin{enumerate}[(i)]
+\item $D(f+g)(a) = Df(a) + Dg(a)$
+\item Product rule: $D(f \cdot g)(a) = g(a)\cdot Df(a) + f(a) \cdot Dg(a)$
+\item Quotient rule: if $g(a) \neq 0, \; D(\frac{f}{g})(a) = \frac{1}{g(a)^2}\cdot (g(a)\cdot Df(a) - f(a) \cdot Dg(a))$
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+For (i):\\
+We can consder the function $s$ from theorem~\ref{s}, $s:\RR^2 \rightarrow \RR \quad s(x,y)=x + y$, but acting on $f$ and $g$ ie $s(f,g) = f+g$ and $Ds =s $
+\[D(f+g)(a)= Ds(f(a),g(a)) \circ D(f,g)(a) = s \circ(Df(a),Dg(a)) = Df(a) + Dg(a)\]
+For (ii):\\
+We can consder the function $p$ from theorem~\ref{p}, $p:\RR^2 \rightarrow \RR \quad p(x,y)=xy$, but acting on $f$ and $g$ ie $p(f,g) = fg$ with  $Dp(f,g)(h,k) = fk + gh$
+\[D(f \cdot g)(a) = Dp(f,g)\cdot D(f,g)(a)= Dp(f(a),g(a)) \cdot (Df(a),Dg(a)) = f(a)\cdot Dg(a) + g(a)\cdot Df(a)\]
+(iii) follows from (ii)
+\end{proof}
+
+
 
 \end{document}
