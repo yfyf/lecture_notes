@@ -6,8 +6,9 @@
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage{pb-diagram}
-
+\usepackage{hyperref}
 
 
 \setlength{\textwidth}{6.5in}
@@ -22,6 +23,7 @@
 
 
 \def\CC{\mathbb{C}}
+\def\MM{\mathbb{M}}
 \def\FF{\mathbb{F}}
 \def\PP{\mathbb{P}}
 \def\QQ{\mathbb{Q}}
@@ -84,8 +86,8 @@ Properties of norm
 \subsection{linear Transformation}
 \[T:\RR^{n}\rightarrow\RR^{n}\]
 \begin{enumerate}[(i)]
-\item $T(x+y)=T(x) + T(y)$
-\item $ T(\lambda x) =\lambda T(x) $
+\item $ T(x+y)=T(x) + T(y)$
+\item $T(\lambda x) =\lambda T(x) $
 \end{enumerate}
 Matrix Representation of T with respect to the standard basis:\\
 \[T(e_i)=\sum_{j=1}^{m}a_{i,j}e_j \textrm{ where } [T]_{\epsilon}^{\epsilon}=A=(a_i,j)_{\substack{i=1,\dots ,m \\ j=1,\dots ,n}}\]
@@ -181,14 +183,17 @@ So \: given \quad \epsilon > 0,\quad choose \quad \delta &= \frac{\epsilon}{M} \
 
 \begin{example}
 $f(x,y)= \frac{x^{2} - y^{2}}{x^{2} +y^{2}}, \quad (x,y)=(0,0)$ assume $\quad \lim_{(x,y) \to (0,0)} f(x,y) = L$
+
+\[\forall \epsilon > 0, \quad  \exists \delta >0  \quad such\: that \quad 0<|(x,y)|<\delta \implies |f(x,y)-L|<\epsilon \]
+\text{Plug $(x,0)$ into $f$:} 
+\[f(x,0) \;= \frac{x^{2}-0}{x^{2}-0} = 1\]
+\text{Plug $(0,y)$ into $f$:} 
+\[ f(0,y)\;= \frac{0-y^{2}}{0 +y^{2}} = -1\]
 \begin{align*}
-\forall \epsilon > 0, \quad  \exists \delta >0  \quad &such\: that \quad 0<|(x,y)|<\delta \implies |f(x,y)-L|<\epsilon \\
-\text{Plug (x,0) into f:} f(x,0) &\;= \frac{x^{2}-0}{x^{2}-0} = 1\\
-\text{Plug (0,y) into f:}  f(0,y)&\;= \frac{0-y^{2}}{0 +y^{2}} = -1\\
 If \: |x|< \delta \quad |f(x,0)| < \delta & \implies |f(x,0) - L|< \epsilon \quad ie \quad |1-L|< \epsilon\\
 If \: |y|< \delta \quad |f(0,y)| < \delta& \implies |f(0,y) - L|< \epsilon \quad ie \quad |-1-L|< \epsilon\\
 &\implies \epsilon = \frac{1}{2} \quad contradiction! \\
-\text{Now consider} \quad y=mx, m\in \RR&\\
+\shortintertext{Now consider $ y=mx, m \in \RR$}
 &f(x,mx)=\frac{x^{2} - (mx)^{2}}{x^{2} + (mx)^{2}} = \frac{1-m^{2}}{1+m^{2}}\\
 &\lim_{x \to 0}(\lim_{y \to 0} f(x,y)) = \lim_{x \to 0}1 = 1\\
 &\lim_{y \to 0}(\lim_{x \to 0} f(x,y)) = \lim_{y \to 0}-1 = -1\\
@@ -298,20 +303,20 @@ deduce that $\lambda= \mu \:\forall h\in\RR^{n} \; ie\; \lambda(h)= \mu(h)$
 \begin{align*}
 \frac{|\lambda(h)- \mu(h)|}{|h|}&= \frac{|\lambda(h) +f(a) -f(a+h) +f(a+h) -f(a)- \mu(h)|}{|h|}\\
 &\leq \frac{|f(a+h) -f(a) -\lambda(h)|}{|h|} +  \frac{|f(a+h) -f(a) -\mu(h)|}{|h|}\\
-\text{Conclude that:} \qquad \qquad \qquad &\\
+\shortintertext{Conclude that:} \qquad \qquad \qquad &\\
 \:lim_{h \to 0}\frac{|\lambda(h)- \mu(h)|}{|h|} &\leq 0 + 0 =0 \quad (*)
 \end{align*}
 Let h=0 $\lambda= 0=\mu$ since $\lambda, \mu$ are linear. Now fix $h \in \RR^{n}$, $h\neq0$ and let $t\in\RR$ such that $th\in\RR^{n} $ then replace $h$ with $th$ in (*):
 \begin{align*}
 \lim_{t \to 0}\frac{|\lambda(th)- \mu(th)|}{|th|}&= \lim_{t \to 0}\frac{|t\lambda(h)- t\mu(h)|}{|t||h|}\\
 &= \lim_{t \to 0}\frac{|t|}{|t|}\frac{|\lambda(h)- \mu(h)|}{|h|}= \frac{|\lambda(h)- \mu(h)|}{|h|} = 0\\
-&So\quad \lambda(h)=\mu(h)\\
+\lambda(h)&=\mu(h)\\
 \end{align*}
 \end{proof}
 \end{theorem}
 
 \begin{definition}[Jacobian Matrix]\label{D:Jacobian Matrix}
-$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at $a \in \RR^{n}$ and it is derivitive at a $Df(a):\RR^{n} \rightarrow \RR^{m}$ is a linear map. Then the matrix representation of $Df(a)$ is $f^{'}(a) \in |MM_{mxn}$ and is called the Jacobian Matrix of f at a.
+$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at $a \in \RR^{n}$ and it is derivitive at a $Df(a):\RR^{n} \rightarrow \RR^{m}$ is a linear map. Then the matrix representation of $Df(a)$ is $f^{'}(a) \in \MM_{mxn}$ and is called the Jacobian Matrix of f at a.
 \end{definition}
 
 \begin{example}\label{Df example}
@@ -344,7 +349,7 @@ $f^{'}(a)$ is the matrix representation of $Df(a)$
  \end{pmatrix}\]
 \end{definition}
 
-\begin{example} With this new information we can tackle example~\ref{Df example}:\\
+\begin{example} With this new information we can tackle example \ref{Df example}:\\
 $f:\RR^{2} \rightarrow \RR^{2}, \quad f(x,y)=(x^{2},x+5) \quad x,y \in \RR$\\
 Show that $Df(1,2)(h^{1}, h^{2})=(4h^{1} +  h^{2}, h^{1})$:
 \[\frac{df^{1}}{dx} = 2xy, \quad \frac{df^{1}}{dy} = x^{2}, \quad \frac{df^{2}}{dx} = 1, \quad \frac{df^{2}}{dy} = 0\]
@@ -456,7 +461,7 @@ To check some $T:\RR^n \rightarrow \RR^m$ is linear we listed two properties:
 \begin{align*}
 T(x+y) &= T(x) +T(y)\\
 T(\lambda x) &= \lambda T(x)\\
-\text{we can instead just check:}\\
+\shortintertext{we can instead just check:}
 T( \lambda x + y) &= \lambda T(x) + T(y)
 \end{align*}
 \end{remark}
@@ -468,8 +473,8 @@ Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear
 let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
 $g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
 \begin{align*}
-g(\lambda x +y) &= \lambda g(x) + g(y) \\
-\text{this can be seen by} \qquad
+g(\lambda x +y) &= \lambda g(x) + g(y)
+\shortintertext{this can be seen by}
 g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
 &= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
 &= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
@@ -490,9 +495,11 @@ and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
 assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
 \[f^{i} =  \Pi^{i} \circ f\]
 this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
-\[ \implies Df^{i} = D\Pi^{i}(a) \cdot Df(a)\]
-$D\Pi^{i} = \Pi^{i}$
-\[ \implies Df^{i} = \Pi^{i}(a) \cdot Df(a) \]
+\begin{align*}
+\implies Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
+\shortintertext{$D\Pi^{i} = \Pi^{i}$}
+\implies Df^{i} &= \Pi^{i}(a) \cdot Df(a)
+\end{align*}
 Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
 \begin{align*}
 &f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
@@ -530,6 +537,315 @@ We can consder the function $p$ from theorem~\ref{p}, $p:\RR^2 \rightarrow \RR \
 (iii) follows from (ii)
 \end{proof}
 
+\subsection{Mixed Derivitives}
 
+$f:\RR^n \rightarrow \RR  , a \in \RR$
+\[D_{i} = lim_{h \rightarrow 0}\frac{f(a^1 , \dots ,a^{i-1},a^{i} + h , a^{i+1}, \dots , a^n ) - f(a)}{h}\]
+if $D_{i}f(x)$ exists for al a in some open set $U$ then we get a function $ U \xrightarrow {D_{i}} \RR , \; x \rightarrow D_{i}f(x)$ then we can talk about partial derivitives of $D_{i}f$ eg $D_{j}(D_{i}f(x)) = D_{ij}f(x)$\\
+If $D_{i}f(x)$ exists $ \forall x \in U$ this is a function of $x$ and we can consider  $D_{j}(D_{i}f(x)) = D_{ji}f(x)$\\
+In general $i \neq j$ eg $f(x,y)=x^{3}y^{5}:$
+\begin{alignat*}{2}
+D_{1}f(x,y) &= 3x^{2}y^{5} &\qquad  D_{2}f(x,y) &= 5x^{3}y^{4}\\
+D_{2,1}f(x,y) &= 15x^{2}y^{4} &D_{1,2}f(x,y) &= 15x^{2}y^{4}
+\end{alignat*}
+
+\begin{theorem}
+If $D_{i,j}$ and $D_{j,i}$ are continuious on an open set containing $a$ then
+ \[D_{i,j} = D_{j,i}\]
+\begin{proof} from homework 5:\\ 
+First we repeat the well-known proof that, if $g : U \rightarrow \RR$ is continuous and $g(p) > 0$,
+then there exists a neighborhood $V$ of $ p (p \in V \subset U,\; V \; open)$ with
+\[q \in V \implies g(q) > 0\]
+Take $\epsilon = g(p)$ in the defnition of continuity of $g$. There there exists a $V$ open with
+$p \in V$ and
+\[q \in V \implies |g(q) - g(p)| < g(p)\]
+Since 
+\[g(p) - g(q) \leq |g(q) - g(p)| < g(p) \implies  -g(q) < 0 \iff g(q) > 0\]
+we get the result. The set V can be taken to contain a closed rectangle $[a, b] \! \times\! [c, d]$.
+
+We apply the result to $g = D_{1,2}f - D_{2,1}f$. Assume (by contradiction) that $g(p)$ is not
+always 0. Then there exists a point $p$ with $g(p) \neq 0$. We can assume that $g(p) > 0$,
+otherwise consider $-g$. The function $g$ is given to be continuous. We have (using
+Fubini twice)
+\[0<\int_{[a, b] \! \times\! [c, d]}(D_{1,2}f(x,y) - D_{2,1}f(x,y))dA\]
+\[=\int_{a}^{b}\left(\int_{c}^{d}D_{1,2}f(x,y)dy\right)dx - \int_{a}^{b}\left(\int_{c}^{d}D_{2,1}f(x,y)dx\right)dy\]
+\[= \int_{a}^{b}\left(D_{1}f(x,d) - D_{1}f(x,c)\right)dx - \int_{c}^{d}\left(D_{2}f(b,y) - D_{2}f(a,y)\right)dy\]
+\[= (f(b, d)-  f(a, d) - f(b, c) + f(a, c)) - (f(b, d)-  f(b, c) - f(a, d) + f(a, c)) = 0\]
+using the fundamental theorem of calculus 6 times. This is a contradiction, so the
+mixed partial derivatives are equal on the rectangle.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+$A \subset \RR$ If the max or min of $f:A \rightarrow \RR$ occur at a point $a$ in the interior of $A$ and $D_{i}f(x)$ exists then $Df(a) = 0$
+\begin{proof}
+Consider $h(x) = f(a^{1}, \dots , a^{i-1} , x^{i}, a^{i+1}, \dots a^{n})$ $x$ in an open interval arround $a^{i}$.\\ Since $f$ has a max or min at $a$, $h$ has a max or min at $a^{i}$
+\[\frac{dh}{dx}(a^{i}) = D_{i}f(a)\]
+By analysis 2:
+\[\frac{dh}{dx}(a^{i}) =0 \implies Df(a) = 0\]
+\end{proof}
+\end{theorem}
+
+\subsection{Jacobian}
+For $f:\RR^{n} \rightarrow \RR^{m}$ with total derivitive $Df(a):\RR^{n} \rightarrow \RR^{m}$ a linear map. Then  the Jacobian $f^{'}(a) \in \MM_{mxn}$ is the  unique representation of $Df(a)$ in the standard basis.
+
+\begin{theorem}\label{jacob unique}
+If  $f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a then $D_{i}f^{j}(a)$ exists $\forall i = 1, \dots , n\; \forall j = 1, \dots , m$ and the jacobian matrix is \[f^{'}(a) = (D_{i}f^{j}(a))_{j = 1, \dots , n}^{j=1,\dots , m}\]
+\[ f^{'}(a) = \begin{pmatrix}
+  D_{1}f^{1}(a) & D_{2}f^{1}(a) & \cdots &D_{n}f^{1}(a) \\
+  D_{1}f^{2}(a) & D_{2}f^{2}(a) & \cdots & D_{n}f^{2}(a) \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  D_{1}f^{m}(a) & D_{2}f^{m}(a) & \cdots & D_{n}f^{m}(a)
+ \end{pmatrix}\]
+Where $f(x)= (f^{1}(x) , \dots , f^{m}(x)), \; f^{i}:\RR^{n} \rightarrow \RR$
+\begin{proof}
+Case $m=1$
+\[
+\begin{diagram}
+\node{\RR} \arrow{e,t}{h}  \arrow{se,b}{f \circ h}
+\node{\RR^n}  \arrow{s,r}{f} \\
+ \node[2]{\RR}
+\end{diagram}\]
+\[ h(t) = (a^1 , \dots , a^{i-1}, t , a^{i+1}, \dots , a^{n}) \qquad \left.\frac{d(f \circ h)}{dt}\right| _{t=a^{i}} = D_{i}f(a)\]
+\[\lim_{t \rightarrow a^{i}}\frac{(f\circ h)(t) - (f\circ h)(a^i)}{t-a^i} = \lim_{t \rightarrow a^{i}}\frac{f(a^1 , \dots , a^{i-1}, t, a^{i+1}, \dots , a^n) - f(a^1 , \dots , a^n)}{t-a^i} \]
+$h$ is differentiable because its components are differentiable ie component $h^i$ is either constant $a^j$ where $j \neq i$ or $t$ when $j = i$
+\begin{align*}
+Dh(t)&=(Dh^{1}(t), \dots , Dh^{n}(t))\\
+&=(0, \dots , 1, \dots , 0)
+\end{align*}
+\[ h^{'}(a^i) = \begin{pmatrix}
+  0 \\
+ 0\\
+  \vdots  \\
+ 1\\
+\vdots  \\
+0
+ \end{pmatrix}_{(m \times 1)}\]
+Case $m>1 $\\
+$f:\RR^n \rightarrow \RR^m $
+\[f(x) = (f^{1} (x), \dots f^{m}(x))\]
+\[Df(a) = (Df^{1} (a), \dots Df^{a})\]
+\[ f^{'}(a) = \begin{pmatrix}
+  (f^1)^{'}(a) \\
+  \vdots\\
+(f^m)^{'}(a)\\
+ \end{pmatrix}_{(m \times n)}\]
+\[ f^{'}(a) = \begin{pmatrix}
+  D_{1}f^{1}(a) & D_{2}f^{1}(a) & \cdots &D_{n}f^{1}(a) \\
+  D_{1}f^{2}(a) & D_{2}f^{2}(a) & \cdots & D_{n}f^{2}(a) \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  D_{1}f^{m}(a) & D_{2}f^{m}(a) & \cdots & D_{n}f^{m}(a)
+ \end{pmatrix}\]
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+Abuse of notation since if $f:\RR \rightarrow \RR$
+\[\text{this is a number} \rightarrow  \frac{dg(t_{0})}{dt}| = g'(t_{0}) \leftarrow \text{this is the $1 \times 1$ jacobian matrix}\]
+\end{remark}
+
+\begin{theorem}
+ $f:\RR^n \rightarrow \RR^m $ if $D_{j}f^{i}(x)$ exist $ \forall x \in u, U\; open,  a \in U,  \forall i = 1 \: to \: m, j = 1\:  to\: n$ and if $D_{j}f^{i}(x)$ continuious at $a$ ie 
+\[\lim_{x \rightarrow a}(D_{j}f^{i}(x)) = D_{j}f^{i}(a)\]
+then $Df(a)$ exists and $f$ is differentiable at $a$
+\begin{proof}
+As in the proof of theorem \ref{jacob unique} It suffices to consider the case $ m=1$, so that $f:\RR^n \rightarrow \RR$. Then
+\begin{align*}
+f(a+ h) - f(a) &= f(a^{1} + h^{1}, a^{2}, \dots , a^{n}) &&- f(a^{1}, \dots , a^{n})\\
+&+ f(a^1 + h^1 , a^2 + h^2, a^3 , \dots , a^n ) &&-  f(a^{1} + h^1 , a^2 ,  \dots , a^{n})\\
+&+ \dots  &&- \dots\\
+&+ f(a^1 + h^1 ,\dots ,  a^n + h^n ) &&-  f(a^{1} + h^1 ,  \dots, a^{n-1} + h^{n-1} , a^{n})
+\end{align*}
+Recal from theorem \ref{jacob unique} that $D_{1}f$ is the derivitive of the function $h$ defined by\\ $h(x) = (x, a^2 , \dots , a^n )$. Applying the mean-value theorem to $h$ we obtain
+\[ f(a^{1} + h^{1}, a^{2}, \dots , a^{n}) - f(a^{1}, \dots , a^{n}) = h^{1} \cdot D_{1}f(b_{1}, a^{2} , \dots, a^{n}) \]
+for some $b_{1}$ between $a^1 $ and $a^1 + h^1 $. Similarly the $ith$ term in the sum equals 
+\[h^{i} \cdot D_{i}f(a^1 + h^1 ,\dots ,  a^{i-1} + h^{i-1},  b_{i}, a^{i+1}, \dots , a^n ) = h^{i}D_{i}f(c_{i}) \quad \text{for some $c_{i}$} \]
+Then
+\begin{align*}
+\lim_{h \rightarrow 0}\frac{|f(a+h) - f(a) - \sum_{i=1}^{n}D_{i}f(a) \cdot h^{i}|}{|h|} &= \lim_{h \rightarrow 0}\frac{| \sum_{i=1}^{n}[D_{i}f(c_{i}) - D_{i}f(a) ]\cdot h^{i}|}{|h|}\\
+ & \leq \lim_{h \rightarrow 0}| \sum_{i=1}^{n}[D_{i}f(c_{i}) - D_{i}f(a)]|\cdot \frac{| h^{i}|}{|h|}\\
+ & \leq \lim_{h \rightarrow 0}| \sum_{i=1}^{n}[D_{i}f(c_{i}) - D_{i}f(a)]|\\
+&=0
+\end{align*}
+Since $D_{i}f$ is continuious at $a$ and as $h \rightarrow 0, c^{i} \rightarrow  a^{i}$.
+\end{proof}
+\end{theorem}
+
+\begin{definition} If $f:\RR^n \rightarrow \RR^m$ has partial derivitives $ D_{j}f^{i} \quad \forall x \in U , \; U \; open, \;  a \in U$ and $D_{j}f^{i}$ is continuious at $a$ then we say $f$ is continuiously differentiable at $a$. 
+\end{definition}
+
+\begin{example}
+$f:\RR^2 \rightarrow \RR$, with $x:\RR \rightarrow \RR, y:\RR \rightarrow \RR$. 
+\[\text{Define} \quad g:\RR \rightarrow \RR \quad g(t) = f(x(t),y(t))\]
+\begin{align*}
+\frac{dg(t_0)}{dt} &= (g^{'}(t_0)) = f^{'}(x(t_0), y(t_0)) \cdot \left(
+    \begin{array}{c}
+      x^{'}(t_0) \\
+     y^{'}(t_0)
+    \end{array}
+  \right)\\
+&= \frac{df}{dx}(x(t_0),y(t_0)) + \frac{df}{dy}(x(t_0),y(t_0))\\
+&= \frac{df}{dx}(x(t_0),y(t_0)) \cdot  \frac{dx}{dt}(t_0) + \frac{df}{dy}(x(t_0),y(t_0)) \cdot  \frac{dy}{dt}(t_0) \\
+&= \frac{df}{dx}\cdot \frac{dx}{dt} + \frac{df}{dy}\cdot \frac{dy}{dt}
+\end{align*}
+\end{example}
+
+\subsection{Inverse Function Theorem}
+
+\begin{lemma}
+Let $A \subset \RR^n$ be a rectangle with interior $A^{0}$ and let $g : A \rightarrow\RR^n$ be continuously differentiable. If there exist a constant $M > 0$ such that 
+\[ |D_{j}g^{i}(x)| \leq M, \quad x \in A^{0}, \quad i,j=1, \dots , n. \]
+then
+\[ |g(x) - g(y)| \leq n^{2}M|x-y|, \quad x,y \in A.\]
+\begin{proof}
+ Fix $ i = 1, \dots , n.$ Then
+\begin{align*}
+g^{i}(y) - g^{i}(x) &= g^{i}(y^1 , y^2 , \dots , y^n) - g^{i}(x^1 , x^ 2 , \dots , x^n )\\
+&= g^{i}(y^1 , y^2 , \dots , y^n) - g^{i}(x^1 , y^2 , \dots , y^n)  +  g^{i}(x^1 , y^2 , \dots , y^n)  - g^{i}(x^1 , x^ 2 , \dots , y^n )\\ 
+& \quad +  g^{i}(x^1 , x^ 2 , \dots , y^n ) - \dots +  g^{i}(x^1 , x^ 2 , \dots , y^n ) -  g^{i}(x^1 , x^ 2 , \dots , x^n )\\ &= \sum^{n}_{j=1}(g^{i}(x^1 , x^ 2 , \dots , x^{j-1} , y^{j}, \dots , y^n ) - g^{i}(x^1 , x^ 2 , \dots , x^{j-1} , x^{j}, y ^{j+1}, \dots , y^n ) \\
+&= \sum^{n}_{j=1}(y^{j} \! -\! x^{j})D_{j}g^{i}(z^{i}_{j})
+\end{align*}
+where $z^{i}_{j}$ is between $y^j$ and $x^j$, and we used the mean-value theorem in the interval between
+$y_j$ and $x_j$ and in the $j$ variable. Using the triangle inequality and $|z^j| \leq |z|, $ we get
+\[ |g^{i}(y) - g^{i}(x)| \leq \sum^{n}_{j=1}|y^{i} - x^{i}|M \leq \sum^{n}_{j=1}|y - x|M = nM|y-x|.\]
+Since $|z| \leq \sum_{i}|z^i |, $ finally we get
+ \[ |g(x) - g(y)| \leq \sum^{n}_{i=1}|g^{i}(y) - g^{i}(x)| \leq  \sum^{n}_{i=1} nM|y-x| =  n^{2}M|y-x|. \]
+\end{proof}
+\end{lemma}
+\begin{remark}
+ It is clear that the dimension of the target space enters only in the last line of
+the calculation. If $g : \RR^n \rightarrow \RR^m$, then we get as upper bound $nmM|x- y|$. The inequality
+is actually not optimal: one can use the Cauchy-Schwarz inequality twice to get a bound
+$n^{1/2}m^{1/2}M|x-y|$ for $g:\RR^n \rightarrow \RR^m$.
+\end{remark}
+
+\setcounter{equation}{0}
+
+\begin{theorem}[Inverse Function Theorem]
+Theorem Let $f : \RR^n \rightarrow \RR^n$ be continuously differentiable on an open set containing $a$ and assume $detf^{'}(a) \neq 0$. Then there exists an open set $V$ containing $a$ and an open set $W$ containing $f(a)$ such that $f : V \rightarrow W$ is bijective with $f^{-1}: W \rightarrow V$ continuously differentiable and which satisfies:
+\[ (f^{-1})^{'}(y) = [f^{'}(f^{-1}(y))]^{-1}, \quad y \in W.\]
+
+\begin{proof}
+\textit{Step 1:}\\ We reduce proving the theorem to the case where actually $f^{'}(a) = I_{nn}$. Call $ \lambda = Df(a)$. This is a linear transformation with nonsingular matrix representation $f^{'}(a)$, as det$f^{'}(a) \neq 0$. Therefore, $\lambda$ is invertible. The inverse $\lambda^{-1}$ is also a linear transformation, so $D(\lambda^{-1})(y) = \lambda^{-1}$ for $y \in \RR^n$. Both $\lambda$ and its inverse are continuous as linear transformations. Consider the function $ h = \lambda^{-1} \circ f$ defined on an open set comtaining a. \\ Then:
+\[Dh(a) = D \lambda^{-1} (f(a)) \circ Df(a) = \lambda ^{-1} \circ Df(a) = \lambda^{-1} \circ \lambda = Id, \]
+
+by using the chain rule. Here $ Id$ is the identity transformation. This gives $ h^{'}(a) = I_{n \times n}$, which has determinant $1\neq0$. Let $A$ be the matrix representation of $ \lambda^{-1}$. (which gives that $A^{-1}$ is the matrix representation of $\lambda= D\lambda$). This is an $ n \times n$ matrix with constant entries, i.e. not depending on $y$. Moreover, h is continuously differentiable, as
+\[ (D_{j}h^{i}(x)) = h^{'}(x) = [ \lambda^{-1} \circ Df(x)] = A \cdot f^{'}(x) = A(D_{j}f^{i}(x)), \]
+
+
+with entries depending continuously on x. Therefore, $h$ satisfies the conditions of the
+inverse function theorem. Suppose that we can prove the conclusion of it for $h$, i.e. that
+there exists an open set $V$ containing $a$ and $\tilde{W}$ open containing $h(a) = \lambda^{-1}(f(a))$ such that
+$h : V \rightarrow \tilde{W}$ is bijective with continuously differentiable inverse $h^{-1}$. Even more, assume
+that we have prove the formula for the derivative of the inverse of $h$:
+\[ (h^{-1})' (z) = [h'(h^{-1}(z))]^{-1}. \]
+
+Define $W =\lambda(\tilde{W}) =(\lambda^{-1})^{-1}(\tilde{W})$. This is the inverse image of $\tilde{W}$ by $\lambda^{-1}$, which is continuous, so it is an open set. Since $\lambda$ is bijective, $f= \lambda \circ h$ is bijective on $V$ with image $\lambda(\tilde{W}) = W$. Moreover, 
+\[f^{-1} = h^{-1} \circ \lambda^{-1}, \]
+which is continuously differentiable as the composition of two such maps. By the chain
+rule for Jacobian
+\[(f^{-1})'(y) = (h^{-1})'(\lambda^{-1}(y)) \cdot (\lambda^{-1})'(y) =  [h'(h^{-1}(\lambda^{-1}(y)))]^{-1} A = [h'((\lambda \circ h)^{-1}(y))]^{-1}  A = [h'(f^{-1}(y))]^{-1}A \]
+\[ = [A^{-1}h'(f^{-1}(y))]^{-1} = [\lambda'h'(f^{-1}(y))]^{-1} = [(\lambda \circ h)'(f^{-1}(y))]^{-1} = [f'(f^{-1}(y))]^{-1}. \]
+
+All these imply that it is enough to work with $h = \lambda ^{-1} \circ f$. The main property we will
+use is that $h'(a)=I_{n \times n}$. For simplicity in our notation we call this function f so we can
+assume that
+\[f'(a) = I_{n \times n}. \]
+This also means that $\lambda = Df(a) = Id$.\\
+\textit{Step 2:}
+The function f cannot take the value $f(a)$ arbitrarily close to $a$. Suppose that there is a sequence $h_{n} \in \RR^n$ such that $ h_{n} \rightarrow 0$ and $f(a + h_{n}) = f(a)$. We plug the sequence into the definition of the derivative at $a$ and use that $Df(a) = Id$ to get
+\[ 0 = \lim_{h_{n} \rightarrow 0}\frac{|f(a + h_{n}) - f(a) - Df(a)(h_{n})|}{|h_{n}|} = \lim_{h_{n} \rightarrow 0}\frac{|-h_{n}|}{|h_{n}|} = 1\]
+So this is a contradiction. Therefore, we can find a closed rectangle $U$ containing a such
+that
+\[f(x) \neq f(a), \quad \forall x \in U\backslash \{a\}. \]
+
+
+\textit{Step 3:} The determinant is a polynomial expression in the entries of a matrix. If the matrix entries depend continuously on $x$, the same is true for the determinant of the matrix. So det$f'(x)$ is a continuous function on an open set containing $a$. Since det$f'(x) \neq 0$, by the inertia principle, there exists a small enough (rectangular) neighbourhood of $a$, which
+we call $U$ again, such that
+\begin{equation}
+ \text{det}f'(x) \neq 0, \quad x \in U \end{equation} 
+Moreover the partial derivatives $D_{j}f^{i}(x)$ are continuous and $D_{j}f^{i}(a) = \delta_{ij},$ as $Df(a) = Id$. So, for $x$ close enough to $a$ we have
+\begin{equation}
+|D_{j}f^{i}(x) - \delta_{ij}| < \frac{1}{2n^{2}}, \quad i,j = 1, \dots , n, \quad x \in U
+\end{equation}
+We assumed again that the neighbourhood is $U$\\
+\textit{Step 4:}  Constructing a contraction map and showing that $f$ is injective in appropriate small meighbourhood. Now we define the function
+\[ g(x) = f(x) - x\]
+and apply the Lemma to this function for the closed rectangle $U$. We notice that $D_{j}g^{i}(x) =D_{j}f^{i}(x) - \delta_{ij}$, as we know the partial derivatives of the identity function $x$. We deduce that
+\begin{equation}
+|g(x_{1}) - g(x_{2})| \leq n^{2}\frac{1}{2n^2}|x_{1} - x_{2}| = \frac{1}{2}|x_{1} - x_{2}| \end{equation}
+
+The choice of the neighbourhood in (2) so that the constant $1/(2n^{2})$ appears on the right is motivated with the desire to get g as a contraction map (with constant $1/2$) as we see in (3). Now the triangle inequality in the form $|a|-|b|\leq  |a-  b|$ gives
+\[|x_{1} - x_{2}| - |f(x_{1}) - f(x_{2})| \leq |(x_{1} - x_{2}) - (f(x_{1}) - f(x_{2}))| = |-g(x_{1}) + g(x_2)| < \frac{1}{2}|x_{1} - x_{2}| \]
+\begin{equation}
+\implies |x_{1} - x_{2}| - \frac{1}{2}|x_{1} - x_{2}| < |f(x_{1}) - f(x_{2})| \implies  \frac{1}{2}|x_{1} - x_{2}|  <|f(x_{1}) - f(x_{2})|
+\end{equation}
+
+Here $x_1, x_2$ are in $U$. We immediately see that on $U$ the function $f$ is injective:
+\[f(x_1)=f(x_2) \implies |x_1 - x_2| =0 \implies x_1 = x_2.\]
+
+We still have not determined the neighbourhoods $W$ of $f(a)$ and $V$ of $a$.\\
+\textit{Step 5:}  Determination of the minimum distance of $f(a)$ to the image of the boundary of $U$ and definition of $W$.\\ We have assumed that on the closed rectangle $ U$ we have $f(x) \neq f(a)$ for $x \neq a$. This is definitely true on the boundary of $U$, denoted $\partial U$, which is a closed and bounded set, i.e. compact. The function $ m(x) = |f(x)-  f(a)|$ is continuous on a neighbourhood of $\partial U$ and nonzero on it. It achieves a minimum value on $\partial U$ (an advanced argument from Real Analysis is that the image of a compact set is compact, so that $m(\partial U)$ is compact, which
+means closed and bounded. Such a set has a maximum and minimum). The minimum value cannot be zero, say
+\[ \min_{x \in \partial U} m(x) = \min_{x \in \partial U} |f(x) - f(a)| > 0 .\]
+Now define 
+\[W = \{y \in \RR^n , |y-f(a)| < \delta / 2\}.\]
+\textit{Step 6:}  Comparison of $|y - f(x)|$ with $|y-  f(a)|$ for $x \in \partial U$, and $y \in W$. We have 
+\[ |f(x)- f(a)| \geq \delta, \quad |y - f(a)| \leq \delta /2 \implies -|y-f(x)| + \delta \leq -|y-f(x)|+|f(x) - f(a)| \leq |y-f(a)| < \delta /2 \]
+\[ \implies \delta /2 = \delta - \delta /2 < |y-f(x)| \implies |y-f(a)|< \delta / 2 < |y-f(x)|. \]
+\textit{Step 7:} Show that for $y_0 \in W$ there exists a unique $x_0 \in U^{0}$ such that $f(x_0) = y_0$. The
+uniqueness is obvious from the fact that $f$ is injective on $U$. The construction of such an $x_0$ is tricky. We define another function on $U$ by
+\[g(x) = |f(x)-y_0 |^2 = \sum^{n}_{i=1}(f^{i}(x) - y^{i}_{0})^2.\]
+
+This function in continuously differentiable, as it is a sum of the squares of the components.
+On the compact set $U$ the function $g$ achieves its minimum, say at $x_0$, i.e. $g(x_0) \leq g(x)$ for
+$x \in U$. We claim that $x_0$ is the desired point with $f(x_0) = y_0$. First we see that $x_0$ is in the
+interior of the set $U$. On the boundary of $U$ the function $g(x)$ has values $> \delta /2$, by Step 6,
+while $g(a) < \delta /2$. So the minimum is not achieved on the boundary of U. Therefore, it is
+achieved in an interior point. This point has to be a critical point of $g$, i.e. $D_j g(x_0) = 0,
+\; j = 1, \dots , n$. We calculate them to be
+\[ 2 \sum^{n}_{i=1}(f^i (x_0) - y^{i}_{0})D_{j}f^{i}(x_0) = 0, \quad j=1, \dots , n.\]
+
+This is a homogeneous system of linear equations with unknowns $f^{i}(x_0) - y^{i}_{0}$ and coefficients $D_j f^{i}(x_0)$. The determinant of the coefficients of the system is nonzero, as $x_0 \in U$. The system has a unique solution, and this solution is the zero vector, i.e
+\[ 0 = f^{i}(x_0) - y^{i}_{0}, \quad i=1, \dots, n \implies f(x_0) = y_{0}. \]
+
+\textit{Step 8:} We define $V$ and Show that $f:V \rightarrow W$ is bijective and continuous. We define $V = U^0 \cap f^{-1} (W)$. Clearly $f : V \rightarrow W$ is bijective. Moreover, $V$ is open as the intersection of the open set $U^0$
+and the open set $f^{-1} (W)$, which is open as the inverse image of an open set W by the continuous function $f$. We now rewrite (4) as
+\begin{equation}
+|x_1 - x_2 | < 2| f(x_1) - f(x_2)| \iff |f^{-1}(y_1)- f^{-1}(y_2)| < 2|y_1 - y_2 |
+\end{equation}
+with $y_1 = f(x_1)$ and $y_2 = f(x_2),\; y_i \in W$. This shows that $f^{-1}$ is a Lipschitz function with constant 2, so that it is continuous. Alternatively, choose $\delta = \epsilon /2$ in the definition of continuity.\\
+
+\textit{Step 9:}  Show that $f^{-1}$ is differentiable. Let $\mu = Df(x_1)$. Since $f^{-1} \circ f = Id$, the chain
+rule gives the only possible choice for $Df^{-1}(y_1)= \mu^{-1}$. Here $f(x_1) = y_1$ and later $f(x) = y$.
+By the definition of the derivative we have
+\[ f(x) - f(x_1) = \mu (x-x_1) + \phi(x-x_1), \quad \lim_{x \rightarrow x_1}\frac{|\phi(x - x_1)|}{|x - x_1|} = 0.\]
+
+We apply to the equation the linear transformation $\mu^{-1}$ to get
+\[ \mu^{-1}(y-y_1) = x - x_1 + \mu^{-1}(\phi(x - x_1)) \implies x - x_1 -\mu^{-1}(y-y_1) = \mu^{-1}(\phi(x - x_1)) \]
+\[ \implies f^{-1}(y) - f^{-1}(y_1) - \mu^{-1}(y - y_1) = -\mu^{-1}(\phi(x-x_1)). \]
+
+By the definition of the derivative of $f^{-1}$ at $y_1$ we need to show that
+\begin{equation}
+\lim_{y \rightarrow Y_1}\frac{|-\mu^{-1}(\phi(x-x_1))|}{|y-y_1|}=0
+\end{equation}
+Since $\mu^{-1}$ is a linear transformation, we have seen that it is a bounded linear operator, i.e.
+there exists a constant $\tilde{M}$ with
+\[|\mu^{-1}(y)| \leq \tilde{M}|y|, \quad \forall y \in \RR^n . \]
+Since
+\[ \frac{|-\mu^{-1}(\phi(x-x_1))|}{|y-y_1|} \leq \frac{\tilde{M}|\phi(x-x_1)|}{|y-y_1|} \]
+by the sandwich theorem it is enough to prove that
+\[\lim_{y \rightarrow Y_1}\frac{|\phi(x-x_1)|}{|y-y_1|} =0\]
+We have 
+\[\frac{|\phi(x-x_1)|}{|y-y_1|} = \frac{|\phi(x-x_1)|}{|x-x_1|}\frac{|x-x_1|}{|y-y_1|} \leq \frac{|\phi(x-x_1)|}{|x-x_1|}\cdot 2,\]
+by (5). Moreover, $y \rightarrow y_1$ iff $ x \rightarrow x_1$ as $ f$ is continuous at $x_1$ and $f^{-1}$ is continuous at $y_1$.We know that
+\[\lim_{x \rightarrow x_1} \frac{|(\phi(x-x_1))|}{|x-x_1|} = 0 \]
+This suffices to prove (6)\\
+\textit{Step 10:} The partial derivatives $D_j (f^{-1})^i(y)$ are continuous. We know that the Jacobian of $f^{-1}(y)$ is
+\[(f^{-1})'(y) = (D_j (f^{-1})^i(y)) = [f'(f^{-1}(y))]^{-1} = (D_j f^i (x))^{-1}. \] 
+The inverse of the matrix $(D_jf^i(x))$ can be calculated as a quotient of two $n \times n$ determinants with entries among $D_jf^i(x)$. The denominator is the determinant of the Jacobian at $x$, which is nonzero for $x \in U$. The whole expression depends continuously on $x \in V$. As $f^{-1}$ is continuous, the inverse matrix depends continuously on $y \in W$. The individual entries are the partial derivatives of $f^{-1}$.
+\end{proof}
+
+\end{theorem}
 
 \end{document}
