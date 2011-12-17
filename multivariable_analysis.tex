@@ -80,10 +80,10 @@ Standard Basis:
 \end{align*}
 Properties of norm
 \[|x|\geq0\]
-\[|x|=0 iff x=\vec{0}\]
+\[|x|=0  \iff x=\vec{0}\]
+\[| \lambda x| = | \lambda| \cdot |x| , \quad x \in \RR^n, \quad \lambda \in \RR \]
 
-
-\subsection{linear Transformation}
+\textbf{linear Transformation}
 \[T:\RR^{n}\rightarrow\RR^{n}\]
 \begin{enumerate}[(i)]
 \item $ T(x+y)=T(x) + T(y)$
@@ -102,9 +102,9 @@ $T:\RR^{n}\rightarrow\RR^{m}, X\in \RR^{n}, Y\in \RR^{m}, X=(x^{1},\dots ,x^{n})
 \[  \left(\! \begin{array}{c} y^{1} \\ y^{2}\\ \vdots\\ y^{m} \end{array}\! \right) = [T] \left(\! \begin{array}{c} x^{1} \\ x^{2}\\ \vdots\\ x^{n} \end{array}\! \right) \]
 
 \subsection{Functions \& Continuity}
-\[f:\RR^{n} \rightarrow\RR^{m}\] vector valued function
-\[f:A \rightarrow\RR^{m}\] where $A \subset \RR^{n}$\\
-$f$ has components which are scalar fields\\
+$f:\RR^{n} \rightarrow\RR^{m}$ vector valued function\\
+$f:A \rightarrow\RR^{m}$ where $A \subset \RR^{n}$\\
+then $f$ has components which are scalar fields.\\
 $ f^{i}:A \rightarrow\RR$\\
 \[f(x)=(f^{1} (x),\dots ,f^{m}(x))\] 
 
@@ -155,23 +155,23 @@ Cauchy-Schwartz: $|x^{1}y^{1} + \dots +x^{n}y^{n}| \leq \sqrt{(x^{1})^{2} + \dot
 \[|f(x)\cdot g(x)-b\cdot c| \leq |g(x)\dot (f(x)-b)| +| b\cdot (g(x) - c)|  \leq |g(x)|\cdot |f(x)-b| +|b|\cdot |g(x) - c|\]
 Since $ lim_{x\to a} (g(x))=c$, $g$ is a bounded neighbourhood of a, i.e: 
 \[
-\forall M \leq 0, \exists \delta > 0 \; st,\; 
-|g(x)| \leq M for |x-a|<\delta\] 
+\exists M  \geq 0, \; \exists \delta > 0 \; st,\; 
+|g(x)| \leq M \; for \; |x-a|<\delta\] 
 \end{proof}
 \end{theorem}
 
 \begin{remark} We have:\\
 \begin{enumerate}[(i)]
-\item $f:\RR^{n} \rightarrow \RR^{m}$ is continuious iff: $f^{i}:\RR^{n} \rightarrow \RR$ is continuious for $i=1,\dots , m$
-\item Polynomial functions in n variables, $f(x^{1}, \dots ,x^{n})$, are continuious
-\item Rational functions, $R(x)= \frac{P(x)}{Q(x)}$, are continuious where defined, ie: $Q(x) \neq 0$ and P, Q are polynomials in n variables.
+\item $f:\RR^{n} \rightarrow \RR^{m}$ is continuous iff: $f^{i}:\RR^{n} \rightarrow \RR$ is continuous for $i=1,\dots , m$
+\item Polynomial functions in n-variables, $f(x^{1}, \dots ,x^{n})$, are continuous
+\item Rational functions, $R(x)= \frac{P(x)}{Q(x)}$, are continuous where defined, ie: $Q(x) \neq 0$ and P, Q are polynomials in n-variables.
 \end{enumerate}
 \end{remark}
 
 \begin{theorem}\label{T:Lin trans cont}
-Linear transformations are continuious.
+Linear transformations are continuous.
 \begin{proof}
-$T:\RR^{n} \rightarrow \RR^{m}$ let $a \in \RR^{n}$ to show: $\lim_{x\to a}T(a+h) = T(a)$
+$T:\RR^{n} \rightarrow \RR^{m}$ let $a \in \RR^{n}$ to show: $\lim_{x\to a}T(a+h) = T(a)$, where $h = (h^1 , \dots , h^n )$
 \begin{align*}
 |T(a+h) - T(a)| & = |T(h)|=|T(h^{1}e_{1}+ \dots +h^{n}e_{n})| =|h^{1}T(e_{1}) + \dots +h^{n}T(e_{n})|\\ 
 &\leq  |h^{1}||T(e_{1})|+ \dots |h^{n}||T(e_{n})| \leq |h|(T(e_{1})+ \dots T(e_{n})) \\
@@ -207,11 +207,11 @@ If \: |y|< \delta \quad |f(0,y)| < \delta& \implies |f(0,y) - L|< \epsilon \quad
 \[
  f(x,y) =
   \begin{cases}
-   \frac{xy}{\sqrt{x^{2} + y^{2}}} & \text{if } (x,y) \neq 90,0) \\
-   0       & \text{if } 9x,y) = (0,0)
+   \frac{xy}{\sqrt{x^{2} + y^{2}}} & \text{if } (x,y) \neq (0,0) \\
+   0       & \text{if } (x,y) = (0,0)
   \end{cases}
 \]
-Show f is continuious at (0,0)
+Show f is continuous at (0,0)
 \[\forall \epsilon > 0, \quad \exists \delta>0\]
 \[\left| \frac{xy}{\sqrt{x^{2} + y^{2}}}\right| \leq \frac{|x| \cdot |y|}{\sqrt{x^{2} + y^{2}}} \leq \frac{\sqrt{x^{2} + y^{2}} \cdot \sqrt{x^{2} + y^{2}}}{\sqrt{x^{2} + y^{2}}}= \sqrt{x^{2} + y^{2}} = |(x,y)|\]
 Since: \[\begin{diagram}
@@ -224,7 +224,7 @@ if the total degree of the neumerator is higher than the denominator in a ration
 \end{note}
 
 \begin{theorem}\label{T:composition}
-If $f$ is continuious at a and $g$ is continuious at $f(a)$ then $g \circ f$ is continuious at a.
+If $f$ is continuous at a and $g$ is continuous at $f(a)$ then $g \circ f$ is continuous at a.
 \end{theorem}
 
 \subsection{Partial Derivitives}
@@ -245,7 +245,7 @@ if $f:\RR^{n} \rightarrow \RR$
 \begin{align*}
  f(x,y) &=
   \begin{cases}
-   \frac{x^{2} - y^{2}}{\sqrt{x^{2} + y^{2}}} & \text{if } (x,y) \neq (0,0) \\
+   \frac{x^{2} - y^{2}}{x^{2} + y^{2}} & \text{if } (x,y) \neq (0,0) \\
    1       & \text{if } (x,y) = (0,0)
   \end{cases}\\
  D_{1}f(0,0) =\left.\frac{df}{dx}\right| _{(0,0)} &=  \lim_{x \to 0}\frac{f(x,0) - f(0,0)}{x}= \lim_{x \to 0}\frac{\frac{x^{2}-0}{x^{2}-0} -1}{x} = 0\\
@@ -368,13 +368,14 @@ Having  directional derivitives in all directions $u\neq 0$ is not enough to gua
 \end{remark}
 
 \begin{theorem}
-If $f$ is differentiable at a then $f$ is continuious at a.
+If $f$ is differentiable at a then $f$ is continuous at a.
 \begin{proof}
 \begin{align*}
 \lim_{h \to 0}|f(a+h)-f(a)| &= \lim_{h \to 0}|f(a+h)-f(a) -Df(a) + Df(a)|\\
 &\leq \lim_{h \to 0}\frac{|f(a+h)-f(a) -Df(a)(h)|}{|h|}\cdot|h| + \lim_{h \to 0}| Df(a)(h)|\\ 
-&= 0 \\
+&= 0 
 \end{align*}
+since $Df(a)$ is a linear transformation $Df(a)$ is continuous so: \[\lim_{h \to 0}| Df(a)(h)| = | Df(a)(0)| = 0\].
 \end{proof}
 \end{theorem}
 
@@ -466,59 +467,6 @@ T( \lambda x + y) &= \lambda T(x) + T(y)
 \end{align*}
 \end{remark}
 
-\subsection{Linear Functionals}
-
-\begin{definition}
-Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear functional. The set of all linear functionals from $\RR^n \rightarrow \RR$ is called the dual space of $\RR^{n}$, denoted $(\RR^n)*$\\
-let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
-$g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
-\begin{align*}
-g(\lambda x +y) &= \lambda g(x) + g(y)
-\shortintertext{this can be seen by}
-g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
-&= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
-&= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
-\end{align*}
-$[g^{i}]$ is the matrix representation of $g^{i}$\\
-$[g^{i}] = (g_{1}^{i}, \dots , g_{n}^{i})$
-\[ [g]_{mxn} = \begin{pmatrix}
-  g_{1}^{1}  & \cdots & g_{n}^{1} \\
-  \vdots   & & \vdots  \\
-  g_{1}^{m} & \cdots &g_{n}^{m}
- \end{pmatrix}\]
-\end{definition}
-
-\begin{theorem}
-$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a iff $f^{i}$ are differentiable at a, $i=1, \dots , m$
-and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
-\begin{proof}
-assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
-\[f^{i} =  \Pi^{i} \circ f\]
-this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
-\begin{align*}
-\implies Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
-\shortintertext{$D\Pi^{i} = \Pi^{i}$}
-\implies Df^{i} &= \Pi^{i}(a) \cdot Df(a)
-\end{align*}
-Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
-\begin{align*}
-&f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
- &= (f^{1}(a+h), \dots , f^{m}(a+h)) - (f^{1}, \dots, f^{m}) - (Df^{1}*(a)(h), \dots , Df^{m}(a)(h))\\
-&=(f^{1}(a+h) -f^{1}(a) - df^{1}(a) , \dots , f^{m}(a+h) -f^{m}(a) - df^{m}(a))
-\end{align*}
-So
-\begin{align*}
- &\frac{|f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))|}{|h|} \\
-&\leq \frac{|f^{1}(a+h) -f^{1}(a) - df^{1}(a)|}{|h|} , \dots ,\frac{| f^{m}(a+h) -f^{m}(a) - df^{m}(a)|}{|h|} \rightarrow 0
-\end{align*}
-\end{proof}
-\end{theorem} 
-
-\begin{remark}
-If $T,S:\RR^{n} \rightarrow \RR^{m}$ are linear then $(T +S):\RR^{n} \rightarrow \RR^{m}, (T+S)(x) = T(x) + S(x)$ is linear.\\
-If $\lambda \in \RR$ then $(\lambda T):\RR^{n} \rightarrow \RR^{m}, (\lambda T)(x) = \lambda \cdot T(x)$ is also linear.
-\end{remark}
-
 \begin{corollary}
 $f,g:\RR^{n} \rightarrow \RR$ differentiable at $a \in \RR^{n}$
 \begin{enumerate}[(i)]
@@ -550,7 +498,7 @@ D_{2,1}f(x,y) &= 15x^{2}y^{4} &D_{1,2}f(x,y) &= 15x^{2}y^{4}
 \end{alignat*}
 
 \begin{theorem}
-If $D_{i,j}$ and $D_{j,i}$ are continuious on an open set containing $a$ then
+If $D_{i,j}$ and $D_{j,i}$ are continuous on an open set containing $a$ then
  \[D_{i,j} = D_{j,i}\]
 \begin{proof} from homework 5:\\ 
 First we repeat the well-known proof that, if $g : U \rightarrow \RR$ is continuous and $g(p) > 0$,
@@ -576,7 +524,7 @@ mixed partial derivatives are equal on the rectangle.
 \end{proof}
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}\label{maxmin}
 $A \subset \RR$ If the max or min of $f:A \rightarrow \RR$ occur at a point $a$ in the interior of $A$ and $D_{i}f(x)$ exists then $Df(a) = 0$
 \begin{proof}
 Consider $h(x) = f(a^{1}, \dots , a^{i-1} , x^{i}, a^{i+1}, \dots a^{n})$ $x$ in an open interval arround $a^{i}$.\\ Since $f$ has a max or min at $a$, $h$ has a max or min at $a^{i}$
@@ -586,10 +534,16 @@ By analysis 2:
 \end{proof}
 \end{theorem}
 
+\begin{note}
+The converse of Theorem \ref{maxmin} is not true, even in one dimension.
+\end{note}
+
+
+
 \subsection{Jacobian}
 For $f:\RR^{n} \rightarrow \RR^{m}$ with total derivitive $Df(a):\RR^{n} \rightarrow \RR^{m}$ a linear map. Then  the Jacobian $f^{'}(a) \in \MM_{mxn}$ is the  unique representation of $Df(a)$ in the standard basis.
 
-\begin{theorem}\label{jacob unique}
+\begin{theorem}\label{jacob}
 If  $f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a then $D_{i}f^{j}(a)$ exists $\forall i = 1, \dots , n\; \forall j = 1, \dots , m$ and the jacobian matrix is \[f^{'}(a) = (D_{i}f^{j}(a))_{j = 1, \dots , n}^{j=1,\dots , m}\]
 \[ f^{'}(a) = \begin{pmatrix}
   D_{1}f^{1}(a) & D_{2}f^{1}(a) & \cdots &D_{n}f^{1}(a) \\
@@ -621,6 +575,7 @@ Dh(t)&=(Dh^{1}(t), \dots , Dh^{n}(t))\\
 \vdots  \\
 0
  \end{pmatrix}_{(m \times 1)}\]
+
 Case $m>1 $\\
 $f:\RR^n \rightarrow \RR^m $
 \[f(x) = (f^{1} (x), \dots f^{m}(x))\]
@@ -644,19 +599,41 @@ Abuse of notation since if $f:\RR \rightarrow \RR$
 \[\text{this is a number} \rightarrow  \frac{dg(t_{0})}{dt}| = g'(t_{0}) \leftarrow \text{this is the $1 \times 1$ jacobian matrix}\]
 \end{remark}
 
+\begin{example}
+\[ G(x,y) =
+  \begin{cases}
+   \frac{x^{2}y}{x^{4} + y^{2}} & \text{if } (x,y) \neq (0,0) \\
+   0       & \text{if } (x,y) = (0,0)
+  \end{cases}\]
+
+Fix a vector $u \in \RR^2$ , $u=(u^1 , u^2 ) \neq (0,0), \quad u^2 \neq 0$ then the directional derivitive $D_{u}$ with $h \in \RR$ is:
+
+\begin{align*}
+D_{u}G(0,0) &= \lim_{h \rightarrow 0}\frac{G((0,0) + hu) - G(0,0)}{h} =  \lim_{h \rightarrow 0}\frac{G(hu^1 , hu^2 ) - 0}{h}\\
+&= \lim_{h \rightarrow 0}\frac{(hu^1)^2(hu^2)}{(hu^1)^4 + (hu^2)^2} \cdot \frac{1}{h} =   \lim_{h \rightarrow 0}\frac{h^3 (u^1)^2 u^2}{h(h^4(u^1)^4 + h^2(u^2)^2)}\\
+&=  \lim_{h \rightarrow 0}\frac{ (u^1)^2 u^2}{h^2(u^1)^4 + (u^2)^2)} = \frac{(u^1)^2}{u^2}\\
+\shortintertext{$u^2=0$}
+D_{u}G(0,0) &=  \lim_{h \rightarrow 0}\frac{G(hu^1 , h \! \cdot \!0)}{h}=  \lim_{h \rightarrow 0}\frac{(\frac{(hu^1)^2 \! \cdot \! 0}{(hu^1)^4 + 0^2})}{h} = 0
+\end{align*}
+
+
+
+
+\end{example}
+
 \begin{theorem}
- $f:\RR^n \rightarrow \RR^m $ if $D_{j}f^{i}(x)$ exist $ \forall x \in u, U\; open,  a \in U,  \forall i = 1 \: to \: m, j = 1\:  to\: n$ and if $D_{j}f^{i}(x)$ continuious at $a$ ie 
+ $f:\RR^n \rightarrow \RR^m $ if $D_{j}f^{i}(x)$ exist $ \forall x \in u, U\; open,  a \in U,  \forall i = 1,\dots, m,$ and $ j = 1, \dots, n$ and if $D_{j}f^{i}(x)$ continuous at $a$ ie 
 \[\lim_{x \rightarrow a}(D_{j}f^{i}(x)) = D_{j}f^{i}(a)\]
 then $Df(a)$ exists and $f$ is differentiable at $a$
 \begin{proof}
-As in the proof of theorem \ref{jacob unique} It suffices to consider the case $ m=1$, so that $f:\RR^n \rightarrow \RR$. Then
+As in the proof of theorem \ref{jacob} It suffices to consider the case $ m=1$, so that $f:\RR^n \rightarrow \RR$. Then
 \begin{align*}
 f(a+ h) - f(a) &= f(a^{1} + h^{1}, a^{2}, \dots , a^{n}) &&- f(a^{1}, \dots , a^{n})\\
 &+ f(a^1 + h^1 , a^2 + h^2, a^3 , \dots , a^n ) &&-  f(a^{1} + h^1 , a^2 ,  \dots , a^{n})\\
 &+ \dots  &&- \dots\\
 &+ f(a^1 + h^1 ,\dots ,  a^n + h^n ) &&-  f(a^{1} + h^1 ,  \dots, a^{n-1} + h^{n-1} , a^{n})
 \end{align*}
-Recal from theorem \ref{jacob unique} that $D_{1}f$ is the derivitive of the function $h$ defined by\\ $h(x) = (x, a^2 , \dots , a^n )$. Applying the mean-value theorem to $h$ we obtain
+Recal from theorem \ref{jacob} that $D_{1}f$ is the derivitive of the function $h$ defined by\\ $h(x) = (x, a^2 , \dots , a^n )$. Applying the mean-value theorem to $h$ we obtain
 \[ f(a^{1} + h^{1}, a^{2}, \dots , a^{n}) - f(a^{1}, \dots , a^{n}) = h^{1} \cdot D_{1}f(b_{1}, a^{2} , \dots, a^{n}) \]
 for some $b_{1}$ between $a^1 $ and $a^1 + h^1 $. Similarly the $ith$ term in the sum equals 
 \[h^{i} \cdot D_{i}f(a^1 + h^1 ,\dots ,  a^{i-1} + h^{i-1},  b_{i}, a^{i+1}, \dots , a^n ) = h^{i}D_{i}f(c_{i}) \quad \text{for some $c_{i}$} \]
@@ -667,11 +644,11 @@ Then
  & \leq \lim_{h \rightarrow 0}| \sum_{i=1}^{n}[D_{i}f(c_{i}) - D_{i}f(a)]|\\
 &=0
 \end{align*}
-Since $D_{i}f$ is continuious at $a$ and as $h \rightarrow 0, c^{i} \rightarrow  a^{i}$.
+Since $D_{i}f$ is continuous at $a$ and as $h \rightarrow 0, c^{i} \rightarrow  a^{i}$.
 \end{proof}
 \end{theorem}
 
-\begin{definition} If $f:\RR^n \rightarrow \RR^m$ has partial derivitives $ D_{j}f^{i} \quad \forall x \in U , \; U \; open, \;  a \in U$ and $D_{j}f^{i}$ is continuious at $a$ then we say $f$ is continuiously differentiable at $a$. 
+\begin{definition} If $f:\RR^n \rightarrow \RR^m$ has partial derivitives $ D_{j}f^{i} \quad \forall x \in U , \; U \; open, \;  a \in U$ and $D_{j}f^{i}$ is continuous at $a$ then we say $f$ is continuously differentiable at $a$. 
 \end{definition}
 
 \begin{example}
@@ -689,6 +666,8 @@ $f:\RR^2 \rightarrow \RR$, with $x:\RR \rightarrow \RR, y:\RR \rightarrow \RR$.
 &= \frac{df}{dx}\cdot \frac{dx}{dt} + \frac{df}{dy}\cdot \frac{dy}{dt}
 \end{align*}
 \end{example}
+
+\subsection{20/11/11 some deep graphs in romans notes, may have a crack producing them later on}
 
 \subsection{Inverse Function Theorem}
 
@@ -847,5 +826,165 @@ The inverse of the matrix $(D_jf^i(x))$ can be calculated as a quotient of two $
 \end{proof}
 
 \end{theorem}
+
+\subsection{Implicit Function Theorem}
+\dgARROWLENGTH=1em
+\begin{example}
+\[x^2 + y^2 = 1, \quad y = g(x)\] 
+\[ 2x + 2y\frac{dy}{dx} = 0, \quad \frac{dy}{dx} = \frac{dg}{dx} = \frac{-x}{y}, \quad y \neq 0 \]
+\end{example}
+\begin{example}
+\[y^2 + xz + z^2 - e^z - 4 = 0 \quad \text{(impossible to solve for z)}\]
+\[set \; F(x,y,z) = y^2 + xz + z^2 - e^z - 4, \quad F(x,y, g(x,y)) = 0\]
+\[
+\begin{diagram}
+\node[2]{F}\arrow{sw,-}\arrow{se,-}\arrow{s,-}\\
+\node{X} \arrow{s,-} 
+\node{Y} \arrow{s,-}
+\node{Z}  \arrow{wsw,-}\arrow{sw,-} \\
+\node{X} \arrow{e,-} \node{Y}
+\end{diagram}
+\]
+Differentiate in $x$:
+\begin{align*}
+\frac{d}{dx}F(x,y,g(x,y)) &= \frac{dF}{dx}\frac{dx}{dx} + \frac{dF}{dy}\frac{dy}{dx} + \frac{dF}{dz}\frac{dz}{dx}\\
+&=  \frac{dF}{dx} + \frac{dF}{dz}\frac{dg}{dx}  = 0\\
+\frac{dg}{dx} &= -\frac{\frac{dF}{dx}}{\frac{dF}{dz}} = - \frac{z}{x^2 +2z - e^z }\\
+\frac{dF}{dy}=0 \overset{chain}{\underset{rule}{\implies}} \frac{dF}{dy} + \frac{dF}{dz}\frac{dg}{dy} \implies 
+\frac{dg}{dy} &= -\frac{\frac{dF}{dy}}{\frac{dF}{dz}} = - \frac{2y}{x^2 +2z - e^z }\\
+\end{align*}
+the point $(0,e,2)$ satisfies $F(x,y,z)=0$
+\[e^2 + 0\cdot 2 + 2^2 - e^2 -4 =0\]
+\begin{align*}
+\left.\frac{dg}{dx}\right|_{(0,e)} &=- \frac{z}{x^2 +2z - e^z } = - \frac{2}{0+2\cdot 2- e^2 }\\
+\left.\frac{dg}{dy}\right|_{(0,e)} &=- \frac{2y}{x^2 +2z - e^z }  = - \frac{2e}{0+2\cdot 2- e^2 }
+\end{align*}
+valid for $\frac{dF}{dz} \neq 0$
+\end{example}
+
+\textbf{General situation:} $m$ equations with $ m$ unknowns $y^1, \dots , y^m$
+\begin{alignat*}{2}
+f^1 &(x^1 , \dots , x^n , y^1 , \dots , y^m) = 0 &\qquad & \text{depends on n parameters:}\; x^1 , \dots , x^n\\
+f^2 &(x^1 , \dots , x^n , y^1 , \dots , y^m)= 0 &\qquad & \text{Try to solve for:} \;  y^1 , \dots , y^m\\
+&\vdots \qquad \qquad \vdots \qquad \qquad \vdots   		&\quad & \\
+f^m &(x^1 , \dots , x^n , y^1 , \dots , y^m)= 0 &\quad &\\
+\end{alignat*}
+\[ x=(x^1 , \dots , x^n) , \qquad y=(y^1 , \dots , y^m)\]
+So we have:
+\begin{align*}
+f^1(x,y) &=0\\
+f^2(x,y) &=0\\
+\vdots\\
+f^m(x,y) &=0\\
+\end{align*}
+Define $f(x,y) = (f^1(x,y), \dots , f^m (x,y))=\underbracket[0.5pt]{0}_{vector} =\underbrace{(0,\dots,0)}_{
+          \mathclap{m}}$\\
+Let $a \in \RR^n , \; b \in \RR^m$ such that $f(a,b,) = 0$ when we can find for each $(x^1,  \dots, x^n) $  near $a=(a^1 , \dots , a^n )$ a unique $y=(y^1 , \dots , y^m )$ near $b= (b^1 , \dots , b^m)$ such that: $f(x,y)=0$, \\$f(x^1 , \dots , x^n , y^1 , \dots , y^m) = 0$
+
+\begin{theorem}[Implicit Value Theorem]\label{implicitvalue}
+$f:\RR^n \times \RR^m \rightarrow \RR^m$ continuously differentiable on an open set containing $(a,b), \; a \in \RR^n , \; b \in \RR^m.$ moreover $f(a,b)=0$\\
+consider the matrix \[M=(D_{j+n}f^{i}(a,b))^{i=1,\dots,m}_{j=1,\dot,m}\] assume det$M \neq 0$. Then there exist two open sets $A \subset \RR^n, \; b \subset \RR^m, \; a \in A, \; b \in B$. such that $\forall x \in A, \exists$ unique $g(x) \in B$ such that $f(x,g(x))=0$ Moreover $g:A \rightarrow B$ is differentiable.
+\begin{proof} 
+Increase the dimension of the target. Define $F:\underbrace{U}_{in \;  \RR^n \times \RR^m} \rightarrow \RR^n \times \RR^m$
+\[F(x^1,\dots , x^n,y^1, \dots,y^m) = (x^1, \dots , x^n, f^1(x,y), \dots , f^m(x,y))\]
+\[F(x,y) = (x,f(x,y))\]
+F is continuously differentiable because $x^1 , \dots , x^n$ are continuously differentiable and $f^1(x,y), \dots , f^m(x,y)$ are continuously differentiable (because $f(x,y)$ is continuously differentiable)
+\[F(a,b) = (a,f(a,b)) = (a,0)\]
+\[
+ F'(a,b) =
+ \left( \begin{array}{cccc|ccc}
+ 1 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 & 0 & \cdots & 0 \\
+  \vdots  & \vdots  & \ddots & \vdots & \vdots & & \vdots \\
+0 & 0 & \cdots & 1 & 0 & \cdots & 0 \\
+\hline
+  \frac{df^1}{dx^1} & \frac{df^1}{dx^2}& \cdots\frac{df^1}{dx^n} & \frac{df^1}{dy^1} & \cdots & \frac{df^1}{dy^m}\\
+\vdots  & \vdots  & \ddots & \vdots & \vdots & & \vdots \\
+  \frac{df^m}{dx^1} & \frac{df^m}{dx^2}& \cdots\frac{df^m}{dx^n} & \frac{df^m}{dy^1} & \cdots & \frac{df^m}{dy^m}
+ \end{array} \right)
+\]
+\[ F'(a,b) =
+ \left( \begin{array}{c|c}
+ I_{n \times n} & 0_{n \times m}\\
+\hline
+\text{\scriptsize * Some $m \times n$} & M_{m \times m}\\
+\text{\scriptsize matrix} & 
+ \end{array} \right) \]
+det$M \neq 0$ (reducing from top left entry).\\
+By the inverse funct theorem, $\exists$ an open set $W$ containing $F(a,b) = (a,0)$ and an open set containing $(a,0)$ which I can take to be a rectangle $A \times B, \;  a \in A , \; b \in B, \; A$ open in $\RR^n, \; B$ open in $\RR^m$.\\
+\[F:A \times B \rightarrow W \text{ is bijective}\]
+\[\exists h = F^{-1}:W \rightarrow A \times B \; \text{such that} \; F \cdot h = id\]
+$h$ is continuously differentiable.
+\begin{equation*} 
+  \addtolength{\fboxsep}{5pt} 
+   \boxed{ 
+   \begin{gathered} 
+      F(x^1,\dots , x^n,y^1, \dots,y^m) = (x^1, \dots , x^n, f^1(x,y), \dots , f^m(x,y))  \\ 
+      F(x,y) = (x,f(x,y)) 
+      \\ F \;\text{is continuously differentiable because} \; x^1 , \dots x^n \; \text{are continuously differentiable}
+   \end{gathered} 
+   } 
+\end{equation*}
+$h$ must have the form: $h(x,y) =  (x,k(x,y))$ for some function $k:W \rightarrow B, \; B \subset \RR^m$, $k$ continuously differentiable.
+\[F(h(x,y) = (x,f(x,k(x,y))) = (x,y)\]
+\[f(x,k(x,y)) = y\]
+Set $y=0$
+\[f(x,k(x,0))=0\]
+The solution is $g(x)=k(x,0)$ (solution to $f(x,y)= 0$).
+\end{proof}
+\end{theorem}
+
+\subsection{Linear Functionals}
+
+\begin{definition}
+Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear functional. The set of all linear functionals from $\RR^n \rightarrow \RR$ is called the dual space of $\RR^{n}$, denoted $(\RR^n)*$\\
+let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
+$g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
+\begin{align*}
+g(\lambda x +y) &= \lambda g(x) + g(y)
+\shortintertext{this can be seen by}
+g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
+&= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
+&= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
+\end{align*}
+$[g^{i}]$ is the matrix representation of $g^{i}$\\
+$[g^{i}] = (g_{1}^{i}, \dots , g_{n}^{i})$
+\[ [g]_{mxn} = \begin{pmatrix}
+  g_{1}^{1}  & \cdots & g_{n}^{1} \\
+  \vdots   & & \vdots  \\
+  g_{1}^{m} & \cdots &g_{n}^{m}
+ \end{pmatrix}\]
+\end{definition}
+
+\begin{theorem}
+$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a iff $f^{i}$ are differentiable at a, $i=1, \dots , m$
+and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
+\begin{proof}
+assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
+\[f^{i} =  \Pi^{i} \circ f\]
+this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
+\begin{align*}
+\implies Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
+\shortintertext{$D\Pi^{i} = \Pi^{i}$}
+\implies Df^{i} &= \Pi^{i}(a) \cdot Df(a)
+\end{align*}
+Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
+\begin{align*}
+&f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
+ &= (f^{1}(a+h), \dots , f^{m}(a+h)) - (f^{1}, \dots, f^{m}) - (Df^{1}*(a)(h), \dots , Df^{m}(a)(h))\\
+&=(f^{1}(a+h) -f^{1}(a) - df^{1}(a) , \dots , f^{m}(a+h) -f^{m}(a) - df^{m}(a))
+\end{align*}
+So
+\begin{align*}
+ &\frac{|f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))|}{|h|} \\
+&\leq \frac{|f^{1}(a+h) -f^{1}(a) - df^{1}(a)|}{|h|} , \dots ,\frac{| f^{m}(a+h) -f^{m}(a) - df^{m}(a)|}{|h|} \rightarrow 0
+\end{align*}
+\end{proof}
+\end{theorem} 
+
+\begin{remark}
+If $T,S:\RR^{n} \rightarrow \RR^{m}$ are linear then $(T +S):\RR^{n} \rightarrow \RR^{m}, (T+S)(x) = T(x) + S(x)$ is linear.\\
+If $\lambda \in \RR$ then $(\lambda T):\RR^{n} \rightarrow \RR^{m}, (\lambda T)(x) = \lambda \cdot T(x)$ is also linear.
+\end{remark}
 
 \end{document}
