@@ -9,7 +9,7 @@
 \usepackage{mathtools}
 \usepackage{pb-diagram}
 \usepackage{hyperref}
-
+\usepackage{cancel}
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
@@ -80,7 +80,7 @@ Standard Basis:
 \end{align*}
 Properties of norm
 \[|x|\geq0\]
-\[|x|=0  \iff x=\vec{0}\]
+\[|x|=0  \Leftrightarrow x=\vec{0}\]
 \[| \lambda x| = | \lambda| \cdot |x| , \quad x \in \RR^n, \quad \lambda \in \RR \]
 
 \textbf{linear Transformation}
@@ -125,7 +125,7 @@ $f:\RR^{n} \rightarrow \RR^{m}$ then
 $\lim_{x\to a} (f(x))=b$ means:
 \[
 \forall \epsilon > 0, \exists \delta > 0 \; st,\; 
-0<|x-a|<\delta \implies |f(x)-b|<\epsilon\] 
+0<|x-a|<\delta \Rightarrow |f(x)-b|<\epsilon\] 
 \end{definition}
 
 \begin{definition}
@@ -176,7 +176,7 @@ $T:\RR^{n} \rightarrow \RR^{m}$ let $a \in \RR^{n}$ to show: $\lim_{x\to a}T(a+h
 |T(a+h) - T(a)| & = |T(h)|=|T(h^{1}e_{1}+ \dots +h^{n}e_{n})| =|h^{1}T(e_{1}) + \dots +h^{n}T(e_{n})|\\ 
 &\leq  |h^{1}||T(e_{1})|+ \dots |h^{n}||T(e_{n})| \leq |h|(T(e_{1})+ \dots T(e_{n})) \\
 So: \quad |T(a+h) - T(a)| &\leq  M|h| \quad where \quad M= \sum_{i=1}^{n}|T(e_i)| \\
-So \: given \quad \epsilon > 0,\quad choose \quad \delta &= \frac{\epsilon}{M} \quad such \: that \quad |h|< \delta \implies |T(a+h) - T(a)|< \epsilon \\
+So \: given \quad \epsilon > 0,\quad choose \quad \delta &= \frac{\epsilon}{M} \quad such \: that \quad |h|< \delta \Rightarrow |T(a+h) - T(a)|< \epsilon \\
 \end{align*}
 \end{proof}
 \end{theorem}
@@ -184,15 +184,15 @@ So \: given \quad \epsilon > 0,\quad choose \quad \delta &= \frac{\epsilon}{M} \
 \begin{example}
 $f(x,y)= \frac{x^{2} - y^{2}}{x^{2} +y^{2}}, \quad (x,y)=(0,0)$ assume $\quad \lim_{(x,y) \to (0,0)} f(x,y) = L$
 
-\[\forall \epsilon > 0, \quad  \exists \delta >0  \quad such\: that \quad 0<|(x,y)|<\delta \implies |f(x,y)-L|<\epsilon \]
+\[\forall \epsilon > 0, \quad  \exists \delta >0  \quad such\: that \quad 0<|(x,y)|<\delta \Rightarrow |f(x,y)-L|<\epsilon \]
 \text{Plug $(x,0)$ into $f$:} 
 \[f(x,0) \;= \frac{x^{2}-0}{x^{2}-0} = 1\]
 \text{Plug $(0,y)$ into $f$:} 
 \[ f(0,y)\;= \frac{0-y^{2}}{0 +y^{2}} = -1\]
 \begin{align*}
-If \: |x|< \delta \quad |f(x,0)| < \delta & \implies |f(x,0) - L|< \epsilon \quad ie \quad |1-L|< \epsilon\\
-If \: |y|< \delta \quad |f(0,y)| < \delta& \implies |f(0,y) - L|< \epsilon \quad ie \quad |-1-L|< \epsilon\\
-&\implies \epsilon = \frac{1}{2} \quad contradiction! \\
+If \: |x|< \delta \quad |f(x,0)| < \delta & \Rightarrow |f(x,0) - L|< \epsilon \quad ie \quad |1-L|< \epsilon\\
+If \: |y|< \delta \quad |f(0,y)| < \delta& \Rightarrow |f(0,y) - L|< \epsilon \quad ie \quad |-1-L|< \epsilon\\
+&\Rightarrow \epsilon = \frac{1}{2} \quad contradiction! \\
 \shortintertext{Now consider $ y=mx, m \in \RR$}
 &f(x,mx)=\frac{x^{2} - (mx)^{2}}{x^{2} + (mx)^{2}} = \frac{1-m^{2}}{1+m^{2}}\\
 &\lim_{x \to 0}(\lim_{y \to 0} f(x,y)) = \lim_{x \to 0}1 = 1\\
@@ -503,12 +503,12 @@ If $D_{i,j}$ and $D_{j,i}$ are continuous on an open set containing $a$ then
 \begin{proof} from homework 5:\\ 
 First we repeat the well-known proof that, if $g : U \rightarrow \RR$ is continuous and $g(p) > 0$,
 then there exists a neighborhood $V$ of $ p (p \in V \subset U,\; V \; open)$ with
-\[q \in V \implies g(q) > 0\]
+\[q \in V \Rightarrow g(q) > 0\]
 Take $\epsilon = g(p)$ in the defnition of continuity of $g$. There there exists a $V$ open with
 $p \in V$ and
-\[q \in V \implies |g(q) - g(p)| < g(p)\]
+\[q \in V \Rightarrow |g(q) - g(p)| < g(p)\]
 Since 
-\[g(p) - g(q) \leq |g(q) - g(p)| < g(p) \implies  -g(q) < 0 \iff g(q) > 0\]
+\[g(p) - g(q) \leq |g(q) - g(p)| < g(p) \Rightarrow  -g(q) < 0 \Leftrightarrow g(q) > 0\]
 we get the result. The set V can be taken to contain a closed rectangle $[a, b] \! \times\! [c, d]$.
 
 We apply the result to $g = D_{1,2}f - D_{2,1}f$. Assume (by contradiction) that $g(p)$ is not
@@ -530,7 +530,7 @@ $A \subset \RR$ If the max or min of $f:A \rightarrow \RR$ occur at a point $a$ 
 Consider $h(x) = f(a^{1}, \dots , a^{i-1} , x^{i}, a^{i+1}, \dots a^{n})$ $x$ in an open interval arround $a^{i}$.\\ Since $f$ has a max or min at $a$, $h$ has a max or min at $a^{i}$
 \[\frac{dh}{dx}(a^{i}) = D_{i}f(a)\]
 By analysis 2:
-\[\frac{dh}{dx}(a^{i}) =0 \implies Df(a) = 0\]
+\[\frac{dh}{dx}(a^{i}) =0 \Rightarrow Df(a) = 0\]
 \end{proof}
 \end{theorem}
 
@@ -757,11 +757,11 @@ and apply the Lemma to this function for the closed rectangle $U$. We notice tha
 The choice of the neighbourhood in (2) so that the constant $1/(2n^{2})$ appears on the right is motivated with the desire to get g as a contraction map (with constant $1/2$) as we see in (3). Now the triangle inequality in the form $|a|-|b|\leq  |a-  b|$ gives
 \[|x_{1} - x_{2}| - |f(x_{1}) - f(x_{2})| \leq |(x_{1} - x_{2}) - (f(x_{1}) - f(x_{2}))| = |-g(x_{1}) + g(x_2)| < \frac{1}{2}|x_{1} - x_{2}| \]
 \begin{equation}
-\implies |x_{1} - x_{2}| - \frac{1}{2}|x_{1} - x_{2}| < |f(x_{1}) - f(x_{2})| \implies  \frac{1}{2}|x_{1} - x_{2}|  <|f(x_{1}) - f(x_{2})|
+\Rightarrow |x_{1} - x_{2}| - \frac{1}{2}|x_{1} - x_{2}| < |f(x_{1}) - f(x_{2})| \Rightarrow  \frac{1}{2}|x_{1} - x_{2}|  <|f(x_{1}) - f(x_{2})|
 \end{equation}
 
 Here $x_1, x_2$ are in $U$. We immediately see that on $U$ the function $f$ is injective:
-\[f(x_1)=f(x_2) \implies |x_1 - x_2| =0 \implies x_1 = x_2.\]
+\[f(x_1)=f(x_2) \Rightarrow |x_1 - x_2| =0 \Rightarrow x_1 = x_2.\]
 
 We still have not determined the neighbourhoods $W$ of $f(a)$ and $V$ of $a$.\\
 \textit{Step 5:}  Determination of the minimum distance of $f(a)$ to the image of the boundary of $U$ and definition of $W$.\\ We have assumed that on the closed rectangle $ U$ we have $f(x) \neq f(a)$ for $x \neq a$. This is definitely true on the boundary of $U$, denoted $\partial U$, which is a closed and bounded set, i.e. compact. The function $ m(x) = |f(x)-  f(a)|$ is continuous on a neighbourhood of $\partial U$ and nonzero on it. It achieves a minimum value on $\partial U$ (an advanced argument from Real Analysis is that the image of a compact set is compact, so that $m(\partial U)$ is compact, which
@@ -770,8 +770,8 @@ means closed and bounded. Such a set has a maximum and minimum). The minimum val
 Now define 
 \[W = \{y \in \RR^n , |y-f(a)| < \delta / 2\}.\]
 \textit{Step 6:}  Comparison of $|y - f(x)|$ with $|y-  f(a)|$ for $x \in \partial U$, and $y \in W$. We have 
-\[ |f(x)- f(a)| \geq \delta, \quad |y - f(a)| \leq \delta /2 \implies -|y-f(x)| + \delta \leq -|y-f(x)|+|f(x) - f(a)| \leq |y-f(a)| < \delta /2 \]
-\[ \implies \delta /2 = \delta - \delta /2 < |y-f(x)| \implies |y-f(a)|< \delta / 2 < |y-f(x)|. \]
+\[ |f(x)- f(a)| \geq \delta, \quad |y - f(a)| \leq \delta /2 \Rightarrow -|y-f(x)| + \delta \leq -|y-f(x)|+|f(x) - f(a)| \leq |y-f(a)| < \delta /2 \]
+\[ \Rightarrow \delta /2 = \delta - \delta /2 < |y-f(x)| \Rightarrow |y-f(a)|< \delta / 2 < |y-f(x)|. \]
 \textit{Step 7:} Show that for $y_0 \in W$ there exists a unique $x_0 \in U^{0}$ such that $f(x_0) = y_0$. The
 uniqueness is obvious from the fact that $f$ is injective on $U$. The construction of such an $x_0$ is tricky. We define another function on $U$ by
 \[g(x) = |f(x)-y_0 |^2 = \sum^{n}_{i=1}(f^{i}(x) - y^{i}_{0})^2.\]
@@ -786,12 +786,12 @@ achieved in an interior point. This point has to be a critical point of $g$, i.e
 \[ 2 \sum^{n}_{i=1}(f^i (x_0) - y^{i}_{0})D_{j}f^{i}(x_0) = 0, \quad j=1, \dots , n.\]
 
 This is a homogeneous system of linear equations with unknowns $f^{i}(x_0) - y^{i}_{0}$ and coefficients $D_j f^{i}(x_0)$. The determinant of the coefficients of the system is nonzero, as $x_0 \in U$. The system has a unique solution, and this solution is the zero vector, i.e
-\[ 0 = f^{i}(x_0) - y^{i}_{0}, \quad i=1, \dots, n \implies f(x_0) = y_{0}. \]
+\[ 0 = f^{i}(x_0) - y^{i}_{0}, \quad i=1, \dots, n \Rightarrow f(x_0) = y_{0}. \]
 
 \textit{Step 8:} We define $V$ and Show that $f:V \rightarrow W$ is bijective and continuous. We define $V = U^0 \cap f^{-1} (W)$. Clearly $f : V \rightarrow W$ is bijective. Moreover, $V$ is open as the intersection of the open set $U^0$
 and the open set $f^{-1} (W)$, which is open as the inverse image of an open set W by the continuous function $f$. We now rewrite (4) as
 \begin{equation}
-|x_1 - x_2 | < 2| f(x_1) - f(x_2)| \iff |f^{-1}(y_1)- f^{-1}(y_2)| < 2|y_1 - y_2 |
+|x_1 - x_2 | < 2| f(x_1) - f(x_2)| \Leftrightarrow |f^{-1}(y_1)- f^{-1}(y_2)| < 2|y_1 - y_2 |
 \end{equation}
 with $y_1 = f(x_1)$ and $y_2 = f(x_2),\; y_i \in W$. This shows that $f^{-1}$ is a Lipschitz function with constant 2, so that it is continuous. Alternatively, choose $\delta = \epsilon /2$ in the definition of continuity.\\
 
@@ -801,8 +801,8 @@ By the definition of the derivative we have
 \[ f(x) - f(x_1) = \mu (x-x_1) + \phi(x-x_1), \quad \lim_{x \rightarrow x_1}\frac{|\phi(x - x_1)|}{|x - x_1|} = 0.\]
 
 We apply to the equation the linear transformation $\mu^{-1}$ to get
-\[ \mu^{-1}(y-y_1) = x - x_1 + \mu^{-1}(\phi(x - x_1)) \implies x - x_1 -\mu^{-1}(y-y_1) = \mu^{-1}(\phi(x - x_1)) \]
-\[ \implies f^{-1}(y) - f^{-1}(y_1) - \mu^{-1}(y - y_1) = -\mu^{-1}(\phi(x-x_1)). \]
+\[ \mu^{-1}(y-y_1) = x - x_1 + \mu^{-1}(\phi(x - x_1)) \Rightarrow x - x_1 -\mu^{-1}(y-y_1) = \mu^{-1}(\phi(x - x_1)) \]
+\[ \Rightarrow f^{-1}(y) - f^{-1}(y_1) - \mu^{-1}(y - y_1) = -\mu^{-1}(\phi(x-x_1)). \]
 
 By the definition of the derivative of $f^{-1}$ at $y_1$ we need to show that
 \begin{equation}
@@ -850,7 +850,7 @@ Differentiate in $x$:
 \frac{d}{dx}F(x,y,g(x,y)) &= \frac{dF}{dx}\frac{dx}{dx} + \frac{dF}{dy}\frac{dy}{dx} + \frac{dF}{dz}\frac{dz}{dx}\\
 &=  \frac{dF}{dx} + \frac{dF}{dz}\frac{dg}{dx}  = 0\\
 \frac{dg}{dx} &= -\frac{\frac{dF}{dx}}{\frac{dF}{dz}} = - \frac{z}{x^2 +2z - e^z }\\
-\frac{dF}{dy}=0 \overset{chain}{\underset{rule}{\implies}} \frac{dF}{dy} + \frac{dF}{dz}\frac{dg}{dy} \implies 
+\frac{dF}{dy}=0 \overset{chain}{\underset{rule}{\Rightarrow}} \frac{dF}{dy} + \frac{dF}{dz}\frac{dg}{dy} \Rightarrow 
 \frac{dg}{dy} &= -\frac{\frac{dF}{dy}}{\frac{dF}{dz}} = - \frac{2y}{x^2 +2z - e^z }\\
 \end{align*}
 the point $(0,e,2)$ satisfies $F(x,y,z)=0$
@@ -881,7 +881,7 @@ Define $f(x,y) = (f^1(x,y), \dots , f^m (x,y))=\underbracket[0.5pt]{0}_{vector} 
           \mathclap{m}}$\\
 Let $a \in \RR^n , \; b \in \RR^m$ such that $f(a,b,) = 0$ when we can find for each $(x^1,  \dots, x^n) $  near $a=(a^1 , \dots , a^n )$ a unique $y=(y^1 , \dots , y^m )$ near $b= (b^1 , \dots , b^m)$ such that: $f(x,y)=0$, \\$f(x^1 , \dots , x^n , y^1 , \dots , y^m) = 0$
 
-\begin{theorem}[Implicit Value Theorem]\label{implicitvalue}
+\begin{theorem}[Implicit Function Theorem]\label{implicitFunction}
 $f:\RR^n \times \RR^m \rightarrow \RR^m$ continuously differentiable on an open set containing $(a,b), \; a \in \RR^n , \; b \in \RR^m.$ moreover $f(a,b)=0$\\
 consider the matrix \[M=(D_{j+n}f^{i}(a,b))^{i=1,\dots,m}_{j=1,\dot,m}\] assume det$M \neq 0$. Then there exist two open sets $A \subset \RR^n, \; b \subset \RR^m, \; a \in A, \; b \in B$. such that $\forall x \in A, \exists$ unique $g(x) \in B$ such that $f(x,g(x))=0$ Moreover $g:A \rightarrow B$ is differentiable.
 \begin{proof} 
@@ -910,6 +910,7 @@ F is continuously differentiable because $x^1 , \dots , x^n$ are continuously di
 \text{\scriptsize * Some $m \times n$} & M_{m \times m}\\
 \text{\scriptsize matrix} & 
  \end{array} \right) \]
+
 det$M \neq 0$ (reducing from top left entry).\\
 By the inverse funct theorem, $\exists$ an open set $W$ containing $F(a,b) = (a,0)$ and an open set containing $(a,0)$ which I can take to be a rectangle $A \times B, \;  a \in A , \; b \in B, \; A$ open in $\RR^n, \; B$ open in $\RR^m$.\\
 \[F:A \times B \rightarrow W \text{ is bijective}\]
@@ -933,6 +934,360 @@ Set $y=0$
 The solution is $g(x)=k(x,0)$ (solution to $f(x,y)= 0$).
 \end{proof}
 \end{theorem}
+
+\begin{theorem}\label{imp2}
+Let $g : \RR^n \rightarrow \RR^p$ be a continuously differentiable function in an open set containing $a$ and assume that $p \leq n$. If $g(a) = 0$ and the rank of the $p \times n$ matrix
+\[(D_jg^i(a))_{i=1,\dots,p \; j=1,\dots, n} \]
+be equal to $p$. Then there exists an open set $A \subset \RR^n$ and a differentiable function $h : A \rightarrow \RR^n$ which is bijective onto an open set $V$ and $h^{-1}$ is differentiable and
+\[(g \circ h)(x^1, x^2, \dots,x^n) = (x^{n-p+1}, x^{n - p+2}, \dots,x^n) \]
+\begin{proof}
+We can consider the function $g$ as $g : \RR^{n-p} \times \RR^P \rightarrow \RR^p$. The 'easy' case is as follows:\\
+If the $p\times n$ matrix above is such that the last $p$ columns give a matrix $M$ with $det(M) \neq
+0$, then we are exactly in the situation of the Implicit Function Theorem as worked out
+above. The notation has only slightly changed: $x^{n-p+1} = y^1,\; x^{n-p+2} = y^2, \dots,x^n = y^p, \;
+p = m,\; g = f$. We have found $h$ with $h(x, y) = (x, k(x, y))$ and 
+\[(f \circ h)(x, y) = f(h(x, y)) = f(x, k(x, y)) = y,\]
+and in our notation
+\[(g \circ h)(x^1, x^2, \dots,  x^n) = (x^{n-p+1}, x^{n-p+2}, \dots, x^n).\]
+In general we cannot assume that the last columns of the matrix give nonzero determinant. We know from Linear Algebra that there will be some $p$ columns with this property. Let these columns be $j^1, j^2, \dots, j^p$ with
+\[M =(D_{j_k}g^i(a))_{i=1,\dots,p \; k=1,\dots ,p}, \qquad det(M) \neq 0.\]
+We rearrange the variables as follows: Let $m : \RR^n \rightarrow \RR^n$ be defined by (put the variables
+with superscript $j_k,\; k = 1, 2,\dots, p$ in the last entries and order in whatever way you want
+the other variables)
+\[m(x^1, x^2, \dots ,x^n) = (\dots, x^{j_1} ; x^{j_2},\dots, x^{j_p}).\]
+Then $g \circ m$ is a function of the type discussed theorem \ref{implicitFunction}, so we can find a function $s : A \rightarrow \RR^n$
+which is bijective onto an open set $V$ and $s^{-1}$ is differentiable and
+\[ ((g \circ m) \circ s)(x^1, x^2, \dots, x^n) = (x^{n-p+1}; x^{n-p+2} , \dots,  x^n).\]
+Then use $h = m \circ s$.
+\end{proof}
+\end{theorem}
+
+\begin{example}
+\[f: \RR^2 \rightarrow \RR^2, \quad f(x,y) = (xy, x^2 + y^2) = (z,w)\]
+\[
+\begin{pmatrix}
+ \frac{dx}{dz} & \frac{dx}{dw}\\
+\frac{dy}{dz} & \frac{dy}{dw}
+ \end{pmatrix} =   \begin{pmatrix}
+ \frac{dz}{dx} & \frac{dz}{dy}\\
+\frac{dw}{dx} & \frac{dw}{dy}
+ \end{pmatrix}^{-1} \]
+
+\begin{alignat*}{2}
+&z=xy, &\quad &y= \frac{z}{w} \\
+&w = x^2 + y^2 = x^2 + \frac{z^2}{x^2} &\quad & \\
+&wx^2 = x^4 + z^2 &\quad & \\
+& x^4 - wx^2 + z^2 &\quad & (*)
+\end{alignat*}
+\[x=g(z,w)\]
+Use implicit differentiation on $(*)$ with respect to $z$:
+\[4x^3\frac{dx}{dz} - w \cdot 2x\frac{dx}{dz} + 2z = 0\]
+\[\frac{dx}{dz}(4x^3 - 2xw) = -2z\]
+\[\frac{dx}{dz} = \frac{-2z}{4x^3 - 2xw}=  \frac{-z}{x(2x^2 - w)}=  \frac{-y}{2x^2 - w}\]
+Valid for
+\[2x^2 - w \neq 0 \]
+\[2x^2 - (x^2 + y^2) \neq 0 \]
+\[x^2 - y^2 \neq 0 \]
+\[ \Leftrightarrow f'(x,y) \neq 0\]
+
+\[\left.\begin{aligned}
+       & f(x,y) = 0 & \; &f(a,b)= 0 \\
+        & f(x,g(x)) = 0 & \; &\text{solve implicitly for $y$} \\
+	& x \in \RR^n, \; y \in \RR^m & \; & g:\RR^n \rightarrow \RR^m\\
+	&f:\RR^n \times \RR^m \rightarrow \RR^m &\; & 
+       \end{aligned}
+ \right\}
+ \qquad \text{Set up of implicit function theorem }\]
+\[i=1,\dots,m \quad f^{i}(x^1 , \dots , x^n , g^1(x^1, \dots, x^n), \dots, g^m(x^1, \dots, x^n)) =0\]
+how to compute $D_{j}g^{i}?$
+\[D_{j}g^{i}(\dots) = 0\]
+\[D_{1}f^i\cancel{\frac{dx^1}{dx^j}} + \cancel{\dots} +  D_{j}f^i\underbracket{\frac{dx^j}{dx^j}}_{= 1} + \cancel{\dots} + D_{n}f^i\cancel{\frac{dx^n}{dx^j}}+D_{n+1}f^i\frac{dg^1}{dx^j} + \dots + D_{n+m}f^i\frac{dg^m}{dx^j}=0\]
+\[\underbrace{D_{n+1}f^i\frac{dg^1}{dx^j} + \dots + D_{n+m}f^i\frac{dg^m}{dx^j}}_{m \; \text{unknowns}}= - D_{j}f^i\frac{dx^j}{dx^j} \]
+Check det of coefficents is $\neq 0$ 
+\[\left[\begin{array}{ccc}
+D_{n+1}f^1 & \dots & D_{n+m}f^1\\
+\vdots & & \vdots\\
+D_{n+1}f^m & \dots & D_{n+m}f^m\\
+\end{array} \right] = M\]
+\end{example}
+
+\section{Integration}
+\subsection{Multiple integrals}
+
+$f:A \rightarrow \RR$, $A$ is a rectangle in $\RR^n$ $A= [a_1,b_1]\times \dots \times[a_n , b_n]$\\
+Recall a partition $\mathcal{P}$ of $[a,b]$ is a collection of of points: $t_{0}, \dots , t_k$ with $a=t_0 < t_1 < \dots <t_k = b$\\
+A Partition of a rectangle $ [a_1 , b_1]\times\dots \times [a_k , b_k]$ is a collection $\mathcal{P} = (P_1 , \dots , P_n)$ where $P_i$ is a partition of $[a_i, b_i], \; i=1,\dots ,n$ Subrectangles $[s_{j-1},s_j]\times[t_{m-1},t_m]$ Let $f$ be bounded on the rectangle  $ [a_1 , b_1]\times\dots \times [a_k , b_k]$
+
+\begin{definition}
+ Let $f$ be bounded on the rectangle  $ [a_1 , b_1]\times\dots \times [a_k , b_k]$ and let $S$ be subrectangle of the partition $\mathcal{P}$  
+\[m_S(f) = \inf_{x \in S}f(x), \qquad M_S (f) = \sup_{x \in S}f(x) \]
+Lower Riemann sum:
+\[\mathcal{L}(f,\mathcal{P}) = \sum_{S}m_S(f).v(S)\]
+where $v(s)$ is the volume of the subrectangle
+\[S=[s_{l-1}, s_l] \times [t_{j-1},t_j] \times \dots \times[r_{k-1},r_k]\]
+\[v(S)= (s_{l-1}- s_l)\cdot(t_{j-1},t_j)\cdots (r_{k-1},r_k)\]
+Upper Riemann sum:
+\[\mathcal{U}(f,\mathcal{P})= \sum_{S}M_S(f).v(S)\]
+\[ \mathcal{L}(f,\mathcal{P}) \leq \mathcal{U}(f,\mathcal{P})\]
+Refinement: A refinement $\mathcal{P}'$ of the partition $\mathcal{P}$ is as follows. Given $S$ a subrectangle of $\mathcal{P}'$, I can find a subrectangle T of $\mathcal{P}$ such that $S \subset T$ and $T= \cup_{S \subset T} S$, $S$ for $\mathcal{P}'$
+\end{definition}
+
+\setcounter{equation}{0}
+
+\begin{lemma}
+if $\mathcal{P}'$ is a refinement of $\mathcal{P}$, then:
+\begin{align}
+\mathcal{L}(f,\mathcal{P}) &\leq \mathcal{L}(f,\mathcal{P}')\\
+\mathcal{U}(f,\mathcal{P}) &\geq \mathcal{U}(f,\mathcal{P}') 
+\end{align}
+
+\begin{proof} of (1)\\
+Let $S$ be a subrectangle of $\mathcal{P}'$ and $T$ a subrectangle of $\mathcal{P}$ such that $S\subset T$ 
+\begin{align*}
+m_S(f) & \geq M_T(f) \\
+m_S(f)v(S) &\geq M_T(f)v(S) \qquad ( \text{sum over all} \; S \subset T, \; S \; for \; \mathcal{P}')\\
+\sum_{S \subset T}m_S(f)v(S) &\geq \sum_{S \subset T}m_T(f)v(S) = m_T(f)v(T)\\
+\mathcal{L}(f,\mathcal{P}') = \sum_{T}\sum_{S \subset T}m_S(f)v(S) &\geq \sum_{T} m_T(f)v(T) = \mathcal{L}(f,\mathcal{P})\\
+\end{align*}
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+For any two partitions $\mathcal{P}$ and $\mathcal{P}'$ we have:
+ \[\mathcal{L}(f,\mathcal{P}) \leq \mathcal{U}(f,\mathcal{P}')\]
+\begin{proof}
+Take $\mathcal{P}''$ a refinement of $\mathcal{P}$ and $\mathcal{P}'$:
+\[\mathcal{L}(f,\mathcal{P}) \leq\mathcal{L}(f,\mathcal{P}'') \leq \mathcal{U}(f,\mathcal{P}'') \leq  \mathcal{U}(f,\mathcal{P}')\]
+\end{proof}
+\end{lemma}
+
+\begin{definition}
+The lower Riemann integral \[\int\limits_{A \;-}f = \sup_{\mathcal{P}} \;\mathcal{L}(f, \mathcal{P}) , \quad (\mathcal{P}\; \text{partition of rectangle $A$})\]
+The upper Riemann integral \[\int\limits_{A}^{-}f = \inf_{\mathcal{P}} \;\mathcal{U}(f, \mathcal{P})\]
+$f$ is called integrable if 
+\[ \int\limits_{A\;-}f = \int\limits_{A}^{-}f \quad and \quad \int\limits_{A} f = \int\limits_{A \;-}f = \int\limits_{A}^{-}f\] 
+\end{definition}
+
+\begin{theorem}[Riemann's Integrability Criterion]\label{reimann}
+$f$ is integrable over the rectangle $A \Leftrightarrow \forall  \epsilon > 0, \; \exists$ a partition $\mathcal{P}$ of $A$ such that 
+\[\mathcal{U}(f, \mathcal{P}) - \mathcal{L}(f, \mathcal{P}) < \epsilon \]
+\begin{proof}
+($ \Rightarrow $)\\
+\begin{align*}
+&\inf_{\mathcal{P}}(\mathcal{U}(f, \mathcal{P}) - \mathcal{L}(f, \mathcal{P}) = 0\\
+\Leftrightarrow &\inf_{\mathcal{P}}\;\mathcal{U}(f, \mathcal{P}) - \sup_{\mathcal{P}}\; \mathcal{L}(f, \mathcal{P}) = 0\\
+\Leftrightarrow  &\int\limits_{A \;-}f = \int\limits_{A}^{-}f\\
+\end{align*}
+($\Leftarrow$)\\
+Assume $\int\limits_{A \;-}f = \int\limits_{A}^{-}f$, fix $\epsilon > 0$
+\[\text{Since} \; \int\limits_{A \;-}\! f = \sup_{\mathcal{P}} \;\mathcal{L}(f, \mathcal{P}), \quad \text{so} \quad \exists \mathcal{P}' \; s.t \; \int\limits_{A \;-}f - \frac{\epsilon}{2} < \mathcal{L}(f, \mathcal{P}')\]
+\[\text{Since} \; \int\limits_{A}^{-}f = \inf_{\mathcal{P}} \;\mathcal{U}(f, \mathcal{P}), \quad \text{so} \quad \exists \mathcal{P}' \; s.t \; \int\limits_{A}^{-}f + \frac{\epsilon}{2} > \mathcal{U}(f, \mathcal{P}')\]
+Take $\mathcal{P}''$ a common refinement of $\mathcal{P}$ and $\mathcal{P}'$
+\[\int\limits_{A}^{-}f + \frac{\epsilon}{2} \;>\; \mathcal{U}(f, \mathcal{P}'') \geq \mathcal{L}(f, \mathcal{P}'') \;> \int\limits_{A \;-}f - \frac{\epsilon}{2}\]
+So
+\[\mathcal{U}(f, \mathcal{P}'') - \mathcal{L}(f, \mathcal{P}'') < \left(\cancel{\int\limits_{A}^{-}\!f} + \frac{\epsilon}{2}\right) - \left(\cancel{\int\limits_{A \;-}\!\!f} - \frac{\epsilon}{2}\right) = \epsilon\]
+\end{proof}
+\end{theorem}
+
+\begin{example} Non-Riemann integrable function $f:\RR^2 \rightarrow \RR^2$
+\[f(x,y) =
+  \begin{cases}
+  1 & \text{if } x \in \QQ \\
+   0      & \text{if } x \notin \QQ
+  \end{cases} \]
+\begin{alignat*}{2}
+m_S(f) &= 0 &\qquad M_S(f)&=1\\
+\mathcal{L}(f, \mathcal{P}) &= 0 &\qquad \mathcal{U}(f, \mathcal{P}) &=1
+\end{alignat*}
+\end{example}
+
+If $C \subset \RR^n$, define the characteristic function of $C$ to be 
+\[X_{C}(x) =\begin{cases}
+  1 & \text{if } x \in C \\
+   0      & \text{if } x \notin C
+  \end{cases} \]
+\setcounter{equation}{0}
+If $f$ is bounded on $\bar{C}$ and $C$ is contained in a rectangle $A$, we define 
+\[\int\limits_{C}f = \int\limits_{A}fX_{C}\]
+$f:[a,b]\times[c,d] \rightarrow \RR$\\
+Fix $x$ and consider $g_{x}:[c,d]\rightarrow\RR$ 
+\[g_{x}(y) = f(x,y)\]
+\[I(x)=\int_{c}^{d}g_{x}dy = \int_c^df(x,y)dy\]
+\begin{equation}
+\int_a^bI(x)dx = \int_a^b\left(\int_c^df(x,y)dy\right)dx
+\end{equation}
+Fix $y$ and define $h_{y}:[a,b]\rightarrow\RR$
+\[h_y(x)=f(x,y)\]
+\[J(y)=\int_{a}^{b}h_{y}dx = \int_a^bf(x,y)dx\]
+\begin{equation}
+\int_c^dJ(y)dy = \int_c^d\left(\int_a^bf(x,y)dx\right)dy
+\end{equation}
+$(1) = (2)$
+
+\subsection{Fubini's theorem}
+
+\begin{theorem}
+Let $A$ be a rectangle in $\RR^n$ and let $B$ be a rectangle in $\RR^m$. $f:A \times B \rightarrow \RR$ is intergrable. define: 
+\[ g_x: B \rightarrow \RR \quad  \text{ by } \quad g_x = f(x,y) , \qquad  \forall y \in B,\;  \forall x \in A \]
+and let: 
+\[ \left.\begin{aligned}
+       \mathfrak{L}(x) &=  \int\limits_{B \;-}g_x =\int\limits_{B \;-}f(x,y)dy\\
+       \mathfrak{U}(x) &=  \int\limits_{B}^{-}g_x =\int\limits_{B}^{-}f(x,y)dy
+       \end{aligned}
+ \; \right\}
+ \qquad \text{exists} \; \; \forall x \in A\]
+Then $\mathfrak{L}(x)$ and $\mathfrak{U}$ are intergrable over $A$, and:
+\[\int\limits_{A}\mathfrak{L}(x)dx =\int\limits_{A} \left(\;\int\limits_{B \;-}f(x,y)dy \right)\! dx=\int\limits_{A} \left(\int\limits_{B}^{-}f(x,y)dy \right)\! dx = \int\limits_{A}\mathfrak{U}(x)dx = \int\limits_{A \times B}f\]
+\begin{proof}
+Let $\mathcal{P}_A$ be a partition of $A$, $\mathcal{P}_B$ be a partition of $B$. Let $S_A$ a subrectangle of $A$,  $S_B$ a subrectangle of $B$. Then the rectangles $S_A \times S_B$ give a partition $\mathcal{P}$ of $A\times B.$ \\
+We will prove:
+\[\mathcal{L}(f,\mathcal{P}) \underset{(1)}{\leq} \mathcal{L}(\mathfrak{L},\mathcal{P}_A) \underset{(2)}{\leq} \mathcal{U}(\mathfrak{L},\mathcal{P}_A) \underset{(3)}{\leq} \mathcal{U}(\mathfrak{U},\mathcal{P}_A) \underset{(4)}{\leq} \mathcal{U}(f,\mathcal{P})\]
+Since $f$ is integrable over $A \times B$, given $\epsilon > 0$ Riemann's integrability criterion given a partition $\mathcal{P}$ of $A \times B$, such that: $\mathcal{U}(f,\mathcal{P}) - \mathcal{L}(f,\mathcal{P}) < \epsilon $. Then $\mathcal{P}$ defines $\mathcal{P}_A ,\; \mathcal{P}_B$ partitions of $A, \; B$ respectively. By the inequality above: $\mathcal{U}(\mathfrak{L},\mathcal{P}_A) - \mathcal{L}(\mathfrak{L},\mathcal{P}_A) < \epsilon $. By reimann's integrability criterion, $\mathcal{L}$ is integrable over $A$, since: 
+\[\sup_{\mathcal{P}}\mathcal{L}(f,\mathcal{P})= \inf_{\mathcal{P}}\mathcal{U}(f,\mathcal{P}) = \int\limits_{A\times B}\! \! f \Rightarrow \int\limits_{A}\mathfrak{L}(x)dx = \sup_{\mathcal{P}_A}\mathcal{L}(\mathfrak{L},\mathcal{P}_A)= \inf_{\mathcal{P}_A}\,\mathcal{U}(\mathfrak{L},\mathcal{P}_A) = \int\limits_{A\times B}\! \!f\]
+Works simularly with $\mathfrak{U}(x)$.\\
+Side remark:
+\begin{align*}
+\mathcal{L}(f, \mathcal{P}) &\leq \mathcal{L}(\mathfrak{L}, \mathcal{P}_A)\\
+\sup_{\mathcal{P}}\mathcal{L}(f, \mathcal{P}) &\leq \sup_{\mathcal{P}_A}\mathcal{L}(\mathfrak{L}, \mathcal{P}_A)\\
+\mathcal{U}(\mathfrak{L}, \mathcal{P}_A) &\leq \mathcal{U}(f, \mathcal{P})\\
+\inf_{\mathcal{P}_A}\mathcal{U}(\mathfrak{L}, \mathcal{P}_A) &\leq \inf_{\mathcal{P}}\mathcal{L}(f, \mathcal{P})
+\end{align*}
+
+\begin{align*}
+(2) \quad \mathcal{L}(\mathfrak{L},\mathcal{P}_A) &\leq \mathcal{U}(\mathfrak{L},\mathcal{P}_A) \\ &\text{always true for  a function $\mathfrak{L}$, partition $\mathcal{P}_A$} \\ \;& \; \\
+(3) \quad \mathcal{U}(\mathfrak{L},\mathcal{P}_A) &\leq \mathcal{U}(\mathfrak{U},\mathcal{P}_A)\\
+&\mathfrak{L}(x)  =\int\limits_{B \;-}f(x,y)dy, \; \mathfrak{U}(x)  =\int\limits_{B}^{-}f(x,y)dy \Rightarrow \mathfrak{L}(x) \leq \mathfrak{U}(x) \\
+ &\Rightarrow \mathcal{U}(\mathfrak{L}(x), \mathcal{P}_A) \leq \mathcal{U}(\mathfrak{U}(x), \mathcal{P}_A) \\
+\end{align*}
+$(4)$ is proved simularly to $(1)$ so we only prove $(1)$. 
+
+\[\mathcal{L}(f,\mathcal{P})= \sum_{S}m_{s}(f) v(S) = \sum_{S_A, \; S_B}\! m_{S_A \times S_B}(f)  v(S_A \times S_B) = \sum_{S_A}\left(\sum_{S_B} m_{S_A \times S_B}(f)  v(S_B) \right)\! v(S_A)\]
+Now, if $x \in S_A$, then clearly $m_{S_A \times S_B}(f) \leq m_{S_B}(g_x).$ Consequently, for $x \in S_A$ we have
+\[\sum_{S_B} m_{S_A \times S_B}(f) \cdot v(S_B) \leq \sum_{S_B}m_{S_B}(g_x)\cdot v(S_B) \leq \int\limits_{B \;-}g_x = \mathfrak{L}(x).\]
+Therefore
+\[\sum_{S_A}\left(\sum_{S_B} m_{S_A \times S_B}(f)  v(S_B) \right)\! v(S_A) \leq \mathcal{L}(\mathfrak{L}, \mathcal{P}_A).\]
+When the function is reimenn integral
+\end{proof}
+\end{theorem}
+
+\subsection{Change of variables}
+\begin{theorem}
+Let $A \in \RR^n$ be open, $g:A \rightarrow \RR^n$ be injective and continuously differentiable with $det \;g'(x) \neq 0, \; \forall x \in A$. Let $f:g(A) \rightarrow \RR$ be integrable.Then we have change of variables formula:
+\[\int\limits_{g(A)}\!f=\int\limits_{A}(f \circ g)\cdot |det \:g'(x)|dx\]
+\end{theorem}
+
+\section{Differential Forms}
+\subsection{Manifolds}
+
+\begin{definition}[$C^{\infty}$]
+A function $f:\RR^n \rightarrow \RR^m$ is called a $C^{\infty}$ function if all partial derivitives of all orders of all components exists and are continuous
+\end{definition}
+
+\begin{definition}[Diffeomorphism]
+Let $U, \; V$ be open sets in $\RR^n$. A $C^{\infty}$ function $h:U\rightarrow V$ bijective and $h^{-1}:V \rightarrow U$, also a $C^{\infty}$ function, is called a diffeomorphism from $U$ to $V$
+\end{definition}
+
+\begin{definition}
+A set $M$ is a K-dim manifold in $\RR^n$ if the following condition (M) holds. For every $x \in M$:\\
+(M): There exisits two open sets $U, \; V$ of $\RR^n, z\; x \in U$ and a diffeomorphsim $h:U \rightarrow V$ such that:
+\[ h(U \cap M) = \{ y \in V \; s.t. \;y^{k+1} = y^{k+2} = \dots = y^{n} = 0\} \]
+\end{definition}  
+
+\begin{theorem}
+ Let $A \rightarrow \RR^n$ be open and let $g : A \rightarrow \RR^p$ be a differentiable function such
+that $g'(x)$ has rank $p$ on the set $g^{-1}(0)$. Then $g^{-1}(0)$ is an $n\! -\! p$ dimensional manifold in $\RR^n$.
+\begin{proof}
+ It follows directly from theorem \ref{imp2}. Let $x \in g^{-1}(0) = M$. We take $V = A$ in theorem\ref{imp2} so that we can find a diffeomorphism $H : V \rightarrow U$ , where $U$ is open in $\RR^n$ and 
+\[g \circ H(x^1, x^2, \dots, x^n) = (x^{n-p+1}, x^{n-p+2}, \dots , x^n) \]
+Let $h = H^{-1} : U \rightarrow V$ . We need to show that 
+\[h(U \cap M) = \{y \in V,\; y^{n-p+1} = y^{n-p+2} = \dots = y^n = 0\}.\]
+Let $y \in U \cap M$. Then $y \in g^{-1}(0)$, i.e. $g(y) = 0$. Since
+\[h(g^{_1}(0)) = H^{-1}(g^{-1}(0)) = (g \circ H)^{-1}(0) = \{y \in V,\; y^{n-p+1} = y^{n-p+2} = \dots = y^n = 0\},\]
+clearly we have for $ y \in g^{-1}(0)$ that $ h(y)$ has its last $p$ coordinates zero. The converse is
+also obvious: if $z \in \{y \in V,\; y^{n-p+1} = y^{n-p+2} = \dots = y^n = 0\}$ then set $y = H(z) \in U$
+and $g(y) = g(H(z)) = (z^{n-p+1},\dots, z^n) = (0,\dots ,0) \Rightarrow y \in g^{-1}(0) = M$ and $z = h(y) \in
+h(U \cap M).$
+\end{proof}
+\end{theorem}
+
+The following theorem gives the coordinate definition of a manifold M.
+
+\begin{theorem}
+A subset $M$ of $\RR^n$ is a $k$-dimensional manifold iff for every point $x \in M$ the following holds:\\
+(C) There exists an open set $U \in \RR^n,\; x \in U$ and an open set $W \subset \RR^k$ and an injective
+differentiable map $f : W \rightarrow \RR^n$ such that
+\begin{enumerate}[(i)]
+\item $f(W) = U \cap M$
+\item rank $f'(y) = k \quad \forall y \in W$
+\item $f^{-1} : f(W) \rightarrow W$ is continuous.
+\end{enumerate}
+\begin{proof}
+ Lets assume that M is a manifold according to the deffnition (M). We choose the function $h : U \rightarrow V$ as in the definition. We define the set $W$ and the function $f$ as follows:
+\[W = \{a \in \RR^k, \; (a, 0) \in h(U \cap M) \}, \quad f : W \rightarrow \RR^n, \quad  f(a) = h^{-1}(a, 0).\]
+Here $(a, 0)$ is the vector with the last $n-k$ coordinates equal to $0$. Obviously $f(W) = U\cap M$, since
+\[a \in W \Leftrightarrow (a, 0) \in h(U \cap M) \Leftrightarrow h^{-1}(a, 0) \in U \cap M \Leftrightarrow f(a) \in U \cap M.\]
+We prove that $W$ is open. For $a \in W$, we have:
+\[(a, 0) \in h(U \cap M) \Leftrightarrow h^{-1}(a, 0) \in U \cap M \Rightarrow h^{-1}(a, 0) \in U.\]
+Since $h^{-1}$ is continuous, if $b$ is sufficiently close to $a$, so that $(a, 0)$ and $(b, 0)$ are sufficiently close, we can deduce that $h^{-1}(b, 0)$ is close enough to $h^{-1}(a, 0)$. Because $U$ open, if $h^{-1}(a, 0) \in U$, then also $h^{-1}(b, 0) \in U$. This gives $(b, 0) \in h(U)$. Because $h(U \cap M)$ consists exactly of the points with last $n- k$ components equal to $0, \; (b, 0) \in h(U\cap M) \Leftrightarrow b \in W$. We immediately see from the definition of $f$ and $W$ that $f^{-1}$ is continuous (it maps $h^{-1}(a, 0)$ to $a$ while $h$ is continuous).\\
+We prove that the rank of $f'(y)$ is $k$ on $W$. For this we introduce another function
+\[H : U \rightarrow \RR^k, \quad  H(z) = (h^1(z),\dots , h^k(z)),\]
+i.e. $H$ has the same first $k$ coordinates as $h$ (and ignores the last $n - k$). We have
+\[H(f(y)) = H(h^{-1}(y, 0)) = y, \quad  y \in W.\]
+Therefore, $H'(f(y) )\cdot f'(y) = I_{k\times k}$ or, in terms of linear transformations:
+\[DH(f(y)) \circ Df(y) = Id_{\RR^k}.\]
+Because the composition is injective, $Df(y)$ is injective and the nullity plus rank theorem for $Df(y) : \RR^k \rightarrow \RR^n$ gives that the rank of $Df(y)$ is $k$.\\ \\
+ \textit{The converse:} Suppose that $f : W \rightarrow \RR^n$ satisfies condition (C). We have $f'(y) \in M_{n\times k}$.
+By rearranging the coordinates in $\RR^n$, we can assume that the rank of the first $k$ rows of $f'(a)$ is $k$. This means
+\[det (D_jf^i(a))_{i,j=1,\dots ,k} \neq 0.\]
+We define
+\[g : W \times \RR^{n - k} \rightarrow \RR^n, \quad g(a, b) = f(a) + (0, b),\]
+where $(0, b)$ has the first $k$ coordinates $0$. We have
+\[g^i(a, b) = f^i(a), \quad i \leq k, \quad g^i(a, b) = f^i(a) + b^i, \quad i > k.\]
+We compute its Jacobian matrix. For $i\leq k$
+\begin{align*}
+D_jg^i(a, b)  = D_jf^i(a) \Rightarrow D_jg^i(a, b) &= D_jf^i(a), \quad j \leq k,\\
+and \quad D_jg^i(a, b) & = 0, \quad j > k.
+\end{align*}
+For $i > k$, however, we have
+\[D_jg^i(a, b) = D_jf^i(a) + D_jb^i \Rightarrow D_jg^i(a, b) = \delta _{ij}, \quad j > k\]
+while
+\[D_jg^i(a, b)  = D_jf^i(a), \quad j \leq k.\]
+The Jacobian matrix is therefore in block form
+\[
+ g'(a,b) =
+ \left( \begin{array}{c|c}
+ D_jf^i(a)_{i,j = 1,\dots , k}  & 0 \\
+\hline
+ D_jf^i(a)^{i=k+1 , \dots, n}_{j = 1,\dots , k}  & I_{(n-k)\times (n-k)} \\
+ \end{array} \right)
+\]
+The calculation of the determinant in block form (which can be considered as successive expansion on the last column) gives that $det \;g'(a, b) \neq 0$. By the inverse function theorem, there exists an open set $V_1$ with $(a, 0) \in V_1$ and an open set $V_2$ containing $g(a, 0) = f(a)$, such that $g : V_1 \rightarrow V_2$ has a differentiable inverse $h : V_2 \rightarrow V_1$. Then, since $f(W) = U \cap M$, we have for $(x, 0) \in V_1,\; g(x, 0) \in M \Leftrightarrow f(x) \in M$: This gives
+\[V_2 \cap M = \{g(x, 0), \; (x, 0) \in V_1\}.\]
+\[h(V_2 \cap M) = g^{-1}(V_2 \cap M) = g^{-1}(\{g(x,  0), \; (x, 0) \in V_1\}) = V_1 \cap (\RR^k\times \{0\}).\]
+\end{proof}
+\end{theorem}
+We also need the definition of manifold with boundary. While a $k$-dimensional manifold in $\RR^n$ looks like a $k$-dim  slice of $\RR^n$, according to condition (M), for a manifold with boundary in $\RR^n$, the part close to the boundary looks likes a half-slice of dimension $k$. To make this precise we define the half-space
+\[\mathbb{H}^k = \{x \in \RR^k, \;  x^k \geq 0 \}.\]
+Then
+\[h(U \cap M) = \{ y \in V: \; y^k \geq 0, \;y^{k+1} = y^{k+2} = \dots = y^{n} = 0\}\]
+is the substitute for condition (M). More precisely:
+
+\begin{definition} 
+A subset $M$ of $\RR^n$ is a $k$-dimensional manifold with boundary if for every point $x$ of $M$ either condition (M) holds or (exclusive) the following condition holds: \\
+(M') There is an open set $U \rightarrow \RR^n$ containing $x$, an open set $V$ contained in $\RR^n$ and a
+diffeomorphism $h : U \rightarrow V$ such that
+\[h(U \cap M) = V \cap (\mathbb{H}^k\times \{0\}) = \{ y \in V: \; y^k \geq 0, \;y^{k+1} = y^{k+2} = \dots = y^{n} = 0\}.\]
+Moreover, $h^k(x) = 0$.The set of points where condition (M') holds is called the boundary of $M$ and is denoted
+by $\partial M$.
+\end{definition}
+
+
+
+
+
+
+
+
 
 \subsection{Linear Functionals}
 
@@ -964,9 +1319,9 @@ assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \d
 \[f^{i} =  \Pi^{i} \circ f\]
 this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
 \begin{align*}
-\implies Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
+\Rightarrow Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
 \shortintertext{$D\Pi^{i} = \Pi^{i}$}
-\implies Df^{i} &= \Pi^{i}(a) \cdot Df(a)
+\Rightarrow Df^{i} &= \Pi^{i}(a) \cdot Df(a)
 \end{align*}
 Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
 \begin{align*}
