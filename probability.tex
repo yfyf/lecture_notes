@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{cancel}
 
+
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
 \setlength{\textheight}{9.5in}
@@ -27,6 +28,7 @@
 \def\QQ{\mathbb{Q}}
 \def\RR{\mathbb{R}}
 \def\ZZ{\mathbb{Z}}
+\def\NN{\mathbb{N}}
 \def\gotha{\mathfrak{a}}
 \def\gothb{\mathfrak{b}}
 \def\gothm{\mathfrak{m}}
@@ -53,11 +55,11 @@
 \newtheorem*{remark}{Remark}
 \newtheorem*{claim}{Claim}
 \newtheorem*{idea}{Idea}
-
-
+\newtheorem*{notation}{Notation}
+\newtheorem*{ap}{Applications}
 \begin{document}
 \title{Probability \\ 3105}
-\author{ Dr N Sidorova}
+\author{Based on lectures by\\Dr N Sidorova}
 \date{Jan 2012}
 \maketitle
 
@@ -497,6 +499,164 @@ Let $\mathcal{I}$ be a collection of sets, it is called a $\pi$-system if $\fora
  \right\}
  \quad \text{$\pi$-system on $\mathcal{B}$}\]
 \end{example}
+
+\begin{example}
+\[
+ \left.\begin{aligned} 
+       &\{ \{x<t\}, \; t \in \RR\} \\
+        &\{ \{x\leq t\}, \; t \in \RR\}
+       \end{aligned} \; \right\}
+ \quad \text{$\pi$-system generating } \sigma(x)\]
+because 
+\[\{x<t\}\cap \{x<s\} = \{x<\min(t,s)\} \; etc\]
+\end{example}
+\begin{example}
+If $X,\; \underbrace{\text{takes finitely or countably many values}}_{discrete} \; a_1, a_2 , \dots$
+\[\{\{x=a_1\}, \{x=a_2\}, \dots \ \phi \} - \text{$\pi$-system generating } \sigma(x)\]
+\end{example}
+
+\begin{theorem}\label{ind1}
+Let $(\Omega, \Sigma)$ be a set with $\sigma$-algebra and $mathcal{I}$ be a $\pi$-system generating $\Sigma$. Let $\mu_1 , \mu_2$ be measures such that \begin{enumerate}
+\item $\mu_1(\Omega) = \mu_2(\Omega) < \infty$
+\item $\mu_1(I) = \mu_2(I)$ for any $I \in \mathcal{I}$ \end{enumerate}
+then \[\mu_1(A) = \mu_2(A)\quad \forall A \in \Sigma\]
+\begin{proof} Stated without proof \end{proof}
+\end{theorem}
+
+\begin{theorem}
+Let $X,Y$ be rv's and $\mathcal{I}, \mathcal{J}$ be $\pi$-systems generating $\sigma(x)$ and $\sigma(y)$.
+\[ \mathcal{I}\; and  \mathcal{J} \text{ are independent} \Rightarrow X \;and\; Y \text{ are independent}\]
+ \begin{proof} Stated without proof \end{proof}
+\end{theorem}
+
+\begin{corollary}\quad \\
+\begin{enumerate}[(a)]
+\item To check the independence of $X$ and $Y$ it suffices to check \[P(X<t, Y<s) = P(X<t)P(Y<s)\]
+\item if $X$ and $Y$ are discrete, taking values $a_1, a_2, \dots$ and $b_1,b_2,\dots$ then
+\[P(X=a_i,Y=b_i)=P(X=a_i)P(Y=b_i) \quad\forall i,j\]
+\end{enumerate}
+
+\begin{proof}[Proof of (a)] fix $I \in \mathcal{I}$
+\begin{align*} \mu_1(B) &= P(I\cap B) \quad on\; \sigma(Y)\\
+\mu_2(B) &= P(I)P(B) \end{align*}
+ $\mu_1 , \mu_2$ are measures  such that  $\mu_1(\Omega) = \mu_2(\Omega) = P(I) < \infty$ and they agree on $\mathcal{J}$
+\begin{align*}
+&\overset{Thm}{\underset{\ref{ind1}}{\Rightarrow}} \mu_1(B) = \mu_2(B) \quad \forall B \in \sigma(Y)\\
+&\;\Rightarrow P(X=a_i,Y=b_i)=P(X=a_i)P(Y=b_i) \quad\forall I \in \mathcal{I}, \; B \in \sigma(Y) \end{align*}
+\end{proof}
+\begin{proof}[Proof of (b)] fix $B \in \sigma(Y)$. Define \begin{align*}
+v_1(A) &= P(A \cap B) \quad on\;\sigma(X)\\
+v_2(A) &=P(A)P(B) \end{align*}
+$v_1, v_2$ are measures such that $v_1(\Omega)=v_2(\omega)= P(B)<\infty$ and they agree on $\mathcal{I}$
+\begin{align*}
+&\overset{Thm}{\underset{\ref{ind1}}{\Rightarrow}} \text{they agree on }\sigma(X)\\
+&\Rightarrow P(A\cap B) = P(A)P(B) \quad \text{whenever }A\in \sigma(X), \; B \in \sigma(Y) \end{align*}
+\end{proof}
+\end{corollary} 
+
+\begin{example}
+$X_1, X_2,\dots$ \begin{itemize}
+\item independent
+\item each $X_i$ has a prescribed distribution function $F_i$
+\end{itemize}
+do they always exist?\\\quad\\
+\textbf{Trick Model}:\\
+It suffices to construct $U_1, U_2, \dots$, which are independent and have uniform distribution, because $X_1 = G_1(U_1), X_2=G_2(U_2), \dots $ generalised as in the Skorokhod representation, \ref{sko}.
+\[G=F^{-1} \qquad G(\omega) = \inf\{t:F(t)>\omega\} \]
+\begin{itemize}
+\item $X_i$ has distribution $F_i$
+\item they are independent since $U_1, U_2, \dots$ are independent \end{itemize}
+How do we construct $U_1, U_2, \dots$
+\[([0,1] , \mathcal{B}, leb) \quad U(\omega)=\omega \; (Uniform!) = .\omega_1\omega_2\dots\]
+$\omega_1,\omega_2,\dots$ are \begin{enumerate}[(a)]
+\item bernulli
+\item independent
+\end{enumerate}
+\[P(\omega_2 = 1) = \frac{1}{2}\quad \underset{\frac{1}{4}}{P(\omega_1 = 0, \omega_2= 1)} = \underset{\frac{1}{2}}{P(\omega_1 = 0)}\underset{\frac{1}{2}}{P( \omega_2= 1)}\]
+$\omega= .\omega_1\omega_2\dots$
+\begin{align*}
+U_1(\omega) &= .\omega_1\omega_2\omega_{25}\omega_{100}\\
+U_2(\omega) &= .\omega_2\omega_3\omega_{200}\\
+U_3(\omega) &= .\omega_4\omega_{500}\omega_{1000}
+\end{align*}
+Uniform + Independent
+\end{example}
+
+\subsection{Finite and infinite occurance of Events}
+\begin{example}
+\[\begin{array}{cccccc}
+X_1, &X_2 &X_3 &X_4 &\dots &Bernulli\\
+1, &0, &1, &1, &\dots & \end{array}\]
+"there will be infinitely many $1$'s in the sequence with probability $1$." \[E_n= \{X_n = 1\}\]
+\[ E = \{\text{ infinitely many $1$'s in the sequence}\} = \{\forall N \in \NN \exists n \geq N \;X_n=1\}\]
+\[ = \bigcap_{N=1}^{\infty}\bigcup_{n \geq N}\{X_n = 1\}\] \end{example}
+
+\begin{notation}Let $(E_n)$ be a sequence of events
+\begin{align*}
+\{E_n \; i.o.\} &=\bigcap_{N=1}^{\infty}\bigcup_{n \geq N}E_n \quad \text{infinitely many of $E_n$ occur} \\
+\{E_n\; i.o.\}^{c} &= \bigcup_{N=1}^{\infty}\bigcap_{n \geq N}E_n^c \quad \text{finitely many events occur}\end{align*}
+\end{notation}
+\begin{note} i.o. - infinitely often \end{note}
+
+\subsection{The Borel-Cantelli Lemmas}
+\begin{lemma}[Borel-Cantelli Lemma 1 - BC1]\label{bc1}
+Let $(E_n)$ be events such that $\sum\limits_{i=1}^{\infty}P(E_n) < \infty$, then 
+\[P(E_n \; i.o.) = 0\]
+\begin{proof}
+\[P(\bigcup_{n \geq N}E_n) \leq \sum_{n \geq N}P(E_n) \quad \forall n \in \NN\]
+\[P(E_n \; i.o) =P(\bigcap_{N=1}^{\infty}\bigcup_{n \geq N}E_n) = \lim_{n\rightarrow \infty}P(\bigcup_{n \geq N}E_n) \leq \lim_{n\rightarrow \infty} \sum_{n \geq N}P(E_n) = 0\]
+since $\sum\limits_{i=1}^{\infty}P(E_n) < \infty$.
+\end{proof}
+\end{lemma}
+
+\begin{lemma}[Borel-Cantelli Lemma 2 - BC2]\label{bc2}
+Let $(E_n)$ be events independent events such that $\sum\limits_{i=1}^{\infty}P(E_n) =\infty$, then 
+\[P(E_n \; i.o.) = 1\]
+\begin{proof}
+\[P(E_n \; i.o.) = 1 \Rightarrow P(\{E_n \; i.o.\}^c) = P( \bigcup_{N=1}^{\infty}\bigcap_{n \geq N}E_n^c)=0\]
+i.e\[P(\bigcap_{n \geq N}E_n^c) =0 \quad \forall n \in \NN\]
+\begin{align*}
+P(\bigcap_{n \geq N}E_n^c) &= \lim_{k\rightarrow \infty}P(\bigcap\limits_{n =N}^{k}E_n^c) = \lim_{k\rightarrow \infty}\prod_{n =N}^{k}\underbrace{P(E_n^c)}_{1-P(E_n)}\\
+&\leq  \lim_{k\rightarrow \infty}\prod_{n =N}^{k}e^{-P(E_n)}= \lim_{k\rightarrow \infty}e^{-\sum_{n=N}^{k}P(E_n)} =0 \; \forall N \end{align*}
+\end{proof}
+\end{lemma}
+
+\begin{remark}
+$E_n = E$ with some $E$ such that $0<P(E)<1, \; \{E_n \;i.o.\} = E$ so $P(E_n \l i.o.) = p$ not $0,1$. BC2, \ref{bc2}, doesn't hold for dependent events. \end{remark}
+
+To summarize if $(E_n)$ are independent then
+\[P(E_n \; i.o.) = \begin{cases} 1 &if \;  \sum\limits_{i=1}^{\infty}P(E_n) =\infty\\
+0 & if \; \sum\limits_{i=1}^{\infty}P(E_n) < \infty \end{cases} \]
+\begin{ap}
+$X_n$ iid assume all $X_n$ have exponential distribution. we wish to show:
+\[\lim_{n \rightarrow \infty}\frac{X_n}{log(n)} = 1\]
+$\lim\sup a_n =a$ means $a$ is the largest value such that there is a subsequence $a_{n_k}$ converging to $a$
+\begin{example}\quad\\
+\begin{enumerate}
+\item $1,\;-1,\;1,\;-1,\dots$
+\[\lim\sup = 1\]
+\item $1,\;0,\;3,\;0, \; 5, \dots$
+\[\lim\sup = \infty\]
+\end{enumerate}
+
+\end{example}
+
+So if I want to prove $\lim\sup a_n=a$:
+\begin{enumerate}
+\item $\forall b>a,\quad a_n>b$ occurs for finitely many $n$
+\item $\forall b<a,\quad a_n>b$ occurs for infinitely many $n$
+\end{enumerate}
+So for 
+\[\lim_{n \rightarrow \infty}\frac{X_n}{log(n)} = 1\]
+\begin{enumerate}
+\item $b>1$
+\[P\{\frac{X_n}{log(n)} >b \;\;i.o\} =0\]
+\[\sum_{i=1}^{\infty}P(\frac{X_n}{log(n)}>b) = \sum_{i=1}^{\infty}P(X_n>b\,log(n))= \sum_{i=1}^{\infty}e^{-b\,log(n)} = \sum_{i=1}^{\infty}\frac{1}{n^b}<\infty\]
+\item $b<1$
+\[P\{\frac{X_n}{log(n)} <b \; \;i.o\} =1\]
+\[\sum_{i=1}^{\infty}P(\frac{X_n}{log(n)}<b)= \sum_{i=1}^{\infty}\frac{1}{n^b}=\infty\]
+\end{enumerate}
+\end{ap}
 
 
 
