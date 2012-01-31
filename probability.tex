@@ -10,7 +10,7 @@
 \usepackage{pb-diagram}
 \usepackage{hyperref}
 \usepackage{cancel}
-
+\usepackage{bbold}
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
@@ -335,7 +335,7 @@ Normal:
 
 \begin{remark}[Reminder from measure theory]\quad \\
 \begin{enumerate}  
-\item \begin{align*} f &= \sum_{n}^{i=1}a_i{\mathbf 1}_{B_i} \quad \text{(simple functions)}\\
+\item \begin{align*} f &= \sum_{n}^{i=1}a_i{\mathbb 1}_{B_i} \quad \text{(simple functions)}\\
 \int f dP &= \sum_{n}^{i=1}a_iP(B_i) \end{align*}
 \item $f \geq 0 $, take simple functions $f_n$ where $f_n \nearrow f$. Define
 \[\int f dP = \lim_{n \rightarrow \infty}\int f_n dP \quad \in [0,1]\]
@@ -388,10 +388,10 @@ Define \[y(\omega) = \begin{cases} c & if \; \omega \;  is \; st \;X(\omega)>c\\
 \]
 \begin{proof}\quad \\
 \begin{enumerate}
-\item $h = {\mathbf 1}_B, \; b \in \mathcal{B}$
-\[Eh(x) = E{\mathbf 1}_B(x) = 1\cdot P(X \in B)\]
-\[\int h(x)d\mu_X(x) = \int {\mathbf 1}_B(x)d\mu_X(x) = 1 \cdot \mu_X(B) = P(X \in B)\]
-\item $h = \sum_{i=1}^{m}a_i{\mathbf 1}_{B_i}$\\
+\item $h = {\mathbb 1}_B, \; b \in \mathcal{B}$
+\[Eh(x) = E{\mathbb 1}_B(x) = 1\cdot P(X \in B)\]
+\[\int h(x)d\mu_X(x) = \int {\mathbb 1}_B(x)d\mu_X(x) = 1 \cdot \mu_X(B) = P(X \in B)\]
+\item $h = \sum_{i=1}^{m}a_i{\mathbb 1}_{B_i}$\\
 \[\text{The formula holds by linearity of the integral}\]
 \item $h\geq 0$.
 \[\underset{positive)}{\underset{(simple,}{h_n}} \nearrow h \overset{MCT}{\Rightarrow} \int h_nd\mu_x \rightarrow \int hd\mu_x\]
@@ -598,6 +598,26 @@ X_1, &X_2 &X_3 &X_4 &\dots &Bernulli\\
 \end{notation}
 \begin{note} i.o. - infinitely often \end{note}
 
+\begin{theorem}[Strong Law of Large Numbers]
+Let $(X_n)$ be independent identically distributed random variables such that $E|X_1|<\infty$, then
+\[\frac{X_1 +\dots + X_n}{n} \rightarrow \underset{a.s.}{EX_1} = EX_n \quad \forall n \]
+Outline of proof:\\
+$S_n = X_1 + \dots + X_n$ denote $\mu = EX_1$ we need to prove:
+\[P\left(\omega \in \Omega: \frac{S_n}{n} \rightarrow \mu\right) = 1\]
+\begin{align*}
+P\left(\omega \in \Omega: \frac{S_n}{n} \rightarrow \mu\right) &= P\left( \forall k>0 \; \; \exists N \in \NN \; \; \forall n>N \; \; \left| \frac{S_n}{n} - \mu \right|<\frac{1}{k}\right) \\ 
+&= P\left(\bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n \geq N}\left\{ \left|\frac{S_n}{n} - \mu \right|<\frac{1}{k} \right\} \right)\end{align*}
+We need to show $\forall k \in \NN$
+\[P\left(\bigcup_{N=1}^{\infty}\bigcap_{n \geq N}\left\{ \left|\frac{S_n}{n} - \mu \right|<\frac{1}{k} \right\} \right) = 1\]
+that is equivalent to 
+\[P\left(\bigcup_{N=1}^{\infty}\bigcap_{n \geq N}\left\{ \left|\frac{S_n}{n} - \mu \right|\geq \frac{1}{k} \right\}^c \right) = 1\]
+ie
+\begin{align*}
+&P\left(\left\{ \left|\frac{S_n}{n} - \mu \right|\geq \frac{1}{k}\; \; i.o. \right\}^c \;\right) = 1\\
+&P\left(\left\{ \left|\frac{S_n}{n} - \mu \right| \geq \frac{1}{k} \; \; i.o. \right\} \right) = 0
+\end{align*}
+Proven later. \end{theorem}
+
 \subsection{The Borel-Cantelli Lemmas}
 \begin{lemma}[Borel-Cantelli Lemma 1 - BC1]\label{bc1}
 Let $(E_n)$ be events such that $\sum\limits_{i=1}^{\infty}P(E_n) < \infty$, then 
@@ -622,7 +642,7 @@ P(\bigcap_{n \geq N}E_n^c) &= \lim_{k\rightarrow \infty}P(\bigcap\limits_{n =N}^
 \end{lemma}
 
 \begin{remark}
-$E_n = E$ with some $E$ such that $0<P(E)<1, \; \{E_n \;i.o.\} = E$ so $P(E_n \l i.o.) = p$ not $0,1$. BC2, \ref{bc2}, doesn't hold for dependent events. \end{remark}
+$E_n = E$ with some $E$ such that $0<P(E)<1, \; \{E_n \;i.o.\} = E$ so $P(E_n \; i.o.) = p$ not $0,1$. BC2, \ref{bc2}, doesn't hold for dependent events. \end{remark}
 
 To summarize if $(E_n)$ are independent then
 \[P(E_n \; i.o.) = \begin{cases} 1 &if \;  \sum\limits_{i=1}^{\infty}P(E_n) =\infty\\
@@ -658,6 +678,92 @@ So for
 \end{enumerate}
 \end{ap}
 
+\begin{example}
+For the following two iid sequences $(X_n)$:\\
+If $(X_n)$ is Exponentially distributed such that $F(x) = 1 - e^{-x}, \; x>0$
+\[\lim_{n\rightarrow \infty}\sup \frac{X_n}{log(n)} =1\]
+If $(X_n)$ is normally distributed $N(0,1)$
+\[\lim_{n\rightarrow \infty}\sup \frac{X_n}{\sqrt{2log(n)}} =1\]
+(this is an exersize in homework.)\\
+Are the any distributions such that $(X_n)$ grows along a straight line?
+\[\lim_{n\rightarrow \infty}\sup\frac{|X_n|}{n} = \alpha ?\]
+answer
+\[\lim_{n\rightarrow \infty}\sup\frac{|X_n|}{n} = \begin{cases} o & if \; E|X_1| < \infty \text{ $\leftarrow$ follows from SLLN}\\
+\infty & if \; E|X_1|=\infty \end{cases}\]
+\begin{proof}
+\[\frac{X_n}{n} = \underset{EX_1 \quad}{\underset{\quad \downarrow \; \text{\tiny SLLN}}{\frac{X_1 + \dots +X_n}{n}}} - \underset{EX_1 \quad}{\underset{\quad \downarrow \;  \text{\tiny SLLN}}{\frac{X_1 + \dots +X_{n-1}}{n-1}}}\underset{1}{\underset{ \downarrow }{\cdot\frac{n-1}{n}}} \rightarrow 0 \]
+We want to show the if $E|X_1|= \infty$
+\[P\left(\lim_{n\rightarrow \infty}\sup\frac{|X_n|}{n} = \infty \right)=1\]
+i.e.
+\[P\left( \forall m \; \frac{X_n}{n} >m  \; i.o.\right) = P\left( \bigcap_{n \i \NN}\frac{X_n}{n} >m  \; i.o.\right) =1\]
+i.e 
+\[P\left(\frac{X_n}{n} >m  \; i.o.\right) =1 \quad \forall m\]
+Use BC2, \ref{bc2}
+\[\sum\limits_{n=1}^{\infty}P\left (\frac{|X_1|}{n} > m \right) =  \sum\limits_{n=1}^{\infty}P\left(\frac{|X_1|}{n} > m \right) = \sum\limits_{n=1}^{\infty}E{\mathbb 1}_{\{\frac{|X_1|}{n} > m\}}\]
+Idea $m =1 $ 
+\[P(|X_1|>1)\]\[P(|X_1|>2)\]\[\vdots \; \; \vdots\]
+\[\sum\limits_{n=1}^{\infty}E{\mathbb 1}_{\{\frac{|X_1|}{n} > m\}} \overset{MCT}{=} E\sum\limits_{n=1}^{\infty}{\mathbb 1}_{\{ n <\frac{|X_1|}{m} \}} \geq E\left(\frac{|X_1|}{m} - 1\right)= \infty\]
+\end{proof}
+\end{example}
+
+\begin{theorem}[Expectation and Variance for independent variables]
+Let $X$ and $Y$ be independent random variables
+\begin{enumerate}[(a)]
+\item if $E|X| < \infty, E|Y| < \infty$ then $E|XY| < \infty$
+\[E(XY)=E(X)\cdot E(Y)\]
+\item if $E(X^2), E(Y^2) < \infty$ then 
+\[Var(X+Y)= Var(X) + Var(Y) \]
+\end{enumerate}
+\begin{proof}[Proof of (a)]\quad \\
+(i) Lets check this for simple r.v's 
+\[X= \sum\limits_{i=1}^{n}a_i{\mathbb 1}_{A_i}, \quad Y= \sum\limits_{j=1}^{m}b_j{\mathbb 1}_{B_j}\quad \text{mutually different}\]
+\begin{align*}
+E(XY) &= E((\sum\limits_{i=1}^{n}a_i{\mathbb 1}_{A_i})(\sum\limits_{j=1}^{m}b_j{\mathbb 1}_{B_j})) = E(\sum\limits_{j=1}^{n}\sum\limits_{j=1}^{m}a_ib_j{\mathbb 1}_{A_i\cap B_j})\\  &= \sum\limits_{j=1}^{n}\sum\limits_{j=1}^{m}a_ib_j\underbrace{P(A_i\cap B_j)}_{= P(A_i)P(B_j)} = (\sum\limits_{i=1}^{n}a_iP(A_i))(\sum\limits_{i=1}^{m}b_jP(B_j)) \\ &= E(X)E(Y)\end{align*}
+(ii) $X\geq 0, \; Y \geq 0 \; \leftarrow$ by approximation $X, \; Y$ by simple r.v's and using MCT.\\
+(iii) $X, Y$ arbitrary, take
+\[X= X^+ - X^- \quad Y=Y^+ - Y^- \]
+and use linearity.
+\end{proof}
+\begin{proof}[Proof of (b)]
+\begin{align*}
+Var(X+Y) &= E(X+Y)^2 - (E(X+Y)^2  \\ &= E(X^2 +2XY +Y^2) - ((EX)^2 +2EXEY + (EY)^2) \\ &= EX^2 -(EX)^2 + EY^2 - (EY)^2 \\ &= VarX + VarY\end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{example}
+$n \in \NN, \; X_1 , \dots , X_n \; - $ independent. 
+\[P(X_i= 1) = p \quad P(X_i=0)= 1-p\]
+\[Y=X_1 + \dots + X_n \quad \text{number of heads over $n$-tosses}\]
+$Y$ has Binomial distribution
+\[P(Y=k) = {n \choose k}p^k(1-p)^{n-k}\]
+\[EY= \sum\limits_{k=1}^{n}kP(Y=k) \quad VarY=\sum\limits_{k=1}^{n}k^2P(Y=k) \]
+\[\vdots \qquad \vdots\]
+\[EY= E(X_1 + \dots + X_n) = EX_1 + \dots + EX_n = np\]
+\[VarY = Var(X_1 + \dots + X_n) = VarX_1 + \dots + VarX_n = np(1-p)\]
+\end{example}
+
+\subsection{Bernstein’s inequality}
+\begin{theorem}[Bernstein’s inequality]\label{bern}
+Let $X_1 , \dots , X_n$ be independent and such that 
+\[P(X_i=1)=\frac{1}{2}, \quad P(X_i=-1)=\frac{1}{2} \quad \forall 1\leq i \leq n \]
+and $a_1, \dots , a_n \; \in \RR$ then
+\[P\left(\left|\sum\limits_{i=1}^{n}a_iX_i\right|\right) \leq 2\exp\left(\frac{-t^2}{\sum\limits_{i=1}^{n}a_i^2}\right) \quad \forall t>0\]
+\begin{proof}
+Denote $c= \sum\limits_{i=1}^{n}a_i^2$ and let $\lambda >0$
+\begin{align*} 
+E\left(\exp{\left(\lambda\sum\limits_{i=1}^{n}a_iX_i\right)}\right)  &= E\left(\prod\limits_{i=1}^{n}e^{\lambda a_iX_i}\right) = \prod\limits_{i=1}^{n}E\left(e^{\lambda a_iX_i}\right) = \prod\limits_{i=1}^{n}\frac{e^{\lambda a_i} +e^{-\lambda a_i}}{2}\\  &=  \prod\limits_{i=1}^{n}\cosh{\lambda a_i} \leq \prod\limits_{i=1}^{n}\exp{\left(\frac{\lambda^2 a_i^2}{2}\right)} = \exp{\left(\frac{\lambda^2 c}{2}\right)}
+\end{align*}
+now
+\begin{align*}
+P\left(\lambda\sum\limits_{i=1}^{n}a_iX_i > \lambda t\right) &= P\left(\exp\left(\lambda\sum\limits_{i=1}^{n}a_iX_i\right) > \exp(\lambda t)\right) \\ &\overset{\mathclap{Chebyshev}}{\leq} E\left(\exp\left(\lambda\sum\limits_{i=1}^{n}a_iX_i\right)\cdot\exp(- \lambda t)\right) \\ &\leq \exp{\left(\frac{\lambda^2 c}{2} - \lambda t\right)}\end{align*}
+Take $\lambda$ in such a way that it minimises $\frac{\lambda^2 c}{2} - \lambda t$
+\begin{align*}
+P\left(\sum\limits_{i=1}^{n}a_iX_i >  t\right) &\leq \exp{\left(\frac{t^2}{c^2}c\frac{1}{2} -\frac{t^2}{c}\right)} = \exp{\frac{-t^2}{2c}}\\
+P\left(\sum\limits_{i=1}^{n}\underbrace{a_i}_{\mathclap{b_i = -a_i}}X_i < - t\right) &= P\left(\sum\limits_{i=1}^{n}b_iX_i >  t\right) \leq \exp{\frac{-t^2}{2c}}\\
+P\left(\left|\sum\limits_{i=1}^{n}a_iX_i \right| >  t\right) &= P \left(\sum\limits_{i=1}^{n}a_iX_i >  t \cup \sum\limits_{i=1}^{n}a_iX_i <  -t\right) \\ &\leq P \left(\sum\limits_{i=1}^{n}a_iX_i >  t \right) + P\left( \sum\limits_{i=1}^{n}a_iX_i <  -t\right)\\ &\leq 2\exp{\frac{-t^2}{2c}}
+\end{align*}
 
 
+\end{proof}
+\end{theorem}
 \end{document}
