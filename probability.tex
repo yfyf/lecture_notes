@@ -54,6 +54,7 @@
 \newtheorem*{note}{Note}
 \newtheorem*{remark}{Remark}
 \newtheorem*{claim}{Claim}
+\newtheorem*{recall}{Recall}
 \newtheorem*{idea}{Idea}
 \newtheorem*{notation}{Notation}
 \newtheorem*{ap}{Applications}
@@ -762,8 +763,108 @@ P\left(\sum\limits_{i=1}^{n}a_iX_i >  t\right) &\leq \exp{\left(\frac{t^2}{c^2}c
 P\left(\sum\limits_{i=1}^{n}\underbrace{a_i}_{\mathclap{b_i = -a_i}}X_i < - t\right) &= P\left(\sum\limits_{i=1}^{n}b_iX_i >  t\right) \leq \exp{\frac{-t^2}{2c}}\\
 P\left(\left|\sum\limits_{i=1}^{n}a_iX_i \right| >  t\right) &= P \left(\sum\limits_{i=1}^{n}a_iX_i >  t \cup \sum\limits_{i=1}^{n}a_iX_i <  -t\right) \\ &\leq P \left(\sum\limits_{i=1}^{n}a_iX_i >  t \right) + P\left( \sum\limits_{i=1}^{n}a_iX_i <  -t\right)\\ &\leq 2\exp{\frac{-t^2}{2c}}
 \end{align*}
-
-
 \end{proof}
 \end{theorem}
+
+\begin{theorem}[SLLN for r.v's taking values $\pm 1$]
+Let $X_1 , \dots , X_n$ be a sequence of iid random variables such that 
+\[P(X_i=1)=\frac{1}{2}, \quad P(X_i=-1)=\frac{1}{2} \quad \forall  i  \]
+then
+\[\frac{X_1 + \cdots + X_n}{n}\rightarrow 0 \;(=EX_1) \; a.s\]
+\begin{proof}
+we want to prove 
+\[P\left(\forall k \; \exists N \; \forall n \geq N \; \left|\frac{X_1 + \cdots + X_n}{n}\right|<\frac{1}{k} \right) =1\]
+i.e
+\[P\left(\bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n \geq N} \left\{ \left|\frac{X_1 + \cdots + X_n}{n}\right|<\frac{1}{k}  \right\} \right) =1\]
+i.e 
+\[P\left(\bigcup_{N=1}^{\infty}\bigcap_{n \geq N} \left\{ \left|\frac{X_1 + \cdots + X_n}{n}\right|<\frac{1}{k}  \right\} \right) =1 \quad \forall k\]
+\[P\left(\bigcap_{N=1}^{\infty}\bigcup_{n \geq N} \left\{ \left|\frac{X_1 + \cdots + X_n}{n}\right| \geq \frac{1}{k}  \right\} \right) =0 \]
+this means 
+\[P\left( \left|\frac{X_1 + \cdots + X_n}{n}\right| \geq \frac{1}{k} \; i.o.  \right) =0 \quad \forall k\]
+Use BC1:
+\[\sum\limits_{n=1}^{\infty}\left( \left|\frac{X_1 + \cdots + X_n}{n}\right| \geq \frac{1}{k}  \right) \overset{(*)}{\geq} \sum\limits_{n=1}^{\infty}2\exp{\frac{-n}{2k^2}} < \infty\]
+\begin{note}[*] this is an application of bernsteins inequality with $a_1= \cdots= \_n = 1$ and $t=\frac{n}{k}$ since
+\[\sum\limits_{n=1}^{\infty}e^{-n} = \sum\limits_{n=1}^{\infty}(\underset{<1}{e^{-1}})^{n} \]
+\end{note}
+\end{proof}
+\end{theorem}
+
+\subsection{Joint Laws}
+\begin{recall}\[X \leadsto \mu_X \quad on \; (\RR, \mathcal{B}) \] \end{recall}
+Let $X, \; Y$ be two r.v's
+\begin{definition}[Joint Law]
+The Joint Law of $X$ and $Y$ is a probability measure
+\[\mu_{X,Y} \quad on \; (\RR^2, \mathcal{B}(\RR^2)) \]
+Defined by 
+\[\mu_{X,Y} = P((x,y) \in \mathcal{B})\]
+\end{definition}
+\begin{definition}[The Joint distribution function]
+\[F_{X,Y}(x,y)=P(X\leq x , \; Y \leq y) = \mu_{X,Y}((-\infty,x]\times (- \infty, y])\]
+\end{definition}
+
+\begin{theorem}
+Let $X$ and $Y$ be independent
+\begin{enumerate}[(a)]
+\item \[F_{X,Y}(x,y) = F_X(x)F_Y(y)\]
+\item if $X$ and $Y$ have densities $f$ and $g$ then $\mu_{X,Y}(x,y)$ has density 
+\[f(x)g(y)\]
+with respect to lebesgue measure on $\RR^2$
+\item  if $X$ and $Y$ have densities $f$ and $g$, then $X +Y$ has density $(f*g)(t)$ where
+\[(f*g)(t)=\int_{-\infty}^{\infty}f(x)g(t-x)dx \]
+which is called the convolution of $f$ and $g$.
+\end{enumerate}
+\begin{proof}[Proof of (a)]
+\[F_{X,Y}(x,y) = P(X\leq x , \; Y \leq y) = P(X\leq x)P(Y \leq y) = F_X(x)F_Y(y)\]
+\end{proof}
+\begin{proof}[Proof of (b)]
+we want to show 
+\[\mu_{X, Y}(B) = f(x)g(y)dxdy \quad \forall B \subset \mathcal{B}(\RR^2)\]
+it suffices to look at $B= (-\infty,x]\times (- \infty, y], \; \forall x,y$ since they form a $\pi$-system generating $\mathcal{B}(\RR^2)$.
+\begin{align*} \mu_{X,Y}((-\infty,x]\times (- \infty, y]) &= F_{X,Y}(x,y) = F_X(x)F_Y(y) = \int\limits_{-\infty}^{x}f(u)du\int\limits_{-\infty}^{y}g(v)dv \\ &= \int\limits_{-\infty}^{x}\int\limits_{-\infty}^{y}f(u)g(v)dudv\end{align*}
+\end{proof}
+\begin{proof}[Proof of (c)]
+\begin{align*} F_{X+Y}(t) &= P(X+Y \leq t) \overset{(b)}{=}\iint\limits_{U+V \leq t}f(u)g(v)dudv = \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{t-x}f(u)g(v)dudv \\ &= \int\limits_{-\infty}^{\infty}f(u)\underbracket[0.5pt][7pt]{\left(\int\limits_{-\infty}^{t-x}g(v)dv\right)}_{v=z-u}du =  \int\limits_{-\infty}^{\infty}f(u)\int\limits_{-\infty}^{t}g(z-u)dzdu \\ &=\int\limits_{-\infty}^{t}\left(\int\limits_{-\infty}^{\infty}f(u)g(z-u)du\right)dz \end{align*}
+\[ F_{X+Y}(t) = \int\limits_{-\infty}^{\infty}f(u)g(t-u)du\]
+\end{proof}
+\end{theorem}
+
+\begin{example}
+Density of $X\cdot Y$?
+\[ F_{X\cdot Y}(t) = \int\limits_{uv\leq t}f(u)g(v)dudv\]
+\end{example}
+
+\subsection{Tail events and Kolmogorov $0-1$ law}
+$(X_n)$ - r.v's
+\begin{alignat*}{2}
+&\{\lim X_n >0\} &\quad &\leftarrow \; \overset{\text{\small tail events}}{\boxed{\text{doesn't depend on any finite no. r.v's}}}\\
+&\{\sup X_n >0\} &\quad &\leftarrow \; \text{is not like that}
+\end{alignat*}
+
+\begin{definition}Let $X_n$ be a sequence of r.v.'s 
+\[\mathcal{T}_n =\sigma(X_{n+1}>X_{n+2}> \cdots ) \quad \text{$n^{th}$ tail $\sigma$-algebra} \]
+this is the information contained in $X_{n+1}, X_{n+2}, \dots$ 
+\[\mathcal{T} = \bigcap_{n=1}^{\infty}\mathcal{T}_n  \quad \text{the tail $\sigma$-algebra} \]
+each $A_i \in \mathcal{T}$ is called a Tail event.
+\end{definition}
+
+\begin{example}\quad \\
+\begin{enumerate}
+\item \[\{X_n \rightarrow a\} \; - \; \text{tail event}\]
+since
+\[\{X_n \rightarrow a\} = \{X_1, X_2, X_3,\dots \rightarrow a\} = \{X_{m+1}, X_{m+2}, \dots \rightarrow a\} \in \mathcal{T}_m\]
+\[\Rightarrow \{X_n \rightarrow a\} \in \cap \mathcal{T}_m = \mathcal{T}\]
+\item
+\begin{alignat*}{2}
+&\{\lim_{n\rightarrow \infty}X_n \; exists\} &\; &- \; \text{tail event}\\
+&\left\{\sum\limits_{n=1}^{\infty}X_n < \infty\right\} &\; &-  \; \text{tail event}
+\end{alignat*}
+\item \[\{\sum\limits_{n=1}^{\infty}X_n < 10\} \; -  \; \text{not a tail event} \]
+\item \[\left\{\frac{X_1 + \cdots +X_n }{n} \; converges\right\} \; -  \; \text{tail event}\]
+since
+\[\left\{\frac{X_1 + \cdots +X_n }{n} \; converges\right\} = \left\{\frac{X_1 }{1}, \; \frac{X_1 + X_2 }{2}, \;\frac{X_1+ X_2 +X_3 }{3}, \dots \; converges\right\}\]
+\[\frac{X_1 + \cdots +X_n }{n} = \underbracket{\frac{X_1 + \cdots +X_m }{n}}_{\rightarrow \; 0} + \frac{X_{m+1} + \cdots +X_n }{n}\]
+\[ \forall m \; \left\{\frac{X_{m+1} + \cdots +X_n }{n} \; converges\right\} \in \mathcal{T}_n \Rightarrow \text{Tail event}\]
+\end{enumerate}
+\end{example}
+
 \end{document}
