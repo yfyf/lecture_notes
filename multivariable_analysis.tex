@@ -13,7 +13,7 @@
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
-\setlength{\textheight}{9.5in}
+\setlength{\textheight}{9in}
 \setlength{\topmargin}{0in}
 \setlength{\headheight}{0in}
 \setlength{\headsep}{0in}
@@ -21,7 +21,10 @@
 \setlength{\parindent}{0pt}
 
 
-
+\def\maj{\mathcal{J}}
+\def\maw{\mathcal{W}}
+\def\mat{\mathcal{T}}
+\def\mas{\mathcal{S}}
 \def\CC{\mathbb{C}}
 \def\MM{\mathbb{M}}
 \def\FF{\mathbb{F}}
@@ -29,20 +32,10 @@
 \def\QQ{\mathbb{Q}}
 \def\RR{\mathbb{R}}
 \def\ZZ{\mathbb{Z}}
-\def\gotha{\mathfrak{a}}
-\def\gothb{\mathfrak{b}}
-\def\gothm{\mathfrak{m}}
-\def\gotho{\mathfrak{o}}
-\def\gothp{\mathfrak{p}}
-\def\gothq{\mathfrak{q}}
-\DeclareMathOperator{\disc}{Disc}
-\DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Norm}{Norm}
-\DeclareMathOperator{\Trace}{Trace}
-\DeclareMathOperator{\Cl}{Cl}
-
+\def\NN{\mathbb{N}}
+\DeclareMathOperator{\alt}{Alt}
+\DeclareMathOperator{\dive}{div}
+\DeclareMathOperator{\curl}{curl}
 \def\head#1{\medskip \noindent \textbf{#1}.}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -54,12 +47,18 @@
 \newtheorem*{note}{Note}
 \newtheorem*{remark}{Remark}
 \newtheorem*{claim}{Claim}
+\newtheorem*{properties}{Properties}
+\newtheorem*{notation}{Notation}
+
+
+
+
 
 
 
 \begin{document}
-\title{Multivariate Analysis}
-\author{Iannis Petridis}
+\title{Multivariate Analysis\\ 3109}
+\author{Dr. Iannis Petridis}
 \date{Autum 2011}
 \maketitle
 
@@ -866,7 +865,7 @@ valid for $\frac{dF}{dz} \neq 0$
 \begin{alignat*}{2}
 f^1 &(x^1 , \dots , x^n , y^1 , \dots , y^m) = 0 &\qquad & \text{depends on n parameters:}\; x^1 , \dots , x^n\\
 f^2 &(x^1 , \dots , x^n , y^1 , \dots , y^m)= 0 &\qquad & \text{Try to solve for:} \;  y^1 , \dots , y^m\\
-&\vdots \qquad \qquad \vdots \qquad \qquad \vdots   		&\quad & \\
+&\vdots \qquad \qquad \vdots \qquad \qquad \vdots 			&\quad & \\
 f^m &(x^1 , \dots , x^n , y^1 , \dots , y^m)= 0 &\quad &\\
 \end{alignat*}
 \[ x=(x^1 , \dots , x^n) , \qquad y=(y^1 , \dots , y^m)\]
@@ -1176,7 +1175,67 @@ Let $A \in \RR^n$ be open, $g:A \rightarrow \RR^n$ be injective and continuously
 \[\int\limits_{g(A)}\!f=\int\limits_{A}(f \circ g)\cdot |det \:g'(x)|dx\]
 \end{theorem}
 
-\section{Differential Forms}
+\section{Calculus on Manifolds}
+
+
+
+
+
+
+\subsection{not sure where this is from}
+
+\begin{definition}
+Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear functional. The set of all linear functionals from $\RR^n \rightarrow \RR$ is called the dual space of $\RR^{n}$, denoted $(\RR^n)*$\\
+let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
+$g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
+\begin{align*}
+g(\lambda x +y) &= \lambda g(x) + g(y)
+\shortintertext{this can be seen by}
+g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
+&= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
+&= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
+\end{align*}
+$[g^{i}]$ is the matrix representation of $g^{i}$\\
+$[g^{i}] = (g_{1}^{i}, \dots , g_{n}^{i})$
+\[ [g]_{mxn} = \begin{pmatrix}
+  g_{1}^{1}  & \cdots & g_{n}^{1} \\
+  \vdots   & & \vdots  \\
+  g_{1}^{m} & \cdots &g_{n}^{m}
+ \end{pmatrix}\]
+\end{definition}
+
+\begin{theorem}
+$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a iff $f^{i}$ are differentiable at a, $i=1, \dots , m$
+and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
+\begin{proof}
+assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
+\[f^{i} =  \Pi^{i} \circ f\]
+this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
+\begin{align*}
+\Rightarrow Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
+\shortintertext{$D\Pi^{i} = \Pi^{i}$}
+\Rightarrow Df^{i} &= \Pi^{i}(a) \cdot Df(a)
+\end{align*}
+Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
+\begin{align*}
+&f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
+ &= (f^{1}(a+h), \dots , f^{m}(a+h)) - (f^{1}, \dots, f^{m}) - (Df^{1}*(a)(h), \dots , Df^{m}(a)(h))\\
+&=(f^{1}(a+h) -f^{1}(a) - df^{1}(a) , \dots , f^{m}(a+h) -f^{m}(a) - df^{m}(a))
+\end{align*}
+So
+\begin{align*}
+ &\frac{|f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))|}{|h|} \\
+&\leq \frac{|f^{1}(a+h) -f^{1}(a) - df^{1}(a)|}{|h|} , \dots ,\frac{| f^{m}(a+h) -f^{m}(a) - df^{m}(a)|}{|h|} \rightarrow 0
+\end{align*}
+\end{proof}
+\end{theorem} 
+
+\begin{remark}
+If $T,S:\RR^{n} \rightarrow \RR^{m}$ are linear then $(T +S):\RR^{n} \rightarrow \RR^{m}, (T+S)(x) = T(x) + S(x)$ is linear.\\
+If $\lambda \in \RR$ then $(\lambda T):\RR^{n} \rightarrow \RR^{m}, (\lambda T)(x) = \lambda \cdot T(x)$ is also linear.
+\end{remark}
+
+
 \subsection{Manifolds}
 
 \begin{definition}[$C^{\infty}$]
@@ -1193,7 +1252,19 @@ A set $M$ is a K-dim manifold in $\RR^n$ if the following condition (M) holds. F
 \[ h(U \cap M) = \{ y \in V \; s.t. \;y^{k+1} = y^{k+2} = \dots = y^{n} = 0\} \]
 \end{definition}  
 
-\begin{theorem}
+\begin{remark} \textmd{Reminder of linear algebra}\\
+$T:\RR^n \rightarrow \RR^p$ Linear transformation, $rank(T) = dim(T(\RR^n)) \leq p$\\
+\[[T]: \quad \text{rank = max number of linearly independant rows or columns.}\]
+$rank(T) \leq min(n,p)$
+\[[T] = \begin{pmatrix}
+a_{11} & \dots & a_{1n}\\
+\vdots & & \vdots\\
+a_{p1} & & a_{pn} \end{pmatrix}, \quad [T] \in M_{p \times n} \]
+determinant of minors: If $r$ is the max size of an $r \times r$ minor with non-zero determinant, then rank(T) = r.
+\end{remark}
+
+
+\begin{theorem}\label{manifold1}
  Let $A \rightarrow \RR^n$ be open and let $g : A \rightarrow \RR^p$ be a differentiable function such
 that $g'(x)$ has rank $p$ on the set $g^{-1}(0)$. Then $g^{-1}(0)$ is an $n\! -\! p$ dimensional manifold in $\RR^n$.
 \begin{proof}
@@ -1210,9 +1281,82 @@ h(U \cap M).$
 \end{proof}
 \end{theorem}
 
+\begin{example}
+\[S^2 = \{(x,y,z) \in \RR^3; \; \;  x^2 + y^2 +z^2 = 1\}\quad \text{$2$-dim manifold in $\RR^3$}\]
+$g:\RR^3 \rightarrow \RR$
+\[g(x,y,z) = x^2 + y^2 + z^2 - 1 \qquad S^2 = g^{-1}(0)\]
+\[g'(x,y,z) = (\frac{dg}{dx}, \frac{dg}{dy}, \frac{dg}{dz}) = (2x, 2y, 2z)\]
+Rank can be $0$ or $1$
+\[\underbrace{2}_{(n-p)} = \underbrace{3}_{(n)}  - \underbrace{1}_{(p)} \qquad \text{Aim to show } rank(g')=1\; on\; M=g^{-1}(0) \]
+\begin{align*}
+rank\;g' = 0 &\Leftrightarrow 2x=2y=2z=0\\
+&\Leftrightarrow (x,y,z)=(0,0,0)
+\end{align*}
+but $(0,0,0) \notin g^{-1}(0)$ because $g(0,0,0) = 0^2 + 0^2 +0^2 -1= -1$
+\end{example}
+
+
+\begin{example}The Sphere 
+\[S^n = \{(x^1,\dots,x^{n+1}); \; \; ( x^1)^2 + \dots +(x^{n+1})^2  = 1\}\quad \text{is an $n$-dim manifold in $\RR^{n+1}$}\]
+$g:\RR^{n+1} \rightarrow \RR^p$
+\[g(x^1,\dots,x^{n+1}) =( x^1)^2 + \dots +(x^{n+1})^2  - 1 \qquad S^n = g^{-1}(0)\]
+\[g'(x^1,\dots,x^{n+1})  = (\frac{dg}{dx^1},\dots , \frac{dg}{dx^{n+1}}) = \underbrace{(2x^1, \dots, 2x^{n+1})}_{1 \times (n+1)\; matix}\]
+\begin{align*}
+rank\;g' = 0 &\Leftrightarrow 2x^1=\dots =2x^{n+1}=0\\
+&\Leftrightarrow (x^1,\dots ,x^{n+1})=(0,\dots ,0)
+\end{align*}
+but $(0,\dots ,0) \notin S^n$
+\end{example}
+
+\begin{example}Hyperbolic space
+\[\mathbb{H}^n = \{(x^1,\dots,x^{n+1}) \in \RR^{n+1},  \; \; ( x^1)^2  - [( x^2)^2 + \dots +(x^{n+1})^2 ] = 1\} \]
+$n$-dim hyperbolic space $g:\RR^{n+1} \rightarrow \RR$
+\[g(x^1,\dots,x^{n+1}) = ( x^1)^2  - [( x^2)^2 + \dots +(x^{n+1})^2 ] - 1 \]
+\[\mathbb{H}^n = g^{-1}(0) \Rightarrow (g:\RR^{n+1} \rightarrow \RR) \rightarrow (g: A \rightarrow \RR), \quad A = \{x \in \RR^{n+1}, \; x^1 > 0 \}. \]
+\[g'(x^1,\dots,x^{n+1})  = (2x^1, - 2x^2 , \dots, - 2x^{n+1}) \]
+\begin{align*}
+rank\;g' = 0 &\Leftrightarrow x^1=\dots =x^{n+1}=0\\
+&\Leftrightarrow (x^1,\dots ,x^{n+1})=(0,\dots ,0)
+\end{align*}
+but $(0,\dots ,0) \notin \mathbb{H}^n$ so $rank (g')= 1$ on $g^{-1}(0)$ so by theorem \ref{manifold1}$g^{-1}(0)$ is an $(n+1)-1$ dim manifold in $\RR^{n+1}$.
+\end{example}
+
+\begin{example}
+Ellipsoid
+\[\frac{x^2}{a^2} +\frac{y^2}{b^2} +\frac{z^2}{c^2} =1, \quad a,b,c>0\]
+\[g(x,y,z) = \frac{x^2}{a^2} +\frac{y^2}{b^2} +\frac{z^2}{c^2} -1 \]
+\[g'(x,y,z) = (\frac{2x}{a^2}, \frac{2y}{b^2} , \frac{2z}{c^2}) = 0 \Leftrightarrow x=y=z=0 \]
+but $(0,0,0)$ does not belong to the ellipsoid.
+\end{example}
+
+\begin{example}The graph of a differentiable function\\
+$f:U \rightarrow \RR, \quad U \subseteq \RR^2$ 
+\[M = \{(x,y,z) \in \RR^3, \; z=f(x,y)\}\quad (mange patch) \]
+$2$-dim manifold in $\RR3$
+\[g(x,y,z)=f(x,y) - z\]
+\[g'(x,y,z) = (\frac{df}{dx},\frac{df}{dy},-1) \neq 0 \Rightarrow rank(g') = 1\]
+\end{example}
+
+\begin{example}$2$-dim torus\\
+\[(x-2)^2 +z^2 =1\]
+\[(r-2)^2 +z^2 =1\]
+\begin{alignat*}{2}
+z &= sin(\phi) & \quad x &=r\cdot cos(\theta)\\
+r-2&= cos(\phi) & \quad y&=r\cdot sin(\theta)
+\end{alignat*}
+\[f(\theta, \phi) = ((2+cos(\phi))cos(\theta), (2+cos(\phi))sin(\theta), sin(\phi)) \quad \theta \in (-\pi , \pi), \; \phi \in (-\pi , \pi)\]
+For theorem 2, take $U=\RR^3$
+\[ f(W) = U \cap M,  \qquad f(W) = M \]
+$f: \rightarrow \RR^3$
+
+\end{example}
+
+
+
+
 The following theorem gives the coordinate definition of a manifold M.
 
-\begin{theorem}
+\begin{theorem}\label{man1}
 A subset $M$ of $\RR^n$ is a $k$-dimensional manifold iff for every point $x \in M$ the following holds:\\
 (C) There exists an open set $U \in \RR^n,\; x \in U$ and an open set $W \subset \RR^k$ and an injective
 differentiable map $f : W \rightarrow \RR^n$ such that
@@ -1266,6 +1410,51 @@ The calculation of the determinant in block form (which can be considered as suc
 \[h(V_2 \cap M) = g^{-1}(V_2 \cap M) = g^{-1}(\{g(x,  0), \; (x, 0) \in V_1\}) = V_1 \cap (\RR^k\times \{0\}).\]
 \end{proof}
 \end{theorem}
+
+\begin{example}2-dim torus.
+
+\begin{align*}
+(x-2)^2 = z^2 &=1\\
+(r-2)^2 + z^2 &= 1 \end{align*}
+\begin{alignat*}{2}
+z&=\sin\phi &\qquad x&=r\cos\theta\\
+r-2&=\cos\phi &\qquad y&=r\sin\theta
+\end{alignat*}
+\[f(\theta,\phi)= ((2+\cos\phi)\cos\theta, \; (2+\cos\phi)\sin\theta, \; \sin\phi) \quad \theta, \phi \in (-\pi , \pi )\]
+For theorem \ref{man1}, take $U=\RR^3$
+\begin{align*}
+f(W) &= U\cap M\\
+f(W) &= M
+\end{align*}
+
+$f:\underset{\subseteq \RR^2}{W} \rightarrow \RR^3$
+\[f'(\theta, \phi) = \begin{pmatrix}  (2+\cos\phi)(-\sin\theta) &-\sin\phi \cos\theta \\
+(2+\cos\phi)\cos\phi & -\sin\phi \sin\theta\\
+0 & \cos\phi \end{pmatrix}\]
+\begin{align*} 2 \times 2\text{ minor}&: \quad \begin{vmatrix}  (2+\cos\phi)(-\sin\theta) &-\sin\phi \cos\theta \\
+(2+\cos\phi)\cos\phi & -\sin\phi \sin\theta \end{vmatrix}\\ &= (2+\cos\phi)(-\sin\phi) \begin{vmatrix}  -\sin\theta & \cos\theta \\ \cos\phi &  \sin\theta \end{vmatrix}\\
+&=  (2+\cos\phi)\sin\phi \neq 0 \; iff\; \sin\phi \neq 0 \Leftrightarrow \phi \neq 0\end{align*}
+$\therefore$ rank $f' = 2$ whenever $\phi \neq 0$\\
+When $\phi =0$ 
+\[f'(\theta, \phi) = \begin{pmatrix} -3\sin\theta & 0\\ 3\cos\theta & 0 \\ 0 & 1 \end{pmatrix}\]
+if $\theta = 0$ use:
+\[\begin{vmatrix} 3\cos\theta & 0 \\ 0 & 1 \end{vmatrix} = \begin{vmatrix} 3 & 0 \\ 0 & 1 \end{vmatrix} = 3\]
+if $\theta = 0$ use:
+\[\begin{vmatrix} 3\sin\theta & 0 \\ 0 & 1 \end{vmatrix} = 3\sin\theta \neq 0 \quad on \; \theta\in (-\infty, \infty), \; \theta \neq 0\]
+\end{example}
+\begin{example}
+Any nice surface of revolution is a 2-dim manifold in $\RR^3$ 
+\[\gamma(t) = (r(t), z(t)) \quad t \in (a,b)\]
+$\gamma$ does not have any self intersections $r(t)>0$. If $\gamma$ is differentiable and
+\[\gamma'(t) = (r'(t) , z'(t)) \neq 0 \quad \forall t \in (a,b)\]
+then when we rotate it arround the $z$-axis we get the surface
+\[f(t,\theta) = (r(t)\cos\theta, \; r(t)\sin\theta, \; z(t)) \quad t \in (a,b), \; \theta \in (-\pi , \pi)\]
+\[f'(t,\theta) = \begin{pmatrix} r'\cos\theta & -r\sin\theta \\ r'\sin\theta & r\cos\theta \\ z' & 0 \end{pmatrix}\]
+\[\begin{vmatrix} r'\cos\theta & -r\sin\theta \\ r'\sin\theta & r\cos\theta \end{vmatrix} = r\cdot r'\]
+\[r>0, \; r' \neq 0 \Rightarrow rank =2 \]
+\end{example} 
+
+\quad \\
 We also need the definition of manifold with boundary. While a $k$-dimensional manifold in $\RR^n$ looks like a $k$-dim  slice of $\RR^n$, according to condition (M), for a manifold with boundary in $\RR^n$, the part close to the boundary looks likes a half-slice of dimension $k$. To make this precise we define the half-space
 \[\mathbb{H}^k = \{x \in \RR^k, \;  x^k \geq 0 \}.\]
 Then
@@ -1281,65 +1470,747 @@ Moreover, $h^k(x) = 0$.The set of points where condition (M') holds is called th
 by $\partial M$.
 \end{definition}
 
+\subsection{Dual Space}
 
+\begin{definition} A linear functional $f$ is a linear transformation $f:V \rightarrow \RR$
+\[f(\lambda x + y ) = \lambda f(x) + f(y) \quad \forall x,y \in V, \; \forall \lambda \in \RR\]
+\end{definition}
 
-
-
-
-
-
-
-\subsection{Linear Functionals}
+\begin{definition}[Dual Space]
+\[V^{*} = \{f:V\rightarrow \RR : f \text{ are linear functionals}\}\]
+\end{definition}
 
 \begin{definition}
-Let $g^{i}:\RR^n \rightarrow \RR$ be a linear map, such a map is called a linear functional. The set of all linear functionals from $\RR^n \rightarrow \RR$ is called the dual space of $\RR^{n}$, denoted $(\RR^n)*$\\
-let $g^{1}, \dots , g^{m}$ be linear functionals $g^{i}:\RR^n \rightarrow \RR$, then I can combine them to get a map $g:\RR^n \rightarrow \RR^{m}$ by $g(x) =(g^{1}(x), \dots , g^{m}(x)$)\\
-$g:\RR^n \rightarrow \RR^{m}$ is linear such for $x,y \in \RR^n, \; \lambda \in \RR$
+If $f,g \in V^{*}$ and $\lambda \in \RR$ then
+\[f+g, \; \lambda f:V \rightarrow \RR\]
+with:
+\[(f+g)(x) = f(x) + g(x)\]
+\[(\lambda f)  = \lambda f(x)\] \end{definition}
+
+\begin{proposition}
+\[\dim(V^{*}) = \dim(V)\]
+\begin{proof}
+We have $\{v_1, \dots , v_n\}$ a basis of $V$, $\forall i = 1,\dots , n$ define $\varphi_i:V\rightarrow \RR$ as follows:\\
+Given $x\in V$
+\[x  = x^1v_i + \cdots + x^n \quad x^i \in \RR\]
+\[\varphi_i(x) = x^i\]
+$\varphi_i$ is a linear functional. If $y \in V$
+\[y= y^1v_1 + \cdots + y^nv_n \quad v^i \in \RR\] 
+for $\lambda \in \RR$
+\[ \lambda x + y = (\lambda x^1 + y^1) + \cdots + (\lambda x^n + y^n)v_n\] 
+\[\varphi_i(\lambda x + y) = \lambda x^i + y^i = \lambda\varphi_i(x) + \varphi_i(y)\]
+\[\varphi_i(v_j) = \delta_{ij}\]
+Is $\{\varphi_1, \dots , \varphi_n\}$ a basis for $V^*$?\\ 
+Spanning:\\ Given $f \in V^*$, define $a^i \in \RR$
+\[f(v_i) = a^i\]
+we will show 
+\[f=a^1\varphi_1 + \cdots + a^n\varphi_n\]
+if $f$ and $a^1\varphi_1 + \cdots + a^n\varphi_n$ agree on the basis $\{v_1 , \dots , v_n\}$ then its true.
+For $K=1,\dots, n$
+\[f(v_k) = a^k\]
+\[(a^1\varphi_1, \dots ,a^n\varphi_n)(v_k) = a^1\varphi_1(v_k) + \cdots + a^k\varphi_k(v_k) + \cdots + a^n\varphi_n(v_k) = a^k\cdot 1 \]
+Linear Independence:\\
+\[b^1\varphi_1 + \cdots + b^n\varphi_n = 0 \overset{?}{\Rightarrow} b^k = 0 \quad \forall k\]
+Apply to a basis vector $v_k$
+\[(b^1\varphi_1 + \cdots + b^n\varphi_n)(v_k) = b^1\cdot 0 +\cdots +b^{k-1}\cdot0 + b^k\cdot 1 + b^{k+1}\cdot 0 + \dots + b^n\cdot 0 = b^k \]
+\end{proof}
+\end{proposition}
+
+\subsection{Multilinear Algebra}
+\begin{definition}
+Let $V$ be a vector space over $\RR$, define
+\[V^k = \underbrace{V \times \cdots \times V}_{k \; times }\]
+To be
+\[V^k = \{(V_1, \dots, V_n) : V_i \in V^* \}.\]
+This is a vector space with opperations 
+\[(V_1, \dots , V_k) + (W_1, \dots , W_k) = (V_1 + W_1, \dots , V_k + W_k)\]
+\[\lambda(V_1 , \dots , V_k) = (\lambda V_1 , \dots , \lambda V_k) \]
+\end{definition}
+
+\begin{definition}
+$\mathcal{T}:V^k \rightarrow \RR$ is called multilinear if $\forall i = 1, \dots , k$
 \begin{align*}
-g(\lambda x +y) &= \lambda g(x) + g(y)
-\shortintertext{this can be seen by}
-g(\lambda x +y) &=(g^{1}( \lambda x + y), \dots , g^{m}( \lambda x + y) \\
-&= ( \lambda g(x)^{1} +g^{1}(y), \dots ,\lambda g(x)^{m} +g^{m}(y))\\
-&= \lambda (g^{1}(x), \dots, g^{m}(x)) + (g^{1}, \dots , g^{m})
+\mathcal{T}(V_1, \dots , V_{i-1},V_i +V_i^{'}, V_{i+1}, \dots , V_k) &= \mathcal{T}(V_1, \dots , V_{i-1},V_i , V_{i+1}, \dots , V_k)\\ &+ \mathcal{T}(V_1, \dots , V_{i-1},V_i^{'}, V_{i+1}, \dots , V_k)\\
+\mathcal{T}(V_1, \dots , V_{i-1},\lambda V_i , V_{i+1}, \dots , V_k) &= \lambda\mathcal{T}(V_1, \dots , V_{i-1},V_i , V_{i+1}, \dots , V_k)\end{align*}
+$\mathcal{T}$ is not linear on $V^k$ but linear on each of its components. A $\mathcal{T}$ like this is called a k-tensor on $V$.
+\end{definition}
+
+\begin{definition}
+\[\mathcal{J}^k(V) = \{\mathcal{T}:V^k \rightarrow \RR : k-multilinear\}\]
+\end{definition}
+
+\begin{note} if $k=2$ then $\mathcal{T}$ is called bilinear, and
+\begin{align*}
+\mathcal{T}(V_1 + V_2 , W) &= \mathcal{T}(V_1, W)+ \mathcal{T}(V_2, W)\\
+\mathcal{T}(\lambda V, W) & = \lambda\mathcal{T}(V, W)\\
+\mathcal{T}(V,W_1 + W_2) &= \mathcal{T}(V, W_1)+ \mathcal{T}(V, W_2)\\
+\mathcal{T}(V, \lambda W)  & = \lambda\mathcal{T}(V, W)
 \end{align*}
-$[g^{i}]$ is the matrix representation of $g^{i}$\\
-$[g^{i}] = (g_{1}^{i}, \dots , g_{n}^{i})$
-\[ [g]_{mxn} = \begin{pmatrix}
-  g_{1}^{1}  & \cdots & g_{n}^{1} \\
-  \vdots   & & \vdots  \\
-  g_{1}^{m} & \cdots &g_{n}^{m}
- \end{pmatrix}\]
+also
+$\mathcal{T}$ is called Symmetric if \[\mathcal{T}(V,W) =  \mathcal{T}(W,V)\]
+$\mathcal{T}$ is called positive definite if \[\mathcal{T}(V,W)\geq 0 \quad \forall \; V,W\]
+ \end{note}
+
+\begin{definition}[Symmetric k-tensor]
+$\mathcal{T}$ is a Symmetric k-tensor if $\forall v_i , \dots , V_k \in \mathcal{V}$
+\[\mathcal{T}(V_1, \dots , V_{i},V_{i+1} , \dots,  V_{j}, \dots , V_k) = \mathcal{T}(V_1, \dots , V_{j},V_{i+1} , \dots,  V_{i}, \dots , V_k)\]
+\end{definition}
+
+\begin{definition}[Alternating k-tensor]$\mathcal{T}$ is a Alternating k-tensor if $\forall v_i , \dots , V_k \in \mathcal{V}$
+\[\mathcal{T}(V_1, \dots , V_{i},V_{i+1} , \dots,  V_{j}, \dots , V_k) = -\mathcal{T}(V_1, \dots , V_{j},V_{i+1} , \dots,  V_{i}, \dots , V_k)\]
+\end{definition}
+
+\begin{example} $V=\RR^2 , \; V^2 = \RR^2 \times \RR^2$
+\[\mathcal{T}(V_1, V_2) = V_1^1V_2^2 - V_2^1V_1^2 \qquad \boxed{determinant}\]
+\[V_1=(V_1^1, V_1^2) \qquad V_2=(V_2^1, V_2^2)\]
+
+\begin{align*}
+\begin{vmatrix} \lambda V_1 + V_1^{'} \\ V_2 \end{vmatrix} &= \lambda\begin{vmatrix} V_1 \\ V_2 \end{vmatrix} + \begin{vmatrix} V_1^{'} \\ V_2 \end{vmatrix} \\
+\begin{vmatrix}  V_1\\ \lambda V_2 + V_2^{'} \end{vmatrix} &= \lambda\begin{vmatrix} V_1 \\ V_2 \end{vmatrix} + \begin{vmatrix} V_1 \\ V_2^{'} \end{vmatrix}\\
+\begin{vmatrix} V_1 \\ V_2 \end{vmatrix} &= -\begin{vmatrix} V_2 \\ V_1 \end{vmatrix}
+\end{align*}
+$\det$ on $k\times k$-matrices as a function of $k$ vectors in $\RR^k$ is an aternating $k$-tensor. 
+\end{example}
+
+\begin{definition}
+If $\mathcal{T},\mathcal{S} \in \mathcal{J}^k(V)$, we define:
+\begin{align*}
+(\mathcal{T} + \mathcal{S})(V_1, \dots , V_k) &= \mathcal{T}(V_1, \dots , V_k) + \mathcal{S}(V_1, \dots , V_k)\\
+\intertext{Simularly if $\lambda \in \RR, \; \lambda\mathcal{T} \in \mathcal{J}^k(V)$}
+(\lambda\mathcal{T})(V_1, \dots , V_k) &= \lambda\mathcal{T}(V_1, \dots , V_k)\quad \forall V_i \in V
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Let $\mathcal{T} \in \mathcal{J}^k(V), \; \mathcal{S} \in  \mathcal{J}^l{}(V), \quad k,l \in \NN, \quad \mathcal{T}:V^k\rightarrow \RR, \;\mathcal{S}:V^l\rightarrow \RR$. Define $\mathcal{T} \otimes \mathcal{S} \in \mathcal{J}^{k+l}$:
+\[\mathcal{T} \otimes \mathcal{S} (V_1,\dots,V_k\;|\;V_{k+1},\dots , V_{k+l}) = \mathcal{T}(V_1,\dots,V_k) \cdot \mathcal{S} (V_k,\dots,  V_{k+l})\]
+\[\mathcal{T}, \mathcal{S} \in \mathcal{J}^{k+l} \Rightarrow \mathcal{T} \otimes \mathcal{S} \neq \mathcal{S} \otimes \mathcal{T}\quad \text{in general}\]
+\begin{properties}\quad \\
+\begin{enumerate}
+\item $\mathcal{T} \otimes \mathcal{S} \in \mathcal{J}^{k+l}$
+\item$(\mathcal{S}_1 + \mathcal{S}_2)\otimes\mathcal{T} = \mathcal{S}_1\otimes \mathcal{T} + \mathcal{S}_2 \otimes\mathcal{T}$
+\item $\mathcal{S}\otimes (\mathcal{T}_1 + \mathcal{T}_2) = \mathcal{S}\otimes \mathcal{T}_1 + \mathcal{S}\otimes \mathcal{T}_2$
+\item $(\lambda\mathcal{S})\otimes\mathcal{T} = \lambda(\mathcal{S}\otimes\mathcal{T}) = \mathcal{S}\otimes(\lambda\mathcal{T})$
+\item $(\mathcal{S}\otimes\mathcal{T})\otimes\mathcal{U} = \mathcal{S}\otimes(\mathcal{T}\otimes\mathcal{U})$
+\item $\mathcal{J}^1(V) = V^{*}$
+\end{enumerate}
+\end{properties}
 \end{definition}
 
 \begin{theorem}
-$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at a iff $f^{i}$ are differentiable at a, $i=1, \dots , m$
-and $Df(a) = (Df^{1}, \dots , Df^{m}(a))$
+Let $i_1,\dots , i_k \in \{1,\dots, n\}$, $V$ has a basis $\{v_1, \dots , v_n\}$ $\dim V = n$. Let $\{\varphi_1, \dots , \varphi_n\}$ be the basis basis of $V^{*}, \; \varphi_i(v_i)=\delta_{ij}$. Then
+\[\varphi_{i_1}\otimes \cdots \otimes \varphi_{i_k} \quad where \quad \{i_1, \dots ,i_k\} \subseteq \{1, \dots , n\}\]
+form basis for $\mathcal{J}^k(V)$
+\[\dim(\mathcal{J}^k(V)) = n^k\]
 \begin{proof}
-assume f is differentiable at $a$ we take the linear function $\Pi^{i}(x^{1}, \dots , x^{m}) = x^{i}$ and compose it with $f$ we get 
-\[f^{i} =  \Pi^{i} \circ f\]
-this is differentiable by chain rule since $f$ and $\Pi^{i}$ are differentiable $\forall i =1 , \dots , m$
-\begin{align*}
-\Rightarrow Df^{i} &= D\Pi^{i}(a) \cdot Df(a)
-\shortintertext{$D\Pi^{i} = \Pi^{i}$}
-\Rightarrow Df^{i} &= \Pi^{i}(a) \cdot Df(a)
+Clearly $\varphi_{i_1}\otimes \cdots \otimes \varphi_{i_k} \in \mathcal{J}^k(V)$ since $\varphi_{i_j} \in V^* = \mathcal{J}_1(V)$. The set spans $\mathcal{J}^k(V)$ and is $L.I.$ Let $\mathcal{T} \in \mathcal{J}^k(V).$ need to write
+\[\mathcal{T} = \sum_{\substack{
+   i_1 = 1,\dots , n \\
+\vdots\\
+ i_k = 1,\dots , n  
+  }} a^{i_1i_2\cdots i_k}\varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k}\]
+Plug $(V_{j_1}, \dots , V_{j_k})$ into the suspected identity.
+\begin{align*}\mathcal{T}(V_{j_1}, \dots , V_{j_k}) &= \sum\limits_{i_1,\dots , i_k}a^{i_1i_2\cdots i_k}\varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k}(V_{j_1}, \dots , V_{j_k}) \\
+ &= \sum\limits_{i_1,\dots , i_k}a^{i_1i_2\cdots i_k}\varphi_{i_1}(V_{j_1})\cdots\varphi_{i_k}(V_{j_k})\\
+ &= \sum\limits_{i_1,\dots , i_k}a^{i_1i_2\cdots i_k}\delta_{i_1 j_1}\cdots\delta_{i_k j_k}\\
+&= a^{j_1\cdots j_k} \end{align*}
+Define
+\[a^{i_1i_2\cdots i_k} = \mathcal{T}(V_{j_1}, \dots , V_{j_k})\]
+Let $w_1,\dots , w_k \in V$
+\[w_1 = \sum\limits_{j=1}^{n}a^{1_j}v_j \qquad \dots \qquad w_k = \sum\limits_{j=1}^{n}a^{k_j}v_j\]
+\begin{align*} \mathcal{T}(w_1 , \dots , w_k) &= \mathcal{T}\left( \sum\limits_{j_1}a^{1_{j_1}}v_{j_1} , \dots , \sum\limits_{j_k}a^{k_{j_k}}v_{j_k} \right)\\
+&= \sum\limits_{j_1, \dots, j_k =1}^{n}a^{1_{j_1}}\cdots a^{k_{j_k}}\cdot\mathcal{T}(V_{j_1}, \dots , V_{j_k})\\
+&=\sum\limits_{j_1, \dots, j_k}a^{1_{j_1}}\cdots a^{k_{j_k}}\cdot a^{i_1i_2\cdots i_k}
 \end{align*}
-Now assume the all $f^{i}$ are differentiable at $a$ $\forall i=1, \dots , m$
-\begin{align*}
-&f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))\\
- &= (f^{1}(a+h), \dots , f^{m}(a+h)) - (f^{1}, \dots, f^{m}) - (Df^{1}*(a)(h), \dots , Df^{m}(a)(h))\\
-&=(f^{1}(a+h) -f^{1}(a) - df^{1}(a) , \dots , f^{m}(a+h) -f^{m}(a) - df^{m}(a))
-\end{align*}
-So
-\begin{align*}
- &\frac{|f(a+h) - f(a) -(Df^{1}(a)(h), \dots , Df^{m}(a)(h))|}{|h|} \\
-&\leq \frac{|f^{1}(a+h) -f^{1}(a) - df^{1}(a)|}{|h|} , \dots ,\frac{| f^{m}(a+h) -f^{m}(a) - df^{m}(a)|}{|h|} \rightarrow 0
-\end{align*}
+\begin{align*}  \sum\limits_{i_1,\dots , i_k}a^{i_1\cdots i_k}\varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k}(w_1, \dots , w_k) &=  \sum\limits_{i_1,\dots , i_k}a^{i_1\cdots i_k}\varphi_{i_1}(w_1)\otimes\cdots\otimes\varphi_{i_k}(w_k)\\
+&=\sum\limits_{j_1, \dots, j_k}a^{i_1i_2\cdots i_k}\cdot a^{1_{i_1}}\cdots a^{k_{i_k}} \end{align*}
+Relabel: \begin{align*} i_1 &\mapsto j_1 \\ &\vdots \\ i_k &\mapsto j_k \end{align*}
+So it Spans. Now check L.I.
+\[ \sum\limits_{i_1,\dots , i_k=1}^{n}a^{i_1\cdots i_k}\varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k} =0\]
+Plus $V_{j_1}, \dots , V_{j_k}$ in to it
+\begin{align*} \sum\limits_{i_1,\dots , i_k=1}^{n}a^{i_1\cdots i_k}\varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k}(V_{j_1}, \dots , V_{j_k})  &= \sum\limits_{i_1,\dots , i_k}a^{i_1\cdots i_k}\delta_{i_1 j_1}\cdots\delta_{i_k j_k}\\
+&= a^{j_1\cdots j_k} = 0 \end{align*}
+put in all possible combinations of basis vectors 
+\[\Rightarrow \text{all coeffecitents }\underline{Zero}\]
 \end{proof}
-\end{theorem} 
+\end{theorem}
+
+\subsection{Alternating Tensors}
 
 \begin{remark}
-If $T,S:\RR^{n} \rightarrow \RR^{m}$ are linear then $(T +S):\RR^{n} \rightarrow \RR^{m}, (T+S)(x) = T(x) + S(x)$ is linear.\\
-If $\lambda \in \RR$ then $(\lambda T):\RR^{n} \rightarrow \RR^{m}, (\lambda T)(x) = \lambda \cdot T(x)$ is also linear.
+for $f:\RR \rightarrow \RR$. If $f$ is even:
+\[f(-x) = f(x)\]
+if $f$ is odd:
+\[f(-x) = -f(x)\]
+Every function can be writen as
+\[f = \underset{even}{f_1} + \underset{odd}{f_2}\]
+Where
+\[f_1 = \frac{f(x) + f(-x)}{2} \qquad f_2=\frac{f(x) - f(-x)}{2}\]
+or $\sigma$ is a bijection on $\RR \rightarrow \RR$, $\sigma^2 = id$.
+\[x \overset{\sigma}{\mapsto} -x\]
+\[\frac{f(x) +  f(\sigma x)}{2}\]
+Let $S_k$ be that symmetric group on $k$ letters.
+\[S_k \overset{hom}{\rightarrow}\{\pm 1\} \quad \text{multiplicitave group}\]
+\[ \sigma \mapsto \begin{cases} +1 & if \; \sigma \; even \\
+-1 & if \; \sigma \; odd \end{cases}\]
+\[\sigma \mapsto sign(\sigma).\]
 \end{remark}
+
+\begin{definition}
+If $\mathcal{T} \in \mathcal{J}^k(V)$
+\[\alt(\mathcal{T})(w1, \dots , w_k) = \frac{1}{k!}\sum\limits_{\sigma \in S_k} sgn(\sigma)\mat(w-{\sigma(1)}, \dots , w_{\sigma(k)}).\]
+\end{definition}
+
+\begin{example}
+$k=2$
+\[\alt(\mathcal{T})(w_1 , w_2) = \frac{1}{2!}(\mat(w_1, w_2) - \mat(w_2, w_1))\]
+\end{example}
+
+\begin{definition}
+The set of alternating $k$-tensors is denoted by $\Lambda^k(V)$, it is a subspace of $\mathcal{J}^k(V)$ 
+\end{definition}
+
+\begin{theorem}\quad\\
+\begin{enumerate}[(a)]
+\item if $\mat \in \mathcal{J}^k(V), \; \alt(\mat) \in \mathcal{J}^k(V)$ and $\alt(T)$ is alternating
+\item if $\mathcal{W}$ is alternating, $\alt(\mathcal{W}) = \mathcal{W}$
+\item $\alt(\alt(\mat)) = \alt(\mat)$
+\end{enumerate}
+\begin{proof}
+(c) follows from (b), use $w=\alt(\mat)$ which is alternating by (a)
+\[\alt(\mat) = \maw = \alt(\maw) = \alt(\alt(\mat))\]
+Proof of (a):\\
+Show $\alt(\mat) \in \mathcal{J}^k(V).$ I will show it is alternating.
+\[\alt(\mat)(w_1, \dots, w_i, \dots , w_j , \dots , w_k) = -\alt(\mat)(w_1, \dots , w_j,\dots, w_i , \dots , w_k)\]
+\begin{align*}
+i &\mapsto j  \\
+j &\mapsto i\\
+k &\mapsto k \quad \text{if }k\neq i,j \end{align*}
+
+\begin{equation}
+ \left.\begin{aligned}
+       S_k &\rightarrow S_k \\
+        \sigma &\mapsto \sigma(ij) = \sigma^{1} \\
+even &\mapsto odd\\
+odd &\mapsto  even 
+       \end{aligned}
+ \right\}
+ \qquad \text{Bijection}
+\end{equation}
+
+\begin{align*}
+\alt(\mat)(w_1, \dots , \overset{i^{th}}{w_j} , \dots , \overset{j^{th}}{w_i} , \dots , w_k) &= \frac{1}{k!}\sum\limits_{\sigma \in S_k}sgn(\sigma)\alt(\mat)(w_{\sigma(1)}, \dots , \overset{i^{th}}{w_{\sigma(j)}} , \dots , \overset{j^{th}}{w_{\sigma(i)}} , \dots , w_{\sigma(k)}) \\
+&=  \frac{1}{k!}\sum\limits_{\sigma' \in S_k}sgn(\sigma')\alt(\mat)(w_{\sigma'(1)}, \dots , w_{\sigma'(i)} , \dots , w_{\sigma'(j)} , \dots , w_{\sigma'(k)})\\
+&= -\alt(\mat)(w_1, \dots , w_k) \end{align*}
+
+ Proof of (b):\\
+Let $\omega$ be alternating.
+\begin{align*}
+\omega(w_1, \dots , \overset{i^{th}}{w_j} , \dots , \overset{j^{th}}{w_i} , \dots , w_k) &= - \omega(w_1, \dots , \overset{i^{th}}{w_i} , \dots , \overset{j^{th}}{w_j} , \dots , w_k)\\ &=\omega(w_{\sigma(1)} , \dots , w_{\sigma(k)})\\
+&=sgn(\sigma)\omega(w_1,  \dots , w_k) \quad \sigma \in S_k \\
+&=\alt(\omega)(w_1,  \dots , w_k)\\
+&= \frac{1}{k!}\sum\limits_{\sigma \in S_k}sgn(\sigma)\omega(w_{\sigma(1)}, \dots , w_{\sigma(k)})\\
+&= \frac{1}{k!}\sum\limits_{\sigma \in S_k}sgn(\sigma)^2 \omega(w_{1}, \dots , w_{k})\\
+&=\cancel{\frac{1}{k!}}\cancel{|S_k|}\omega(w_{1}, \dots , w_{k})
+\end{align*}
+\[\therefore \; \alt(\omega)=\omega\]
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+If $\omega \in \Lambda^k(V), \; \eta \in \Lambda^l(V)$ then 
+\[\omega \otimes \eta \in \maj^{k+l}(V)\]
+\end{remark}
+
+\begin{definition}
+\[\omega \wedge \eta = \frac{(k+l)!}{k!\,l!}\alt(\omega \otimes \eta) \quad \in \Lambda^{k+l}(V)\]
+\begin{properties} if $\omega, \;\omega_1,\; \omega_2 \in \Lambda^k(V), \; \eta, \; \eta_1, \; \eta_2 \in \Lambda^l(V)$
+\begin{itemize}
+\item $(\omega_1 + \omega_2)\wedge\eta = \omega_1\wedge\eta + \omega_2\wedge\eta$
+\item $\omega\wedge(\eta_1 + \eta_2)  = \omega\wedge\eta_1 + \omega\wedge\eta_2$
+\item $(\alpha\omega)\wedge\eta = \alpha(\omega\wedge\eta) = \omega\wedge(\alpha\eta) \quad \alpha \in \RR$
+\item $\omega\wedge\eta = (-1)^{k\cdot l}\eta\wedge\omega$
+\end{itemize}
+\end{properties}
+\end{definition}
+
+\begin{definition}
+Let $V,W$ be vector spaces $f:V\rightarrow W$ be a linear transformation. \\ If $\mat$ is a linear functional on $W$, $\mat : W\rightarrow \RR$ then \[\mat \circ f\] is a linear functional on $V$.
+
+\[\begin{diagram}
+\node{V} \arrow{e,t}{f}  \arrow{se,b}{\mat \circ f}
+\node{W}  \arrow{s,r}{\mat} \\
+ \node[2]{\RR}
+\end{diagram}\]
+
+\begin{notation}
+\[f^{*}(\mat) = \mat \circ f\]
+$f^{*}(\mat)$ is called the pullback of $\mat$ by $f$.
+\[f^{*}:W^{*} \rightarrow V^{*}\]
+by $f^{*}(\mat) = \mat \circ f$
+\end{notation}
+
+\end{definition}
+
+\begin{definition}[Pullback of Tensors]
+If $\mat$ is a $k$-tensor on $W$ ie $\mat \in \maj^k(W)$ we define the pullback $f^{*} \in \maj^k(V)$ by:
+\[f^{*}(\mat)(v_1, \dots , v_k) = \mat(f(v_1), \dots , f(v_k))\]
+This is a $k$-tensor on $V$.
+\begin{proof}[Need to show linearity in the $i^{th}$ entry]
+Let $v_i, v_i' \in V, \; \lambda \in \RR$.
+\begin{align*}
+f^{*}(\mat)(v_1,\dots,  \lambda v_i + v_i', \dots , v_k) &= \mat(f(v_1), \dots , f(\lambda v_i + v_i'), \dots , f(v_k))\\
+&= \mat(f(v_1), \dots , f(\lambda v_i) + f(v_i'), \dots , f(v_k))\\
+&= \lambda\mat(f(v_1), \dots , f( v_i), \dots , f(v_k))+ \mat(f(v_1), \dots , f(v_i'), \dots , f(v_k))\\
+&=\lambda f^{*}(\mat)(v_1,\dots, v_i, \dots , v_k) + f^{*}(\mat)(v_1,\dots, v_i', \dots , v_k)
+\end{align*}
+\end{proof}
+\end{definition}
+
+\begin{properties}\quad\\
+\begin{enumerate}[(a)]
+\item \[ f^*(\mat \otimes \mas) = f^*(\mat)\otimes f^*(\mas) \quad \mat \in \maj^k(W), \; \mas \in \maj^l(W)\]
+\item \[ f^*(\mat \wedge \mas) = f^*(\mat)\wedge f^*(\mas) \quad \mat \in \Lambda^k(W), \; \mas \in \Lambda^l(W)\]
+\end{enumerate}
+\end{properties}
+
+\begin{theorem}\quad \\
+\begin{enumerate}[(a)]
+\item if $\mas \in \maj^k(V), \; \mat \in \maj^l(V)$ and $\alt(\mas)=0$ then 
+\[\alt(\mas\otimes\mat) = \alt(\mat\otimes\mas)=0\]
+\item if $\omega \in \Lambda^k(V), \; \eta \in \Lambda^l(V), \; \mathcal{G} \in \Lambda^m(V)$ then
+\[\alt(\alt(\omega\otimes\eta)\otimes\mathcal{G}) = \alt(\omega\otimes\eta\otimes\mathcal{G}) = \alt(\omega\otimes\alt(\eta\otimes\mathcal{G}) )\]
+\item  if $\omega \in \Lambda^k(V), \; \eta \in \Lambda^l(V), \; \mathcal{G} \in \Lambda^m(V)$ then
+\[(\omega\wedge\eta)\wedge\mathcal{G} = \omega\wedge(\mathcal{G}\wedge\eta) = \frac{(k+l+m)!}{k!\,l!\,m!}\alt(\omega\otimes\eta\otimes\mathcal{G})\]
+\end{enumerate}
+
+\begin{proof}\quad \\
+Proof of (a): 
+\[\alt(\mas\otimes\mat) = \frac{1}{(k+l)!}\sum\limits_{\sigma \in S_{k+l}}sgn(\sigma)(\mas\otimes\mat)(w_{\sigma(1)}, \dots, w_{\sigma(k)}, w_{\sigma(k+1)}, \dots , w_{\sigma(k+l)})\]
+Let $G$ be the subgroup of $S_{k+l}$ such that
+\[G= \left\{ \sigma \in S_{k+l} : \begin{aligned} \sigma(k+1) &= k+1\\ &\vdots \\ \sigma(k+l) &= k+l \end{aligned} \right\}\]
+The contribution of these to the sum is:
+\begin{align*}
+&\frac{1}{(k+l)!}\sum\limits_{\sigma \in G}sgn(\sigma)\mas(w_{\sigma(1)}, \dots, w_{\sigma(k)})\cdot\mat( w_{k+1}, \dots , w_{k+l})\\
+&=\frac{1}{(k+l)!}k!\,\alt(\mas)(w_1, \dots, w_k)\cdot\mat( w_{k+1}, \dots , w_{k+l})=0
+\end{align*}
+Let $G\sigma_0$ be a coset of $G$ in $S_{k+l}, \; \sigma_0 \neq 0$
+\[G\sigma_0 = \{\sigma'\cdot\sigma_0:\sigma' \in G\}\]
+define 
+\[(z_1, \dots, z_{k+l}) = (w_{\sigma_0(1)}, \dots , w_{\sigma_0(k+l)})\]
+The contribution of these elements is
+\begin{align*}
+&\frac{1}{(k+l)!}\sum\limits_{\sigma' \in G}sgn(\sigma'\cdot\sigma_0)\mas(z_{\sigma'(1)}, \dots, z_{\sigma'(k)})\cdot\mat(z_{\sigma'(k+1)}, \dots, z_{\sigma'(k+l)})\\
+&= \frac{1}{(k+l)!}\sum\limits_{\sigma' \in G}sgn(\sigma')sgn(\sigma_0)\mas(z_{\sigma'(1)}, \dots, z_{\sigma'(k)})\cdot\mat(z_{k+1}, \dots, z_{k+l})\\
+&=\frac{1}{(k+l)!}sgn(\sigma_0)\mat(z_{k+1}, \dots, z_{k+l})k!\alt(\mas)(z_1, \dots, z_{k}) =0 
+\end{align*}
+Proof of (b):
+\[\alt(\omega\otimes\eta) - \omega\otimes\eta =\mas\]
+\begin{align*}
+\alt(\mas) &= \alt(\alt(\omega\otimes\eta) - \omega\otimes\eta) = \alt(\alt(\omega\otimes\eta)) - \alt(\omega\otimes\eta)\\ &= \alt(\omega\otimes\eta) - \alt(\omega\otimes\eta) = 0 \end{align*}
+Apply (a) with $\mas$
+\[alt(\mas\otimes\\mathcal{G}) = 0\]
+\[\alt([\alt(\omega\otimes\eta) - \omega\otimes\eta]\otimes\mathcal{G}) = 0\]
+\[\alt(\alt(\omega\otimes\eta)\otimes\mathcal{G}) - \alt(\omega\otimes\eta\otimes\mathcal{G}) = 0\]
+Proof of (c):
+\begin{align*}
+(\omega\wedge\eta)\wedge\mathcal{G} &=  \frac{((k+l)+m)!}{(k+l)!\,m!}\alt((\omega\wedge\eta)\otimes\mathcal{G})\\
+&=\frac{((k+l)+m)!}{(k+l)!\,m!}\alt(\frac{(k+l)!}{k!\,l!}\alt(\omega\otimes\eta)\otimes\mathcal{G})\\
+&=\frac{((k+l)+m)!}{\cancel{(k+l)!}\,m!}\frac{\cancel{(k+l)!}}{k!\,l!}\alt(\alt(\omega\otimes\eta)\otimes\mathcal{G})\\
+&=  \frac{(k+l+m)!}{k!\, l!\,m!}\alt(\omega\otimes\eta\otimes\mathcal{G})
+\end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Let $dim\, V = n$, then the following is a basis for $\Lambda^k(V)$
+\[\varphi_{i_1}\wedge\cdots\wedge\varphi_{i_k}, \quad 1 \leq i_1 < \dots < i_k \leq n. \]
+therefore
+\[dim\, \Lambda^k(V) = {n \choose k}\] Since choosing a subset of $k$ items from a set of $n$ items and reordering.
+\begin{proof}
+$\mat \in \Lambda^k(V)$ then $\alt(\mat) = \mat$. Since \[\varphi_{i_1} \otimes \cdots \otimes \varphi_{i_k}\] is a basis for $\maj^k(V)$ we have
+\[\mat = \sum\limits{i_1, \dots , i _k = 1, \dots , n}a^{i_1\cdots i_k}\varphi_{i_1} \otimes \cdots \otimes \varphi_{i_k}\]
+Apply $\alt$ on both sides
+\[ \mat = \sum\limits{i_1, \dots , i _k}a^{i_1\cdots i_k}\alt(\varphi_{i_1} \otimes \cdots \otimes \varphi_{i_k})\]
+$\alt(\varphi_{i_1} \otimes \cdots \otimes \varphi_{i_k})$ is a multiple of $\varphi_{i_1}\wedge\cdots\wedge\varphi_{i_k}$. Since 
+\[\varphi_{i_j}\wedge\varphi_{i_s} = - \varphi_{i_s}\wedge\varphi_{i_j}\]
+you can reorder to 
+\[\sum\limits_{i_1 < \dots < i_k}\]
+So $\varphi_{i_1}\wedge\cdots\wedge\varphi_{i_k}$ with $i_1 <\dots<i_k$ span $\Lambda^k(V)$. It is easy to see that they are L.I.
+\end{proof}
+\end{theorem}
+
+\begin{example}
+$dim\,V = 3$, $k=1$
+\[dim\,\Lambda^1(V) = {3 \choose 1} = 3\]
+\[\Lambda^1(V) = \maj^1(V) = V^{*}\]
+if $\{v_i\}_{i=1,2,3}$ is a basis of $V$, then the dual basis $\varphi_1, \varphi_2, \varphi_3$ is a basis of $\Lambda^1(V)$
+\end{example}
+
+\begin{example}
+$dim\,V = 3$, $k=2$
+\[dim\,\Lambda^2(V) = {3 \choose 2} = 3\]
+\[\Lambda^1(V) = \maj^1(V) = V^{*}\]
+basis is \[\varphi_1\wedge\varphi_2 ,\; \varphi_1\wedge\varphi_3 \; and  \;\varphi_2\wedge\varphi_3\]
+\begin{align*}
+(\varphi_{1}\wedge\varphi_{2})(w_1,w_2)&= \frac{(1+1)!}{1!\,1!}\alt(\varphi_{1}\otimes\varphi_{2})(w_1,w_2)\\
+&=2!\frac{1}{2!}(\varphi_{1}\otimes\varphi_{2}(w_1,w_2) -\varphi_{1}\otimes\varphi_{2}(w_2,w_1))\\
+&=\varphi_1(w_1)\cdot\varphi_2(w_2) - \varphi_1(w_2)\cdot\varphi_2(w_1) \\
+&=\varphi_{1}\otimes\varphi_{2}(w_1,w_2) - \varphi_{2}\otimes\varphi_{1}(w_1,w_2)\\
+&\quad\\
+\therefore \; \varphi_1\wedge\varphi_2 & = \varphi_{1}\otimes\varphi_{2} -\varphi_{2}\otimes\varphi_{1}\\
+ \varphi_1\wedge\varphi_3 & = \varphi_{1}\otimes\varphi_{3} -\varphi_{3}\otimes\varphi_{1}\\
+ \varphi_2\wedge\varphi_3 & = \varphi_{2}\otimes\varphi_{3} -\varphi_{3}\otimes\varphi_{2}\\
+&\quad\\
+\therefore \; \varphi_1\wedge\varphi_2 & = \varphi_{1}\otimes\varphi_{2} -\varphi_{2}\otimes\varphi_{1} = - \varphi_2\wedge\varphi_1\\
+\varphi_1\wedge\varphi_3 &= -\varphi_3\wedge\varphi_1\\
+\varphi_2\wedge\varphi_3 &= -\varphi_3\wedge\varphi_2\\
+&\quad\\
+(\varphi_1\wedge\varphi_1)(w_1, w_2)  &= \varphi_1(w_1)\varphi_1(w_2) - \varphi_1(w_1)\varphi_1(w_2) =0
+\end{align*}
+\[\therefore \; \boxed{\varphi_1\wedge\varphi_1 = \varphi_2\wedge\varphi_2 = \varphi_3\wedge\varphi_3 = 0}\]
+\end{example}
+
+\begin{example}
+$dim\,V = 3$, $k=3$
+\[dim\,\Lambda^3(V) = {3 \choose 3} = 1\quad basis:\; \varphi_1\wedge\varphi_2\wedge\varphi_3\]
+\begin{align*}
+(\varphi_1\wedge\varphi_2\wedge\varphi_3)(w_1,w_2,w_3) &= 3!\alt(\varphi_1\otimes\varphi_2\otimes\varphi_3)\\
+&=\sum\limits_{\sigma \in S_3}sgn(\sigma)\varphi_1\otimes\varphi_2\otimes\varphi_3(w_{\sigma(1)}, w_{\sigma(2)}, w_{\sigma(3)})\\ 
+&=\varphi_1(w_1)\varphi_2(w_2)\varphi_3(w_3) - \varphi_1(w_2)\varphi_2(w_1)\varphi_3(w_3)\\ & \quad - \varphi_1(w_3)\varphi_2(w_2)\varphi_3(w_1) - \varphi_1(w_1)\varphi_2(w_3)\varphi_3(w_2) \\ & \quad + \varphi_1(w_2)\varphi_2(w_3)\varphi_3(w_1) + \varphi_1(w_3)\varphi_2(w_1)\varphi_3(w_2)
+\end{align*}
+\begin{align*}
+\varphi_1\wedge\varphi_2\wedge\varphi_3 &= \varphi_1\otimes\varphi_2\otimes\varphi_3 - \varphi_2\otimes\varphi_1\otimes\varphi_3 - \varphi_2\otimes\varphi_2\otimes\varphi_1\\ & \quad- \varphi_1\otimes\varphi_3\otimes\varphi_2 + \varphi_3\otimes\varphi_1\otimes\varphi_2 + \varphi_2\otimes\varphi_3\otimes\varphi_1
+\end{align*}
+\end{example}
+
+\subsection{Differential Forms}
+
+\begin{definition}[Tangent Space]\quad \\
+\[\begin{diagram}
+\node{P}\arrow{n} \arrow{s} \arrow{sse} \arrow[1]{nw} \arrow{sw} \arrow[2]{e}\\
+\node{}\\
+\node{}
+\end{diagram} \]
+\[\RR_p^n = \{(p,v) : v \in \RR^n\} \quad \text{This is the tangent space at p}\]
+\begin{align*}
+(p,v) + (p,w) &= (p,v+w)\\
+\lambda(p,v) &= (p,\lambda v) 
+\end{align*}
+with these opperations $\RR_p^n$ is a vector space.
+The opperation $(p,v) + (q,w)$ makes no sense if $p \neq q$. 
+\begin{notation} $V_p = (p,v)$ \end{notation}
+on $\RR_p^n$ we have:
+\[ \langle (p,v), (p,w)\rangle = \langle v,w \rangle \]
+\end{definition}
+
+\begin{definition}[Vector Field]
+A vector field in $\RR^n$ is a function
+\[F:p \rightarrow F(p)\in \RR_p^n\]
+\[F(p) = (p,v)\]
+\[v=(F^1(p), \dots , F^n(p))\]
+\begin{properties} \quad \\
+\begin{itemize}
+\item if the components $F^i, \; i \in \{1, \dots, n\}$ are continuous, the vector field is continuous
+\[F^i:p\rightarrow F^i(p)\]
+\item if the components are differentiable then the vector function is differentiable.
+\item if $F,G$ are vector fields in $\RR^n$, then $F+G$ is also a vector field in $\RR^n$
+\[F+G(p) = F(p) + G(p)\]
+\item $\lambda F$ is a vector field $\forall \lambda \in \RR$ and 
+\[ (\lambda F)(p) = \lambda \cdot F(p)\]
+\item if $f:\RR^n \rightarrow \RR$ is a function (continuous and differentiable) then $f\cdot F$ is a new vector field on $\RR^n$.
+\[f\cdot F(p) = f(p)\cdot F(p)\]
+\end{itemize}
+\end{properties}
+\end{definition}
+
+\begin{definition}[Divergence]
+If $F$ is a vector field then its divergence is defined to be:
+\[(\dive F )(p) = \sum\limits_{i=1}^{n}D_iF^i(p) \in \RR\]
+So $\dive F : \RR^n \rightarrow  \RR$. 
+\begin{notation} \[\dive F = \nabla \cdot F\] \end{notation}
+\end{definition}
+
+\begin{definition}[k-form]
+Given $p \in \RR^n$, let $\omega(p)\in \Lambda^k(\RR_p^k) $
+\[\omega(p) = \sum\limits_{i_1<\dots< i_k}\omega_{i_1\cdots i_k}(p)\varphi_{i_1}(p)\wedge\cdots\wedge\varphi_{i_k}(p)\]
+it is defined by ${n \choose k}$ functions $p \rightarrow \omega_{i_1\cdots i_k}(p), \; i_1<\cdots <i_k$
+\begin{properties}\quad \\
+\begin{itemize}
+\item if these functions are continuous, then the k-form is continuous. 
+\item if these functions are differentiable, then $\omega$ is a differential k-form.
+\item if $\omega$ and $\eta$ are differentiable k-forms on $\RR^n$, $\omega + \eta$ is a differentiable k-form on $\RR^n$
+\[(\omega + \eta)(p) = \omega(p) + \eta(p)\]
+\item if $f:\RR^n \rightarrow \RR$ is a differentiable function then $f\cdot\omega$ is a differentiable k-form.
+\[(f\cdot\omega)(p) = f(p)\omega(p)\]
+\item if $\omega$ is a differentiable k-form and $\eta$ is a differentiable l-form, then $\omega\wedge\eta$ is a differentiable $(k+l)$- form. 
+\[(\omega\wedge\eta)(p) = \omega(p)\wedge\eta(p)\]
+\end{itemize}
+\end{properties}
+\end{definition}
+
+\begin{definition}
+Let $f:\RR^n \rightarrow \RR$ be differentiable, then 
+\[Df(p):\RR^n \rightarrow \RR\]
+is a linear map
+\[Df(p) \in (\RR_p^n)^*  = \maj^1(\RR_p^n) = \Lambda^1(\RR_p^n)\]
+\end{definition}
+
+\begin{note}
+we define the following 1-form
+\[df(p) \in \Lambda^1(\RR_p^n)\]
+\[df(p)(V_p) = Df(p)(v), \quad V_p= (v,p)\]
+Let $f=\pi^i$, the projection into the i-component.
+\[\pi^i(x^1, \dots, x^n) = x^i \]
+is a linear map, sometimes denoted $x^i(x) = x^i$
+\[d\pi^i(p)(V_p) = D\pi^i(p)(v) =\pi^i(p)(v) = \pi^i(v) = v^i\]
+But this is the same as $\varphi_i(v)$
+\[\therefore \; d\pi^i = \varphi_i = dx^i\]
+A differentiable k-form on $\RR^n$ will look like 
+\[\omega(p) = \sum\limits_{i_1<\dots< i_k}\omega_{i_1\cdots i_k}(p)dx^{i_1}(p)\wedge\cdots\wedge dx^{i_k}(p)\]
+\[\omega = \sum\limits_{i_1<\dots< i_k}\omega_{i_1\cdots i_k}dx^{i_1}\wedge\cdots\wedge dx^{i_k}\]
+\end{note}
+
+
+\begin{example} $\RR^2:(x^1, x^2 ) = (x,y)$ ie $n=2$
+\begin{alignat*}{2}
+k&=0 &\qquad &\omega = f(x,y)\\
+k&=1 &\qquad &\omega = f(x,y)dx + g(x,y)dy\\
+k&=2 &\qquad &\omega = f(x,y,z)dx\wedge dy
+\end{alignat*}
+\end{example}
+
+\begin{example} $\RR^3:(x^1, x^2 , x^3) = (x,y,z)$
+\begin{alignat*}{2}
+k&=0 &\qquad &\omega = f(x,y,z)\\
+k&=1 &\qquad &\omega = f(x,y,z)dx + g(x,y,z)dy + h(x,y,z)dz\\
+k&=2 &\qquad &\omega = f(x,y,z)dx\wedge dy + g(x,y,z)dx\wedge dz + h(x,y,z)dy\wedge dz\\
+k&=3 &\qquad &\omega = f(x,y,z)dx\wedge dy \wedge dz
+\end{alignat*}
+\[dx\wedge dx = dy\wedge dy =dz\wedge dz =0\]
+\begin{align*}
+dx\wedge dy &= -dy \wedge dx\\
+dx\wedge dz &= -dz \wedge dx\\
+dy\wedge dz &= -dz \wedge dy 
+\end{align*}
+\end{example}
+
+\begin{theorem}
+Let $f:\RR^n \rightarrow \RR$ be differentiable, then the 1-form $df$ is:
+\[df = D_1fdx^1 + D_2fdx^2 + \cdots + D_nfdx^n \]
+\begin{proof}
+$df(p) \in \Lambda^1(\RR_p^n)$
+\[df(p)(V_p) = df(p)(v) = (D_1f(p)dx^1(p)+ \cdots + D_nf(p)dx^n(p))\cdot \left(\! \!\begin{array}{c} v^1\\ \vdots \\ v^n \end{array} \! \! \right) = \sum\limits_{i=1}^{n}D_if(p)v^i \]
+Calculate:
+\begin{align*}
+(D_1fdx^1 + \cdots + D_nfdx^n )(p)(V_p) &= [D_1f(p)dx^1(p)+ \cdots + D_nf(p)dx^n(p)] (V_p)\\
+&=D_1f(p)dx^1(p)(V_p)+ \cdots + D_nf(p)dx^n(p)(V_p)\\
+&=[D_1f(p)v^1+ \cdots + D_nf(p)v^n\\
+&=\sum\limits_{i=1}^{n}D_if(p)v^i 
+\end{align*}
+\end{proof}
+\end{theorem}
+
+\begin{example}
+for $\RR^3$
+\[ df = \frac{df}{dx}dx + \frac{df}{dy}dy + \frac{df}{dz}dz \]
+\end{example}
+
+\begin{definition}[The Opperator $d$ on $k$-forms]
+\[\omega = \sum\limits_{i_1<\dots <i_k}\omega_{i_1\cdots i_k}dx^{i_1}\wedge\cdots\wedge dx^{i_k}\quad \text{(k-form)}\]
+\[d\omega = \sum\limits_{i_1<\dots <i_k}\sum\limits_{i=1}^nD_i\omega_{i_1\cdots i_k}x^1\wedge dx^{i_1}\wedge\cdots\wedge dx^{i_k}\quad \text{(k+1)-form}\]
+\end{definition}
+
+\begin{example}
+$n=3, \; k=1$
+\[\omega  = f\,dx + g\,dy + h\,dz\]
+\begin{align*}
+d\omega &= \frac{df}{dx}\cancel{dx\wedge dx} + \frac{df}{dy}dy\wedge dx + \frac{df}{dz}dz\wedge dx\\
+& \quad + \frac{dg}{dx}dx\wedge dy + \frac{dg}{dy}\cancel{dy\wedge dy} + \frac{df}{dz}dz\wedge dy\\
+& \quad + \frac{dh}{dx}dx\wedge dz + \frac{dh}{dy}dy\wedge dz + \frac{dh}{dz}\cancel{dz\wedge dz} \\
+&=  \left(\frac{dg}{dx} - \frac{df}{dy} \right) dx\wedge dy + \left(\frac{dh}{dy} - \frac{dg}{dz} \right) dy\wedge dz +\left(\frac{dh}{dx} - \frac{df}{dz} \right) dx\wedge dz  
+\end{align*}
+
+\[\begin{vmatrix} i & j & k\\ dx &dy &dz \\ f &g &h \end{vmatrix} =  \left(\frac{dh}{dy} - \frac{dg}{dz} \right)\mathbf{i}  - \left(\frac{dh}{dx} - \frac{df}{dz} \right) \mathbf{j} +  \left(\frac{dg}{dx} - \frac{df}{dy} \right) \mathbf{z} \]
+\[\mathbf{i} \leftrightarrow dy\wedge dz \quad \mathbf{j} \leftrightarrow dz \wedge dx \quad \mathbf{k} \leftrightarrow dx \wedge dy\]
+\end{example}
+
+\begin{example}
+$n=3, \; k=2$
+\[\omega  = f \,dy \wedge dz + g\, dz \wedge  dx  + h \,dx \wedge dy\]
+\begin{align*} d\omega &= \frac{df^1}{dx}dx\wedge dy \wedge dz + \frac{df^1}{dy}dy\wedge dy \wedge dz + \frac{df^1}{dz}dz\wedge dy \wedge dz\\
+& \quad +\frac{df^2}{dx}dx\wedge dz \wedge dx + \frac{df^2}{dy}dy\wedge dz \wedge dx + \frac{df^2}{dz}dz\wedge dz\wedge dx\\
+& \quad + \frac{df^3}{dx}dx\wedge dx \wedge dy + \frac{df^3}{dy}dy\wedge dx \wedge dy + \frac{df^3}{dz}dz\wedge dx \wedge dy\\
+&= \left( \frac{df^1}{dx} + \frac{df^2}{dy} + \frac{df^3}{dz} \right)dx\wedge dy \wedge dz
+\end{align*}
+\end{example}
+
+\begin{example} $2$-form $\leftrightarrow F=(f^1, f^2, f^3)$
+\[\dive F = \frac{df^1}{dx} + \frac{df^2}{dy} + \frac{df^3}{dz} \leftrightarrow d\omega\]
+\end{example}
+
+\begin{example}
+$n=3, \; k=3$
+\[\omega = f \,dx\wedge dy \wedge dz\] 
+\[d\omega = 0 \qquad \text{4-form on }\RR^3 \quad {3 \choose 4}=0\]
+\end{example}
+
+\begin{example}
+$n=2, \;k=1$
+\[\omega = f\, dx + g\,dy\]
+\begin{align*}
+d\omega &= \frac{df}{dx}dx\wedge dx + \frac{df}{dy}dy\wedge dx + \frac{dg}{dx}dx\wedge dy + \frac{dg}{dy}dy\wedge dy\\
+&= \left(\frac{dg}{dx} -  \frac{df}{dy}\right)dx \wedge dy
+\end{align*}
+\end{example}
+
+\begin{example}
+$n=2, \;k=2$
+\[\omega = f\, dx\wedge dy\]
+\[d\omega =0\]
+\end{example}
+\begin{example}
+$n=1, \;k=1$
+\[\omega = f\, dx\]
+\[d\omega =0\]
+\end{example}
+
+\begin{theorem}\quad \\
+\begin{enumerate}[(a)]
+\item $d(\omega + \eta) = d(\omega) + d(\eta)$
+\item if $\omega$ is a k-form,  $\eta$ is an l-form,  $\omega\wedge\eta$ is a $(k+l)$- form.
+\[d(\omega\wedge\eta) = (d\omega)\wedge\eta + (-1)^k\omega\wedge(d\eta)\]
+\item $d(d\omega) = 0$
+\end{enumerate}
+
+\begin{proof}\quad\\
+(c):
+\[\omega = \sum\limits_{i_1<\dots <i_k}\omega_{i_1\cdots i_k}dx^{i_1}\wedge\cdots\wedge dx^{i_k}\]
+
+\begin{align*}
+d(d\omega) &= d\left(\sum\limits_{i_1<\dots <i_k}\sum\limits_{i=1}^n D_i\omega_{i_1\cdots i_k}x^i\wedge dx^{i_1}\wedge\cdots\wedge dx^{i_k}\right)\\
+&=\sum\limits_{i_1<\dots <i_k}\sum\limits_{i=1}^n\sum\limits_{j=1}^n D_j\left( D_i\omega_{i_1\cdots i_k}\right)dx^j\wedge dx^i\wedge dx^{i_1}\wedge\cdots\wedge dx^{i_k}
+\end{align*}
+if $i=j$ then $dx^1\wedge dx^j =0$, if $i \neq j: \; (i,j) , (j,i)$
+\[  D_jD_i\omega_{i_1\cdots i_k}dx^j\wedge dx^i -D_iD_j\omega_{i_1\cdots i_k}\overset{swapped\: in\: i,j}{ dx^j\wedge dx^i}\]
+for functions which have continuous mixed partial derivitives we have proved 
+\[D_iD_j\omega_{i_1\cdots i_k}= D_jD_i\omega_{i_1\cdots i_k}\]
+\[\Rightarrow \text{property }(c)\]
+(b):\quad \\
+Take
+\[\omega\wedge\eta = \sum\limits_{i_1<\dots <i_k} \sum\limits_{j_1<\dots <j_c}\omega_{i_1\cdots i_k}\eta_{j_1\cdots j_c}dx^{i_1}\wedge\cdots\wedge dx^{i_k}\wedge dx^{j_1}\wedge dx^{j_c}\]
+
+
+
+\begin{align*} d(\omega\wedge\eta) &= \sum\limits_{i_1<\dots <i_k} \sum\limits_{j_1<\dots <j_c}\sum\limits_{\alpha =1}^{n}D_\alpha(\omega_{i_1\cdots i_k}\eta_{j_1\cdots j_c})dx^\alpha\wedge dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\wedge  dx^{j_1}\wedge dx^{j_c}\\
+\intertext{\[= \sum\limits_{i_1<\dots <i_k} \sum\limits_{j_1<\dots <j_c}\sum\limits_{\alpha =1}^{n}((D_\alpha\omega_{i_1\cdots i_k})\eta_{j_1\cdots j_c} + \omega_{i_1\cdots i_k}(D_\alpha\eta_{j_1\cdots j_c}))dx^\alpha\wedge dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\wedge  dx^{j_1}\wedge dx^{j_c}\]} 
+&= \sum\limits_{i_1<\dots <i_k} \sum\limits_{j_1<\dots <j_c}\sum\limits_{\alpha =1}^{n}(D_\alpha\omega_{i_1\cdots i_k})\eta_{j_1\cdots j_c}dx^{\alpha}\wedge dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\wedge  dx^{j_1}\wedge dx^{j_c}\\
+&\quad + \sum\limits_{i_1<\dots <i_k} \sum\limits_{j_1<\dots <j_c}\sum\limits_{\alpha =1}^{n} \omega_{i_1\cdots i_k}(D_\alpha\eta_{j_1\cdots j_c})\overset{*}{dx^\alpha}\wedge dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\wedge  dx^{j_1}\wedge dx^{j_c}
+\intertext{* shift the $dx^\alpha$ term down to the one place infront of the $dx^{j_1}$ term.}
+&= \left(\sum\limits_{i_1<\dots <i_k}\sum\limits_{\alpha =1}^{n}D_\alpha\omega_{i_1\cdots i_k}dx^{\alpha}\wedge dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\right)\wedge  \left( \sum\limits_{j_1<\dots <j_c}\eta_{j_1\cdots j_c} dx^{j_1}\wedge dx^{j_c}\right) \\
+&\quad + \left(\sum\limits_{i_1<\dots <i_k} \omega_{i_1\cdots i_k} dx^{i_1}\wedge\cdots\wedge  dx^{i_k}\right) \wedge(-1)^k\left( \sum\limits_{j_1<\dots <j_c}\sum\limits_{\alpha =1}^{n}D_\alpha\eta_{j_1\cdots j_c}dx^\alpha\wedge  dx^{j_1}\wedge dx^{j_c}\right)\\
+&\quad \\
+&= d(\omega)\wedge\eta + (-1)^k\omega\wedge d(\eta)
+\end{align*}
+\end{proof}
+\end{theorem}
+
+\subsection{Closed and Exact forms}
+
+\begin{definition}
+Let $\omega$ be a $k$-form, $\omega$ is called closed if
+\[d\omega = 0\]
+\end{definition}
+
+\begin{definition}
+Let $\omega$ be a $k$-form, $\omega$ is called exact if $\exists$ a (k-1)-form $\eta$ such that:
+\[ d\eta = \omega \]
+\end{definition}
+
+\begin{proposition}
+If $\omega$ is exact then it is closed.
+\begin{proof}
+\[d(\omega) = d(d(\eta)) = 0\]
+\end{proof}
+\end{proposition}
+
+\begin{example}
+$n=2,\;k=1$
+\[\omega = p(x,y)dx + q(x,y)dy\]
+\[d\omega = \left(-\frac{dp}{dy} + \frac{dq}{dx}\right)dx\wedge dy\]
+$\omega$ is closed if $\frac{dp}{dy} = \frac{dq}{dx}$
+\end{example}
+
+\begin{example}
+when $\omega$ is an exact 1- form we have a $\eta = f$ 0-form such that
+\[\omega = d\eta = df = \frac{df}{dx}dx + \frac{df}{dy}dy\]
+\[grad(f) =  \frac{df}{dx}\mathbf{i} + \frac{df}{dy}\mathbf{j}\]
+\end{example}
+\begin{definition}
+For a vector field 
+\[F=P\mathbf{i} + Q\mathbf{j}\]
+if
+\[\frac{dP}{dy} = \frac{dQ}{dx}\]
+we call it a conservative field. Also $F$ is a conservative field if
+\[F = grad(f)\]
+\end{definition}
+
+\begin{example}
+\[\omega = xy^2dx + ydy\]
+\begin{align*}
+d\omega &= \frac{d(xy^2)}{dy}dy\wedge dx + \frac{d(y)}{dx}dx\wedge dy\\
+&= -2xydy\wedge dx \neq 0 \end{align*}
+\[\Rightarrow \text{not closed and not exact}\] 
+\end{example}
+
+\begin{example}
+\[\omega = xy^2dx + x^2ydy\]
+\[d\omega = 2xydy\wedge dx + 2xydx\wedge dy = 0 \]
+\[\Rightarrow \text{closed}\] 
+Is it exact?
+\[\exists f=\frac{x^2y^2}{2} +h\]
+\[\frac{df}{dx}dx + \frac{df}{dy}dy = xy^2dx + x^2ydy =\omega\]
+so it is also exact.
+\end{example}
+
+\begin{proposition}
+If $n>2, \; k=1$ 
+\[\omega = \omega_1dx^1 + \cdots + \omega_ndx^n\]
+is closed. Is it exact? i.e does there exist $f$ st
+\[\omega = df = D_1fdx^1 + \cdots + d_nfdx^n\]
+$ \omega_i = D_if$ and can assume $f(0)=0$you can recover the $f$ by integration in one variable t. $f:\RR^n \rightarrow \RR$.
+\[f(x) -\cancel{f(0)} = \int\limits_{0}^1\frac{d}{dt}[f(tx)]dt\]
+\begin{align*}
+f(x) &= \int\limits_{0}^1\sum\limits_{\alpha=1}^nD_\alpha f(tx)\frac{d}{dt}(tx^\alpha)dt\\
+ &= \int\limits_{0}^1\sum\limits_{\alpha=1}^nD_\alpha f(tx)x^\alpha dt\\
+&= \int\limits_{0}^1\sum\limits_{\alpha=1}^n\omega_\alpha(tx)x^\alpha dt
+\end{align*}
+\end{proposition}
+
+\begin{definition}[Star-Shaped region]  
+$A$ is a star-shaped region with respect to 0 (or p) if  $\forall t \in [0,1], \; \forall x \in A$
+ \[t\cdot x \in A\]
+i.e.\[p +t(x-p) \in A\]
+\end{definition}
+
+\begin{lemma}[Poincaré Lemma]
+If $A$ is star-shaped with respect to 0 and $\omega$ is a closed form on $A$ then $\omega$ is an exact form on $A$. 
+\begin{proof}
+For any $l$form $\omega$, i will define an (l-1)-form $I(\omega)$ such that 
+\begin{itemize}
+\item \[I(\lambda\omega_1 + \omega_2) = \lambda I(\omega_1) + I(\omega_2)\]
+\item \[I(0) =0\]
+\item \[\underbracket[1pt][2pt]{d(\underbracket[1pt][2pt]{I(\omega)}_{l-1})}_{l} +\underbracket[1pt][2pt]{I(\underbracket[1pt][2pt]{d(\omega)}_{l+1})}_{l} = \omega\]
+\end{itemize}
+Then if $\omega$ is closed, $d\omega =0$ so $I(d\omega)=0$ so we get 
+\[d(I(\omega)) = \omega \Rightarrow \omega \; is \; exact\]
+\[\omega = \sum\limits_{i_1<\dots <i_l}\omega_{i_1\cdots i_l}dx^{i_1}\wedge\cdots\wedge dx^{i_l}\]
+\[I(\omega) = \sum\limits_{i_1<\dots <i_l}\sum\limits_{\alpha=1}^{l}(-1)^\alpha\int\limits_{0}^1 t^{l-1}\omega_{i_1\cdots i_l}(tx)x^{i_\alpha}dt\, dx^{i_1}\wedge\cdots\wedge \hat{dx^{\alpha}}\wedge\cdots\wedge dx^{i_l}\]
+\[I(0)=0 \qquad \text{trivial to show}\]
+\[I(\lambda\omega_1 + \omega_2) = \lambda I(\omega_1) + I(\omega_2) \qquad \text{trivial to show}\]
+\end{proof}
+\end{lemma}
+
+
 
 \end{document}
