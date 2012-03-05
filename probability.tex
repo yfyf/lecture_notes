@@ -3,7 +3,7 @@
 \usepackage{verbatim}
 \usepackage{enumerate}
 \usepackage{graphicx}
-\usepackage{amssymb}
+\usepackage{amssymb} 
 \usepackage{epstopdf}
 \usepackage{amsthm}
 \usepackage{mathtools}
@@ -11,6 +11,9 @@
 \usepackage{hyperref}
 \usepackage{cancel}
 \usepackage{bbold}
+\usepackage{framed}
+\usepackage[all]{xy}
+
 
 \setlength{\textwidth}{6.5in}
 \setlength{\oddsidemargin}{0in}
@@ -21,6 +24,7 @@
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0pt}
 
+
 \def\CC{\mathbb{C}}
 \def\MM{\mathbb{M}}
 \def\FF{\mathbb{F}}
@@ -29,19 +33,8 @@
 \def\RR{\mathbb{R}}
 \def\ZZ{\mathbb{Z}}
 \def\NN{\mathbb{N}}
-\def\gotha{\mathfrak{a}}
-\def\gothb{\mathfrak{b}}
-\def\gothm{\mathfrak{m}}
-\def\gotho{\mathfrak{o}}
-\def\gothp{\mathfrak{p}}
-\def\gothq{\mathfrak{q}}
-\DeclareMathOperator{\disc}{Disc}
-\DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Norm}{Norm}
-\DeclareMathOperator{\Trace}{Trace}
-\DeclareMathOperator{\Cl}{Cl}
+\def\FF{\mathcal{F}}
+
 \newcommand{\Perp}{\perp \! \! \! \perp}
 
 \def\head#1{\medskip \noindent \textbf{#1}.}
@@ -338,8 +331,8 @@ Normal:
 \subsection{Expectation and varience}
 
 \begin{remark}[Reminder from measure theory]\quad \\
-\begin{enumerate}
-\item \begin{align*} f &= \sum_{n}^{i=1}a_i\mathbb{1}_{B_i} \quad \text{(simple functions)}\\
+\begin{enumerate}  
+\item \begin{align*} f &= \sum_{n}^{i=1}a_i{\mathbb 1}_{B_i} \quad \text{(simple functions)}\\
 \int f dP &= \sum_{n}^{i=1}a_iP(B_i) \end{align*}
 \item $f \geq 0 $, take simple functions $f_n$ where $f_n \nearrow f$. Define
 \[\int f dP = \lim_{n \rightarrow \infty}\int f_n dP \quad \in [0,1]\]
@@ -949,7 +942,7 @@ Need to check someone elses notes cant read mine!
 and $X_n \rightarrow X$ a.s.
 \end{enumerate}
 \end{theorem}
-\begin{theorem}\label{weak2}[Useful definition of weak convergence]
+\begin{theorem}[Useful definition of weak convergence]\label{weak2}
 \[\mu_n \rightarrow \mu \;weakly \; \Rightarrow \int\limits_{\RR}hd\mu_n \rightarrow \int\limits_{\RR}hd\mu \]
 \[\forall h:\RR \rightarrow \RR \qquad \text{continuous and bounded}\]
 \end{theorem}
@@ -991,19 +984,488 @@ proof of (b): lets prove that the set of discontinuity points of $F$ is at most 
  \right\} \; \underset{\text{\normalsize and weak convergence}}{\text{Since  $X(\omega) \pm \delta$  are are continuity points of $F$}}\]
 \[\Rightarrow \exists N\; \forall n\geq N \quad F_n(X(\omega) - \delta) < \omega < F_n(X(\omega) + \delta) \]
 \[\Rightarrow X(\omega) - \delta < X_n(\omega) < X(\omega) + \delta\]
-
-
-
 \end{proof}
+
 \begin{proof}[Proof of $(\Rightarrow)$]
-we are given 
+Assume $\mu_n \rightarrow \mu$ weakly. BY $(2)$ we can pick $X_n,X$ with laws $\mu_n, \mu$ such that
+\[X_n \rightarrow X \; a.s.\]
+\[\int h d\mu_n = Eh(X_n) \underset{*}{\overset{DCT}{\rightarrow}} Eh(X) = \int h d\mu\]
+$(*)$  since $X_n \rightarrow X$ a.s $\Rightarrow h(X_n)\rightarrow h(X)$ continutiy of $h$ and since $h(X)$ bounded. 
 \end{proof}
 \begin{proof}[Proof of $(\Leftarrow)$]
-we are given 
+\begin{idea}
+\[F_X(X) = \mu_n((-\infty, X]) = \int{\mathbb 1}_{(-\infty, X]}d\mu_n \overset{*}{\rightarrow} \int{\mathbb 1}_{(-\infty, X]}d\mu = F(X)\]
+$(*)$ Problem: h is not continuous so we need to make it continuous.
+\end{idea}
+Let $X$ be a continuity point of $F$. Let $\delta >0$ and $h$ be :
+\[F_n(X) =  \int{\mathbb 1}_{(-\infty, X]}d\mu_n \geq \int hd\mu_n \]
+\[\lim\limits_{n\rightarrow \infty}\inf F_n(X) \geq \lim_{n\rightarrow \infty} \int h d\mu_n =  \int h d\mu_n \geq \int{\mathbb 1}_{(-\infty, X-\delta]}d\mu_n  = F(X-\delta) \]
+Let $\delta \rightarrow  0$ 
+\[\lim\limits_{n\rightarrow \infty}\inf F_n(X)  = \lim\limits_{\delta \downarrow 0}F(X-\delta) \overset{*}{=} F(X)\]
+$(*)$ as $X$ is a continuity point of $F$. 
+Take some $\delta >0$ and take $h$ to be :
+\[F_n(X) = \int{\mathbb 1}_{(-\infty,X]}d\mu_n \leq \int h d\mu_n\]
+\[\lim\limits_{n \rightarrow \infty}\sup F_n(X) \leq \lim\limits_{n \rightarrow \infty} \int h d\mu = \int h d\mu \leq  \int{\mathbb 1}_{(-\infty,X]}d\mu = F(X+\delta)\]
+Let $\delta \rightarrow 0$
+\[\lim\limits_{n \rightarrow \infty}\sup F_n(X) \leq \lim\limits_{\delta \downarrow 0} F(X+\delta) \overset{*}{=} F(X)\]
+$(*)$ since any distribution finction is right continuous.
+\[F(X) \leq \lim\limits_{n \rightarrow \infty} \inf F_n(X) \leq \lim\limits_{n\rightarrow \infty} \sup F_n(X) \leq F(X) \]
+\[\Rightarrow \lim\limits_{n \rightarrow \infty} F_n(X) = F(X)\]
 \end{proof}
 \begin{proof}[Proof of $(1)$]
-we are given 
+Suppose $X_n \rightarrow X$ a.s.
+\begin{align*}
+&\Rightarrow h(X_n)\rightarrow h(X) \quad \text{for $h$ continuous and bounded}\\
+&\overset{DCT}{\Rightarrow} Eh(X_n) \rightarrow Eh(X)\\
+&\Rightarrow \int h d\mu_n \rightarrow \int h d \mu \underset{\ref{weak2}}{\overset{thm}{\Rightarrow}} \mu_n \rightarrow \mu \text{ weakly}\end{align*}
+and so 
+\[X_n \overset{d}{\rightarrow} X\]
 \end{proof}
 \end{proof}
+
+\begin{definition}
+A function is $h:\RR\rightarrow \RR$ is called a $C^2$ function if it is twice differentiable, $h''$ is continuous and $h=0$ outside some bounded interval.
+\end{definition}
+
+\begin{definition}
+$\mu_n $ is called tight if for any $\epsilon > 0 \; \exists M>0$ such that
+\[\mu_n([-M,M])\geq 1-\epsilon \quad \forall n\]
+\[\mu_n(\RR \backslash[-M,M]) < \epsilon \quad \forall n\]
+\end{definition}
+
+\begin{theorem}[Usefull definition of weak convergence 2]
+\[\mu_n \rightarrow \mu \; weakly \; \Leftrightarrow \int h d\mu_n \rightarrow \int h d\mu\]
+for any $C^2$ test function.
+\begin{proof}
+$(\Rightarrow)$ obvious since any test function is continuous and bounded.\\
+$(\Leftarrow)$ 
+\begin{enumerate}[(a)]
+\item Right hand side $\Rightarrow \;\{\mu_n\}$ is tight. Let $\epsilon >0$ choose $M_1$ such that
+\[\mu[-M_1, M_1] \geq 1 - \tfrac{\epsilon}{2}\]
+we need 
+\begin{align*}
+\mu_n ([-M_1 -1 , M_1 +1]) &= \int{\mathbb 1}_{[-M_1 -1 , M_1 +1]}d\mu_n \geq \int h d\mu_n \rightarrow \int h d \mu \\
+&\geq \int{\mathbb 1}_{[-M_1 , M_1]}d\mu = \mu[-M_1, M_1] \geq 1 - \tfrac{\epsilon}{2}\end{align*}
+\[\mu_n ([-M_1 -1 , M_1 +1]) \geq  1 - \tfrac{\epsilon}{2}\quad \forall n \geq \;some \; N \]
+Choose $M_2$ such that
+\[\mu[-M_2, M_2] \geq 1 - \tfrac{\epsilon}{2} \quad \forall n \leq N\]
+Choose $M = \max\{M_1 +1, M_2\}$
+\[\Rightarrow \mu_n[-M,M] \geq  1 - \tfrac{\epsilon}{2}  \quad  \forall n\]
+\item Let $x$ be a continuity point of $F$. Let $\epsilon >0, \; \delta >0$, choose $M$ according to tightness property 
+\[F_n(X) = \int{\mathbb 1}_{(-\infty, X)}d\mu_n \geq \int h d\mu_n\]
+\begin{align*}
+\lim_{n \rightarrow \infty}\inf F_n(X) &\geq \lim_{n \rightarrow \infty}\int h d\mu_n = \int h d\mu \geq \int{\mathbb 1}_{(-\infty, X-\delta)}d\mu -  \int{\mathbb 1}_{(-\infty, -M)}d\mu \\
+&=F(x-\delta) - \mu(-\infty, -M) \geq F(X-\delta) - \epsilon
+\end{align*}
+\[\boxed{\lim_{n\rightarrow \infty}\inf F_n(X) \geq F(X) \quad as\; \epsilon,\delta \rightarrow 0}\]
+\[F_n(X) = \int{\mathbb 1}_{(-\infty, X]}d\mu_n = \mu(-\infty, -M] +  \int{\mathbb 1}_{(-M, X]}d\mu_n  \leq \epsilon + \int h d\mu_n\]
+\begin{align*}
+\lim_{n\rightarrow \infty}\sup F_n(X) &\leq \epsilon + \lim_{n \rightarrow \infty} \int h d\mu_n  = \epsilon +  \int h d\mu\\
+&\leq \epsilon + \int{\mathbb 1}_{(-\infty, X + \delta]}d\mu = \epsilon +F(X+\delta) \end{align*}
+\[\boxed{\lim_{n\rightarrow \infty}\sup F_n(X) \leq F(X) \quad as\; \epsilon,\delta \rightarrow 0}\]
+\[\Rightarrow \lim_{n\rightarrow \infty}F_n(X) = F(X)\]
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{definition}
+for a probability measure $\mu$ on $(\RR, \mathcal{B})$
+\[ \left.\begin{aligned}
+&\tilde{\mu}:\RR \rightarrow \CC\\
+&\tilde{\mu}(t) = \int\limits_{\RR}e^{itX}d\mu(x) \end{aligned} \right\} \quad \text{fourier transform of }\mu \]
+\end{definition}
+
+\begin{definition}
+for an integrable function $h:\RR \rightarrow \RR$
+\[ \left.\begin{aligned}
+&\tilde{h}:\RR \rightarrow \CC\\
+&\tilde{h}(t) = \int\limits_{\RR}e^{itX}h(x)dx \end{aligned} \right\} \quad \text{fourier transform of }h \]
+\end{definition}
+
+\begin{definition}
+if $X$ is a random variable
+\[\varphi_X:\RR \rightarrow \CC \qquad \varphi_X(t) = Ee^{itX}\]
+is the Characteristic function of $X$
+\end{definition}
+
+\begin{remark}\quad \\
+\begin{itemize}
+\item $\mu$ is the law of $X$
+\[ \varphi_X(t) = Ee^{itX} = \int e^{itX} d\mu(x) = \tilde{\mu}(t)\]
+\item if $\mu$ has density $h$ then 
+\[\tilde{\mu} = \tilde{h}\]
+\end{itemize}
+\end{remark}
+
+\begin{theorem}[Properties of the Characteristic Function]\quad \\
+\begin{enumerate}[(1)]
+\item $\varphi(0) = 1$
+\item $\varphi_{\lambda X}(t) = Ee^{it\lambda X} = \varphi_X(\lambda t)$
+\item if $X$ and $Y$ are independent then
+\[\varphi_{X+Y}(t) = Ee^{it(X+Y)} = Ee^{itX}\cdot Ee^{itY}= \varphi_X(t)\cdot \varphi_Y(t)\]
+\item $\varphi$ is continuous\\
+$t_n \rightarrow t$,
+\[\varphi(t_n) = Ee^{it_nX} \underset{*}{\overset{DCT}{\Rightarrow}} Ee^{itX} = \varphi(t)\]
+* since everything bounded by 1
+\end{enumerate}
+\end{theorem}
+
+\begin{example} if $(X_i)$ are iid with characteristic function $\varphi$ then
+\[\frac{\varphi_{X_1 + \cdots + X_n}}{\sqrt{n}} = \varphi(\frac{t}{\sqrt{n}})^n \]
+\end{example}
+
+
+\begin{example}Uniform distribution on $[-1,1]$
+\[\varphi(t) = \int\limits_{-1}^{1}e^{itX}\cdot\frac{1}{2}dx =\left. \frac{1}{2}\cdot \frac{e^{itX}}{it}\right|_{-1}^{1} = \frac{1}{t}\cdot \frac{e^{it}-e^{-it}}{2i} = \frac{\sin t}{t}\]
+\end{example}
+
+\begin{example}[Cauchy Distributiion: Density]
+\[f(X) = \frac{1}{\pi}\cdot \frac{1}{1 +X^2} \]
+Cauchy distribution has $\infty$ expectation since no integrable.
+for $t>0$
+\[\varphi(t) =  \frac{1}{\pi}\int\limits_{-\infty}^{\infty}\cdot \frac{e^{itX}}{1 +X^2}dx =  \frac{1}{\pi}\cdot 2\pi i \,Res(i) \]
+repeat for $t<0$ to get 
+\[\varphi(t) = e^{-|t|}  \quad \text{ not differentiable since }E|X| \; is \; \infty\]
+\end{example}
+
+\begin{example}[$X,Y$- cauchy independent. Distribution of $X+Y$?]
+\[f_{X+Y}(X) = \int\limits_{-\infty}^{\infty}\frac{1}{\pi (1+(t-X)^2)} \cdot \frac{1}{\pi(1 +X^2)}dX = \ddot\frown \]
+\[\varphi_{X+Y}(t) = e^{-|t|}e^{-|t|} = e^{-2|t|}\]
+\[\varphi_{\frac{X+Y}{2}}(t) = e^{\frac{-|t|}{2}}e^{\frac{-|t|}{2}} = e^{-|t|} \quad \Rightarrow \frac{X+Y}{2} \;is \; cauchy.\]
+\end{example}
+
+\begin{example}[N(0,1)]
+\[\varphi(t) = \tfrac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty}e^{itX}e^{\tfrac{-X^2}{2}}dX = \underbracket[1pt][4pt]{\left(\tfrac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty}e^{\frac{-(X-it)^2}{2}}dX\right)}_{=1}e^{\frac{-t^2}{2}} = e^{\frac{-t^2}{2}}\]
+since by using contor integration form complex analysis:
+\[\tfrac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty}e^{\frac{-(X-it)^2}{2}}dX = \tfrac{1}{\sqrt{2\pi}}\int\limits_{-}e^{\frac{-z^2}{2}}dz = \tfrac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{\infty}e^{\frac{-x^2}{2}}dx =1\]
+\end{example}
+
+\begin{lemma}
+Let $h$ be a $C^2$ test function. Then
+\[|\tilde{h}(t)| \leq \tfrac{c}{t^2} \quad for\; some\; c>0\]
+\begin{proof}
+\begin{align*}
+|\tilde{h}(t)| &= \left|\int e^{itX}h(x)dx \right| = \left|\tfrac{1}{t}\int h(X)de^{itX}\right| = \left|\left[\tfrac{1}{t} h(X)e^{itX}\right]_{-\infty}^{\infty} - \tfrac{1}{t}\int\limits_{-\infty}^{\infty} h(X)de^{itX}\right|= \cdots \\ 
+&=\tfrac{1}{t^2}\left|\int\limits_{-\infty}^{\infty}e^{itX} h''(X)dX\right| \leq  \tfrac{1}{t^2}\left(\int\limits_{-\infty}^{\infty}e^{itX}\left| h''(X)\right|dX\right) = \frac{c}{t^2} \end{align*}
+\end{proof}
+\end{lemma}
+
+\begin{remark}\quad \\
+\begin{enumerate}[(a)]
+\item $\int\limits_{-\infty}^{infty} \frac{\sin t}{t} dt = \tfrac{\pi}{2}$
+\item $\int\limits_{-\infty}^{X} \frac{\sin t}{t} dt$ is a bounded function.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Parseval-Plancherel] Let $\mu$ be a pobability measure with a fourier transform $\varphi$ then
+\[\int\limits_{\RR} h d\mu = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \overline{\hat{h}(t)}\varphi(t)dt\]
+\begin{proof}
+\begin{align*}\frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \overline{\hat{h}(t)}\varphi(t)dt &= \lim_{ T \rightarrow \infty} \frac{1}{2 \pi} \int\limits_{-T}^{T}\left(\int\limits_{-\infty}^{\infty}e^{-itX}h(X)dX\right)\left(\int\limits_{\RR}e^{itY}d\mu(Y)\right)dt \\
+&= \lim_{ T \rightarrow \infty} \frac{1}{2 \pi} \int\limits_{\RR}\int\limits_{-\infty}^{\infty}h(X)\int\limits_{-T}^{T}e^{it(Y-X)}dt\, dx\, d\mu(Y)
+\intertext{\begin{framed}
+Fubini: integrable and continuous with $Leb\times Leb\times \mu$ on $[T,T]\times \RR \times \RR$
+\[|h(X)e^{it(Y-X)}|  = |h(X)|\] 
+\end{framed}}
+&= \lim_{ T \rightarrow \infty} \frac{1}{2 \pi} \int\limits_{\RR}\int\limits_{-\infty}^{\infty} h(X)\underbrace{\left.\frac{e^{it(Y-X)}}{i(Y-X)} \right|_{-T}^{T}}_{*} dx\, d\mu(Y)
+\intertext{ \[\boxed{(*) \qquad \left.\frac{e^{it(Y-X)}}{i( Y-X)} \right|_{-T}^{T} = \frac{e^{iT(Y-X)} - e^{-iT(Y-X)}}{i(Y-X)} = \frac{\sin(T(X -Y))}{X -Y} }\]}
+&= \lim_{ T \rightarrow \infty} \frac{1}{2 \pi} \int\limits_{\RR}\int\limits_{-\infty}^{\infty} h(X)\frac{\sin(T(X -Y))}{X -Y} dx\, d\mu(Y) \overset{?}{=} \int\limits_{\RR}h(Y)d\mu(Y)
+  \end{align*}
+To prove the theorem it suffices to show
+\[ \frac{1}{2 \pi}\int\limits_{-\infty}^{\infty} h(X)\frac{\sin(T(X -Y))}{X -Y} dx \rightarrow h(Y) \quad as T\rightarrow \infty\]
+
+\[\frac{1}{2 \pi}\int\limits_{-\infty}^{\infty} h(X)\frac{\sin(T(X -Y))}{X -Y} dx = \frac{1}{2 \pi}\int\limits_{-\infty}^{Y} h(X)\frac{\sin(T(X -Y))}{X -Y} dx + \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h(X)\frac{\sin(T(X -Y))}{X -Y} dx\]
+\begin{align*}
+ \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h(X)\frac{\sin(T(X-Y))}{X- Y} dx &=  \frac{1}{2 \pi}\left[\underbracket[1pt][3pt]{h(X)\int\limits_{Y}^{X} \frac{\sin(T(U-Y))}{U-Y} dU}_{=0}\right]_{Y}^{\infty} \\
+&\quad -  \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h'(X)\int\limits_{Y}^{\infty}\frac{\sin(T(X-Y))}{X- Y}\, dU dx \quad \leftarrow V=T(U-V)\\
+&= -  \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h'(X)\int\limits_{0}^{T(X-Y)}\frac{\sin(V)}{V}\, dV dx
+ \quad (we\; want\; \rightarrow \tfrac{h(X)}{2}\;dominatedly)
+\end{align*}
+\[\int\limits_{0}^{T(X-Y)}\frac{\sin(V)}{V}\, dV \rightarrow\frac{\pi}{2}\quad \text{bounded by some }c\]
+\[h'(X)\int\limits_{0}^{T(X-Y)}\frac{\sin(V)}{V}\, dV \rightarrow\frac{\pi}{2}h'(X)\quad \text{bounded by }c\cdot|h'(X)| \text{ lebesque integrable}\]
+Since
+\[\left|-  \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h'(X)\underbracket[1pt][3pt]{\int_{0}^{T(X-Y)}\frac{\sin(V)}{V}\, dV dx}_{\leq c} \right| \leq \underbracket[1pt][3pt]{\frac{c}{\pi} \int_{-\infty}^{\infty}|h'(X)|dx}_{constant\; i.e \; int. \; wrt \; \mu}\]
+By dominated convergence theorem
+\[-  \frac{1}{2 \pi}\int\limits_{Y}^{\infty} h'(X)\int\limits_{0}^{T(X-Y)}\frac{\sin(V)}{V}\, dV dx \rightarrow -  \frac{1}{2 \pi}\int\limits_{Y}^{\infty}\frac{\pi}{2}h'(X) = \left.\frac{1}{2}h(X)\right|_{Y}^{\infty} = \frac{h(Y)}{2}\]
+
+
+\end{proof}
+\end{theorem}
+
+
+
+
+\[\xymatrix
+@C-1.5pc{\ar @{} [dr] 
+&\boxed{X_n \overset{d}{\rightarrow} X}\ar@{<=>}[d]  \ar@{<=>}[r]  & \boxed{\underset{h \; const + bounded}{\int h d\mu_n \rightarrow \int hd\mu}} \ar@{=>}[r] &\boxed{\underset{\forall t}{\varphi_n(t)\rightarrow \varphi(t)}} \ar@{=>}[dl]  \\
+ &\boxed{\underset{h \;is \; a\; C^2 \; test\;function}{\int h d\mu_n \rightarrow \int hd\mu}}  \ar@{<=>}[r]  &\boxed{\underset{h \;is \; a\; C^2 \; test\;function}{\int \tilde{h}\varphi_n dt \rightarrow \int \tilde{h}\varphi dt }} } \]
+
+
+\section{Missing about 2.5 hours from here, will type soon}
+
+
+
+
+
+
+
+
+
+\section{28/02/12}
+\begin{theorem}[Existance \& Uniqueness of Conditional Expectation]
+\begin{definition}
+Let $(\Omega , \Sigma , P)$ be a probability space and $X:\Omega \rightarrow \RR$ be a random variable such that $E|X|<\infty$ and let $\mathcal{F} \subset \Sigma$ be a sub $\sigma$-algebra. Then $\exists$ a random variable $Y$ such that
+\begin{enumerate}[(a)]
+\item $Y$ is $\mathcal{F}$ measurable
+\item $E|Y| < \infty$
+\item $\int\limits_{A}YdP = \int\limits_{A}XdP$
+\end{enumerate}
+If $Y$ and $\tilde{Y}$ are two such random variables then 
+\[Y = \tilde{Y} \; a.s.\]
+Each such random variable is called a Cnditional Expectation of $X$ wrt $\mathcal{F}$ and is denoted $E[X|\mathcal{F}]$
+\end{definition}
+\begin{proof}
+$X = X^+ - X^-$. Define:
+\[ \begin{cases} V^+(A) = \int\limits_{A}X^+ dP \\ V^-(A) = \int\limits_{A}X^- dP \end{cases} \quad A\in \mathcal{F}\]
+$V^+, V^-$ are finite measures on $\FF$ 
+\begin{alignat*}{2} V^+ \ll p &\qquad &\text{(if $P(A) = 0$ then } V^{\pm} = \int X^{\pm}dP = 0) \\
+V^+ \gg p &\qquad & \quad
+\end{alignat*}
+\begin{alignat*}{2} \text{Radon–Nikodym theorem:} & \quad &\exists \text{ a density }Y^+ \; of \; V^+ \; wrt\;P \\
+\: & \quad &\exists \text{ a density }Y^- \; of \; V^- \; wrt\;P \end{alignat*}
+which means $Y^+ , Y^-$ are $\FF$-measurable, $P$-integrable and 
+\[ V^+(A) = \int\limits_{A}Y^+dP \qquad V^-(A) = \int\limits_{A}Y^-dP\quad \forall A \in \FF\]
+Define $Y = Y^+ - Y^-$, $\FF$-measurable and $P$-integrable
+\[\int\limits_{A}YdP = \int\limits_{A}(Y^+ - Y^-)dP = V^+(A) -V^-(A) = \int\limits_{A}X^+dP - \int\limits_{A}X^-dP = \int\limits_{A}XdP \quad \forall A \in \FF\]
+Let $Y$ and $\tilde{Y}$ be two random variables. Suppose
+\[P(|Y-\tilde{Y}| \neq 0)>0\]
+\[P\left(\bigcup_{k=1}^{\infty}\{Y - \tilde{Y} >\tfrac{1}{k}\bigcup \bigcup_{k=1}^{\infty}\{Y - \tilde{Y} < -\tfrac{1}{k}\}\right) >0\]
+$\Rightarrow$ at least one of the sets has positive probability. Suppose
+\[P(Y-\tilde{Y} > \tfrac{1}{k}) = c >0 \quad \text{Denote this event by }A\in \FF\]
+\[0= \int XdP - \int XdP = \int\limits_{A}YdP - \int\limits_{A}\tilde{Y}dP = \int (Y - \tilde{Y}) dP > \tfrac{1}{k}P(A) = \tfrac{c}{k}> 0  \quad Contradiction! \]
+\end{proof}
+\end{theorem}
+
+\begin{framed} \begin{remark}
+$\mathcal{F} = \{\phi, \Omega\}$, $EX = c$ (since $\mathcal{F}$ - measurable). What is $c$?
+\[\int\limits_{\Omega}\underbrace{E[X|\mathcal{F}]}_{c}pd = \underbrace{\int\limits_{\Omega}XdP}_{EX}\]
+So $E[X|\mathcal{F}] = EX$
+\end{remark}
+\end{framed}
+
+\begin{theorem}[Properties of Conditional Convergence]
+Suppose all random variables below are integrable
+\begin{enumerate}[(a)]
+\item $E\left[E[X|\FF]\right] = EX$
+\item if $X$ is $\FF$-measurable then $E[X|\FF]=X$
+\item (Linearity) \[E[aX + bY \, |\,\FF] = aE[X|\FF] + bE[Y|\FF]\]
+\item (Positivity) if $X\geq 0$ a.s. then \[E[X |\FF] a.s.\] 
+\item (Conditional Mon) if $0 \leq X_n \uparrow X$ then 
+\[0\leq E[X_n \FF] \uparrow E[X |\FF]\]
+\item (Taking Out What Is Know) if $X$ is $\FF$-measurable then 
+\[E[XY|\FF] = X\cdot E[Y|\FF]\]
+\item (independence)  if $X$ is  independent of $\FF$ then 
+\[E[X|\FF] = EX\]
+\item (Tower property) if $\mathcal{G}\subset \FF$ are two sub-$\sigma$-algebras
+\[E\left[E[X|\FF] \,| \,\mathcal{G}\right] = E[X|\mathcal{G}] \] 
+\item Let $\varphi$ be a convex function such that
+\[E|\varphi(X)|< \infty\]
+then
+\[E[\varphi(X)|\FF] \geq \varphi\left( E[X|\FF]\right) \]
+\end{enumerate}
+\begin{proof}\quad \\ \begin{enumerate}[(a):]
+\item \[E\left[E[X|\FF]\right] =\int\limits_{\Omega}E[X|\FF] dP =\int\limits_{\Omega}XdP =  EX\]
+\item Obvious\\
+\item Obvious \\
+\item Denote $Y = E[X|\FF]$ and assume $P(Y<0)>0$
+\[P\left(\bigcup_{k=1}^{\infty} \{Y<-\tfrac{1}{k}\}\right) >0 \quad So \quad P\left( \underbrace{Y < -\tfrac{1}{k}}_{denote:\, A \in \FF} \right) > 0 \quad for \; some \; k \]
+\[0 = \int\limits_{A}XdP - \int\limits_{A}YdP = \int\limits_{A}\underbrace{(\underset{\geq 0}{X}  - \underset{< - \tfrac{1}{k}}{Y})}_{\geq \, \tfrac{1}{k}}dP\]
+\item denote $Y_n = E[X_n|\FF]$
+\[\Rightarrow Y_n \geq 0\]
+\[X_{n+1} - X_n \geq 0 \overset{(c+d)}{\Rightarrow} Y_{n+1} - Y_n \geq 0 \Rightarrow Y_n \uparrow \]
+Define 
+\[Y = \lim_{n \rightarrow \infty} Y_n \]
+Why is $Y = E[X|\FF]$? $Y$ is $\FF$-measurable 
+\[ \int\limits_{A}YdP \overset{MCT}{=}\lim_{n \rightarrow \infty}\int\limits_{A}Y_n dP = \lim_{n \rightarrow \infty}\int\limits_{A}X_n dP \overset{Mon}{=} \int\limits_{A}XdP \quad A \in \FF\]
+\item Let ${\mathbb 1}_B, \; B\in \FF, \; \forall A \in \FF$
+\[\int\limits_{A}\underset{{\mathbb 1}_B}{Z}E[X|\FF]dP = \int\limits_{A\cap B \in \FF}E[X|\FF]dP = \int\limits_{A\cap B}XdP = \int\limits_{A}{\mathbb 1}_B Xdp = \int\limits_{A}ZXdP\]
+extend to whole of $Z$ in standard way.\\
+\item Let $Z={\mathbb 1}_B , \; B \Perp \FF, \; A \in \FF$
+\[  \int\limits_{A}\underset{{\mathbb 1}_B}{Z}dP = P(A\cap B) = P(A)P(B) = \int\limits_{A}\underset{= P(B)}{EZ}dP\]
+this can be extended to all $Z$ in the the standard plane.\\
+\item Let $A \in \mathcal{G}$ 
+\[\underset{= \int\limits_{A}XdP}{\int\limits_{A}E[X|\FF]dP} = \underset{= \int\limits_{A}XdP}{\int\limits_{A}E[X|\mathcal{G}]dP}  \]
+\item not proven here.
+\end{enumerate}
+\end{proof}
+\end{theorem}
+
+\begin{example}
+$(X_n)$ independent bernulli (p)
+\[\sigma(X_1, \dots , X_m) \leq X_1 + \cdots + X_n \quad n >m\]
+\[E[S_n \,|\, \underset{\FF}{\sigma(X_1, \dots , X_m)} ] =  X_1 + \cdots + X_m +p(n-m)\]
+\begin{align*}
+E[S_n \,|\, \underset{\FF}{\sigma(X_1, \dots , X_m)} ] &=  E[X_1 + \cdots + X_n \,| \,\sigma(X_1, \dots , X_m) ]\\
+&= \sum_{i=1}^{n}E[X_i \,| \,\sigma(X_1, \dots , X_m) ]\\
+&= \sum_{i=1}^{m}EX_i + = \sum_{i=m +1}^{n}EX_i\\
+&=  \sum_{i=1}^{m}EX_i +p(n-m) \end{align*}
+\end{example}
+
+\begin{example} $0 < p_1 \neq p_2 <1$
+Flip a coin and choose $p_1$ or $p_2$  with $p=\tfrac{1}{2}$
+\[X = \begin{cases} p_1 & with\, probability \;\tfrac{1}{2} \\ p_2 & with\, probability \;\tfrac{1}{2} \end{cases}\]
+Now flip an unfair coin with this random probability $X$. Denote the result by $Y$
+\[ E[Y|\sigma(X) ] = 1 \cdot X + 0 \cdot (1-X) = X\]
+\begin{alignat*}{2} Y_1 = Bernulli \,(p_1) &\qquad & \text{Both Independent \& Independent of $X$} \\
+Y_2 = Bernulli \,(p_2) &\qquad &\; \end{alignat*}
+\[Y = {\mathbb 1}_{\{X=p_1\}}Y_1 + {\mathbb 1}_{\{X=p_2\}}Y_2\]
+\begin{align*}
+E[Y | \sigma(X)] &= E[ {\mathbb 1}_{\{X=p_1\}}Y_1 + {\mathbb 1}_{\{X=p_2\}}Y_2 \, | \, \sigma(X)]\\
+&= {\mathbb 1}_{\{X=p_1\}}E[Y_1\,|\,\sigma(X)] + {\mathbb 1}_{\{X=p_2\}}E[Y_2 \, | \, \sigma(X)]\\
+&= {\mathbb 1}_{\{X=p_1\}}\underset{p_1}{EY_1} + {\mathbb 1}_{\{X=p_2\}}\underset{p_2}{EY_2} \\
+&= X \end{align*}
+\end{example}
+
+\begin{example}[Galton Watson Tree]
+Lets fix a random variable with values in $\{1,2,\dots \}$ which chooses the number of edges decending from each vertex.
+\dgARROWLENGTH= 1em
+\[
+\begin{diagram}
+\node[4]{ \bullet}\arrow[3]{sw,-}\arrow[3]{se,-}\arrow[3]{s,-} \node[5]{Z_0}\\ \\ \\ \\
+\node{\bullet} \arrow[2]{s,-} \arrow{ssw,-}
+\node[3]{\bullet} \arrow[2]{s,-}
+\node[3]{\bullet}  \arrow{ssw,-}\arrow[2]{s,-} \arrow{sse,-} \node[2]{Z_1}\\ \\ \\
+\end{diagram}\]
+\[Z_n =\text{ number of veticies in generation }n\]
+\[a = \text{ the mean of offspring distribution}\]
+\[E[Z_{n+1} | \sigma(Z_n)]  = a \cdot Z_n\]
+\begin{align*}
+E[Z_{n+1} | \sigma(Z_n)]  & = E\left[ \sum_{i=1}^{\infty}{\mathbb 1}_{\{Z_n =i\}}\underbrace{Z_{n+1}}_{N_1^i + \cdots + N_i^i} \,| \, \sigma(Z_n) \right] \\
+& = \sum_{i=1}^{\infty}{\mathbb 1}_{\{Z_n =i\}}E(\underset{ai}{N_1^i + \cdots + N_i^i ) } \\
+& =Z_n \cdot a \end{align*}
+\end{example}
+
+\begin{definition}[Filtration]
+Let $(\Omega, \Sigma, P)$ be a probability space. A growing sequence of $\sigma$-algebras 
+\[\FF_1 \subset \FF_2 \subset \cdots \]
+is called a Filtration. 
+\end{definition}
+
+\begin{definition}[Adapted]
+A sequence $(X_n)$ of random variables is called adapted to $\FF$ if $X_n$ is $\FF_n$ measurable $\forall n$. 
+\end{definition}
+
+\begin{definition}[Natural Filtration] Let $(X_n)$ be a sequence of random variables 
+\[\sigma(X_1) \subset \sigma(X_1, X_2) \subset \cdots \]
+is called then natural filtration for $(X_n)$. It is natural since each $X_i$ is measurable with respect to $\sigma(X_1, \dots, X_n)$. $(X_n)$ is always adapted to its natural filtration.
+\[S_n = X_1 + \cdots X_n \quad is \quad \sigma( X_1 + \cdots X_n) \]
+$S_n$ is also adapted to the natural filtration of $(X_i)$.
+\end{definition}
+
+\begin{example}[Fair Game]
+We will illstrate the concept of a fair game though an example.
+$(X_n)$ bernulli $(\tfrac{1}{2})$ with values $\pm 1$
+\[S_n = \sum_{i=1}^{n}Y_iX_i \]
+Where $Y_i$ is the ammount which I bet at day $i$, this may be random but can also depend on $X_1, \dots , X_{n-1}$.
+\[E[S_n |\sigma(X_1, \dots , X_{n-1})] \overset{*}{=} S_{n-1}\]
+* I want this equality to have a fair game. 
+\begin{align*}
+E[S_n |\sigma(X_1, \dots , X_{n-1})] &= E[S_{n-1} + Y_nX_n |\sigma(X_1, \dots , X_{n-1})] \\
+&= S_{n-1} + Y_n\underbrace{EX_n}_{0}\\ &= S_{n-1} \end{align*}
+\end{example}
+
+\begin{definition}[Martingale]
+Let $(\Omega, \Sigma, P)$ be a probability space and let $(\FF_n)_{n \geq 0}$  be a filtration. A sequence $(X_n)$ of random variables is a martingale if 
+\begin{enumerate}[(1)]
+\item $(X_n)$ is adapted to $(\FF_n)$
+\item $E|X_n| < \infty$
+\item $E[X_n|\FF_{n-1}] = X_{n-1} \quad \forall n \geq 1$
+\end{enumerate}
+It is called a sub-martingale if we have conditions (1) + (2) +
+\begin{enumerate}[(3*)]
+\item $E[X_n|\FF_{n-1}] \geq X_{n-1} \quad \forall n \geq 1$
+\end{enumerate}
+\end{definition}
+ 
+\begin{remark}
+if $(X_n)$ is a martingale 
+\begin{enumerate}[(1)]
+\item $E[X_n | \FF_m] = X_m \quad \forall n \geq m$
+\[E[X_n | \FF_m] \overset{tower}{=} E[E[X_{n} | \FF_{n-1}]|\FF_m] = \dots = E[X_{m+1} | \FF_m]=X_m\]
+\item $EX_n = EX_0$
+\[EX_n = E(\underbrace{E[X_n | \FF_0]}_{X_0})\]
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+Let $(X_n)$ be a sequence of integrable random variables with mean 0. $(\FF_n)$ natural filtration. 
+Then $S_n$ is a martingale where 
+\[ S_n = X_1 + \cdots + X_n \]
+need to check condition (3):
+\[E[S_n | \FF_{n-1}] = E[S_{n-1} + X_n | \FF_{n-1}] = S_{n -1} + \underbrace{EX_n}_{0} = S_{n-1}\]
+\end{example}
+
+\begin{example}[Galton Watson Tree]
+$(Z_n)$
+\[E[Z_n | \FF_{n-1}] = a \cdot Z_n \]
+if $a=1$ then $(Z_n)$ is usually a martingale. \\
+if $a \neq 1$ 
+\[W_n = \frac{Z_n}{a^n}\]
+\[E\left[\frac{Z_n}{a^n} | \FF_{n-1}\right] = \frac{1}{a^n}\cdot a \cdot Z_{n-1} =  \frac{Z_{n-1}}{a^{n-1}} = W_{n-1} \]
+\end{example}
+
+\begin{example}[Polya Urn]
+In each round $n=i$ a ball is added by a random variable 
+\begin{alignat*}{3}
+n&=0 &\quad  \bullet & \; \circ & \qquad &X_0 =\tfrac{1}{2} \text{ probability of black ball} \\ 
+n&=1 &\quad  \bullet &\; \circ \; \bullet & \qquad &X_0 =\tfrac{2}{3} \text{ probability of black ball} \\
+n&=2 &\quad  \bullet &\; \circ \; \bullet \; \bullet & \qquad &X_0 =\tfrac{3}{4} \text{ probability of black ball} \\
+n&=3 &\quad  \bullet & \; \circ\; \bullet \; \bullet \; \circ & \qquad &X_0 =\tfrac{3}{5} \text{ probability of black ball} \\
+&\vdots \; \; \; & \quad & \quad \vdots \qquad & \qquad & \quad \vdots \qquad \qquad \qquad  \vdots
+\end{alignat*}
+\[X_i = \text{ Probability you add a black ball next time}\]
+Looks like it is not a martingale, but it is!
+see Hw 7 something along the lines of $EX_n = \tfrac{1}{2}$
+\end{example}
+
+\begin{definition}[Stopping Time] Let $(\Omega, \Sigma, P)$ be a probability space and let $(\FF_n)$ be a filtration. A random variable \[\tau:\Omega \rightarrow \{0,1,2,\dots \} \cup \{\infty\}\]
+is called a stopping time if 
+\[ \{\tau=n\} \in \FF_n \quad \forall n \in \NN\]
+\end{definition}
+
+\begin{example}
+\[\tau = \text{First rainy day in March}\]
+\[ \left.\begin{aligned}
+\tau&= 0? &\quad &\text{"I know if it rains at day 0"}\\
+\tau&= 1? &\quad &\text{"I know if it rains at day 1"}\\
+&\vdots & \quad & \quad \vdots \\
+\tau&= n? &\quad &\text{"I know if it rains at day n"}
+\end{aligned}
+\right\}
+\qquad \text{Stopping Time}\]
+\[\tau = \text{Last sunny day in March}\]
+\[ \left.\begin{aligned}
+\tau&= 0? &\quad &\text{"I dont know it at day 0"}\\
+\tau&= 1? &\quad &\text{"I dont know it at day 1"}\\
+&\vdots & \quad & \quad \vdots \\
+\tau&= n? &\quad &\text{"I dont know it at day n"}
+\end{aligned}
+\right\}
+\qquad \overset{\text{\normalsize NOT a}}{\text{Stopping Time}}\]
+\end{example}
+
+\begin{example}[Random walk] let $(X_n)$ be $\pm 1$ with $p=\tfrac{1}{2}$ and independent. 
+\[S_n = X_1 + \cdots +X_n \]
+Let $\FF_n$ be the natural filtration of $(X_n)$, (to which $S_n$ is always adapted).
+\[\tau= \min\{n : S_n = 2\} \quad - \quad \text{Stopping Time}\]
+since 
+\[\{\tau = n\} = \{X_1 = 2, X_2 \neq 2, \dots, X_{n-1} \neq 2, X_n = 2\}\]
+\[\tau = \text{ the last time I visit }2 \in \FF_n\]
+\end{example}
+
+
+ 
+
+
+
 
 \end{document}
