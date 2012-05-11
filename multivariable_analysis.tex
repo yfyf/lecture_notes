@@ -96,7 +96,7 @@ Matrix Representation of T with respect to the standard basis:\\
 
 Given: $T:\RR^{n}\rightarrow\RR^{m}, S:\RR^{n}\rightarrow\RR^{m} \textrm{ and } U:\RR^{m}\rightarrow\RR^{k}$
 \begin{enumerate}[(i)]
-\item $ [UT]_{kxm}=[U]_{kxm}[T]_{mxn}$
+\item $ [UT]_{k\times n}=[U]_{k\times m}[T]_{m\times n}$
 \item $[T+S]=[T]+[S]$
 \item $\lambda[T]=[\lambda T]$
 \end{enumerate}
@@ -322,7 +322,7 @@ deduce that $\lambda= \mu \;\;  i.e \; \;\forall h\in\RR^{n}$
 \end{theorem}
 
 \begin{definition}[Jacobian Matrix]\label{D:Jacobian Matrix}
-$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at $a \in \RR^{n}$ and it is derivitive at a $Df(a):\RR^{n} \rightarrow \RR^{m}$ is a linear map. Then the matrix representation of $Df(a)$ is $f^{'}(a) \in \MM_{mxn}$ and is called the Jacobian Matrix of f at a.
+$f:\RR^{n} \rightarrow \RR^{m}$ is differentiable at $a \in \RR^{n}$ and it is derivitive at a $Df(a):\RR^{n} \rightarrow \RR^{m}$ is a linear map. Then the matrix representation of $Df(a)$ is $f^{'}(a) \in \MM_{m\times n}$ and is called the Jacobian Matrix of f at a.
 \end{definition}
 
 \begin{example}\label{Df example}
@@ -406,11 +406,11 @@ if $b=f(a)$ and we let $Df(a) = \lambda$ and $Dg(f(a))=\mu$ then if we define:
 \end{align}
 \text{Then:}
 \begin{align}
-\lim_{h \to 0}\frac{|f(a+h)-f(a) -Df(a)(h)|}{|h|} &= \lim_{x \to a}\frac{|\varphi(x)|}{|x-a|} = 0\\
-\lim_{h \to 0}\frac{|g(b+h)-g(b) -Dg(b)(h)|}{|h|} &= \lim_{y \to b}\frac{|\psi(y)|}{|y-b|} = 0
+\lim_{x \to a}\frac{|f(x)-f(a) -Df(a)(h)|}{|h|} &= \lim_{x \to a}\frac{|\varphi(x)|}{|x-a|} = 0\\
+\lim_{y \to b}\frac{|g(y)-g(b) -Dg(b)(h)|}{|h|} &= \lim_{y \to b}\frac{|\psi(y)|}{|y-b|} = 0
 \end{align}
 We must show:
-\[\lim_{h \to 0}\frac{|g\circ f(x) - g\circ f(a) - \mu \circ \lambda (x -a)|}{|h|} = \lim_{x \to b}\frac{|\rho(x)|}{|x-b|} = 0\]
+\[\lim_{x \to a}\frac{|g\circ f(x) - g\circ f(a) - \mu \circ \lambda (x -a)|}{|h|} = \lim_{x \to a}\frac{|\rho(x)|}{|x-a|} = 0\]
 Now:
 \begin{alignat*}{2}
 \rho(x) &=g(f(x)) - g(b) - \mu(\lambda(x-a)) &\qquad & \\
@@ -434,7 +434,7 @@ which is true if $|x-a|< \delta_{1} $ for a suitable $\delta_{1}$. We also have 
 So
 \[\lim_{x \to a}\frac{|\psi(f(x))|}{|x-a|} \leq \lim_{x \to a}\frac{\epsilon|\varphi(x)|}{|x-a|}  + \lim_{x \to a}\frac{\epsilon M|x-a|}{|x-a|} = \epsilon M \rightarrow 0\]
 Also
-\[\lim_{x \to a}\frac{|\mu\varphi(x)|}{|x-a|} \leq \lim_{x \to a}\frac{M|\varphi(x)|}{|x-a|} = 0\]
+\[\lim_{x \to a}\frac{|\mu(\varphi(x))|}{|x-a|} \leq \lim_{x \to a}\frac{M|\varphi(x)|}{|x-a|} = 0\]
 \end{proof}
 \end{theorem}
 
@@ -910,7 +910,7 @@ Let $a \in \RR^n , \; b \in \RR^m$ such that $f(a,b) = 0$ when we can find for e
 
 \begin{theorem}[Implicit Function Theorem]\label{implicitFunction}
 $f:\RR^n \times \RR^m \rightarrow \RR^m$ continuously differentiable on an open set containing $(a,b), \; a \in \RR^n , \; b \in \RR^m.$ moreover $f(a,b)=0$\\
-consider the matrix \[M=(D_{j+n}f^{i}(a,b))^{i=1,\dots,m}_{j=1,\dot,m}\] assume det$M \neq 0$. Then there exist two open sets $A \subset \RR^n, \; b \subset \RR^m, \; a \in A, \; b \in B$. such that $\forall x \in A, \exists$ unique $g(x) \in B$ such that $f(x,g(x))=0$ Moreover $g:A \rightarrow B$ is differentiable.
+consider the matrix \[M=(D_{j+n}f^{i}(a,b))^{i=1,\dots,m}_{j=1,\dot,m}\] assume det$M \neq 0$. Then there exist two open sets $A \subset \RR^n, \; B \subset \RR^m, \; a \in A, \; b \in B$. such that $\forall x \in A, \exists$ unique $g(x) \in B$ such that $f(x,g(x))=0$ Moreover $g:A \rightarrow B$ is differentiable.
 \begin{proof} 
 Increase the dimension of the target. Define $F:\underbrace{U}_{\mathclap{\in \;  \RR^n \times \RR^m}} \rightarrow \RR^n \times \RR^m$
 \[F(x^1,\dots , x^n,y^1, \dots,y^m) = (x^1, \dots , x^n, f^1(x,y), \dots , f^m(x,y))\]
@@ -925,9 +925,9 @@ F is continuously differentiable because $x^1 , \dots , x^n$ are continuously di
   \vdots  & \vdots  & \ddots & \vdots & \vdots & & \vdots \\
 0 & 0 & \cdots & 1 & 0 & \cdots & 0 \\
 \hline
-  \frac{df^1}{dx^1} & \frac{df^1}{dx^2}& \cdots\frac{df^1}{dx^n} & \frac{df^1}{dy^1} & \cdots & \frac{df^1}{dy^m}\\
+  \frac{df^1}{dx^1} & \frac{df^1}{dx^2}& \cdots &\frac{df^1}{dx^n} & \frac{df^1}{dy^1} & \cdots & \frac{df^1}{dy^m}\\
 \vdots  & \vdots  & \ddots & \vdots & \vdots & & \vdots \\
-  \frac{df^m}{dx^1} & \frac{df^m}{dx^2}& \cdots\frac{df^m}{dx^n} & \frac{df^m}{dy^1} & \cdots & \frac{df^m}{dy^m}
+  \frac{df^m}{dx^1} & \frac{df^m}{dx^2}& \cdots &\frac{df^m}{dx^n} & \frac{df^m}{dy^1} & \cdots & \frac{df^m}{dy^m}
  \end{array} \right)
 \]
 \[ F'(a,b) =
